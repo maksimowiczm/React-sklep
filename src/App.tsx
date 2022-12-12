@@ -1,7 +1,13 @@
 import React from "react";
+import CategoriesList from "./components/CategoriesList";
+import "./styles/style.scss";
 
 function App() {
-    return <div className="App"></div>;
+    return (
+        <div className="App">
+            <CategoriesList />
+        </div>
+    );
 }
 
 export default App;

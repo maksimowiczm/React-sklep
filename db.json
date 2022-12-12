@@ -17,17 +17,17 @@
         {
             "id": 1,
             "name": "Dyski twarde HDD i SSD",
-            "categoriesId": 2
+            "categoryId": 2
         },
         {
             "id": 2,
             "name": "Karty graficzne",
-            "categoriesId": 2
+            "categoryId": 2
         },
         {
             "id": 3,
             "name": "Laptopy/Notebooki/Ultrabooki",
-            "categoriesId": 3
+            "categoryId": 3
         }
     ],
     "tagTypes": [
