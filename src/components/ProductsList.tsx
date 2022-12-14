@@ -22,7 +22,7 @@ export const ProductsList = ({ category, subCategory, productClick }: ProductsLi
     return (
         <div>
             {products.map(({ id, name }: ProductData, i) => (
-                <Product id={id} name={name} productClick={productClick} />
+                <Product key={i} id={id} name={name} productClick={productClick} />
             ))}
         </div>
     );
