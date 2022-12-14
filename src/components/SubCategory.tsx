@@ -5,7 +5,7 @@ export interface SubCategoryData {
 }
 
 export const SubCategory = ({ id, name, subCategoryClick }: SubCategoryData) => (
-    <div className="subCategory" onClick={() => subCategoryClick(id)}>
+    <div className="subCategory name" onClick={() => subCategoryClick(id)}>
         {name}
     </div>
 );
