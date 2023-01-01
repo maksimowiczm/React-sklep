@@ -5,9 +5,7 @@ body {
 
 .categoriesList {
     display: flex;
-    .name {
-        cursor: pointer;
-    }
+
     .category {
         padding: 1em;
         .subCategory {
@@ -17,4 +15,13 @@ body {
             }
         }
     }
+}
+
+.home,
+.name {
+    cursor: pointer;
+}
+
+.active {
+    color: red;
 }

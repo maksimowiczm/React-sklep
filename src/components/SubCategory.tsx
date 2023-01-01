@@ -1,13 +1,18 @@
+import { useCategoryContext } from "../App";
+
 export interface SubCategoryData {
     id: number;
     name: string;
-    subCategoryClick: (id: number) => void;
 }
 
-export const SubCategory = ({ id, name, subCategoryClick }: SubCategoryData) => (
-    <div className="subCategory name" onClick={() => subCategoryClick(id)}>
-        {name}
-    </div>
-);
+export const SubCategory = ({ id, name }: SubCategoryData) => {
+    const { subCategoryId, setSubCategory } = useCategoryContext();
+
+    return (
+        <div className={`subCategory name ${subCategoryId === id ? "active" : ""}`} onClick={() => setSubCategory(id)}>
+            {name}
+        </div>
+    );
+};
 
 export default SubCategory;

@@ -1,28 +1,24 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { ProductData } from "./Product";
-import Product from "./Product";
+import Product, { ProductData } from "./Product";
+import { useCategoryContext } from "../App";
 
-export interface ProductsListData {
-    category: number | undefined;
-    subCategory: number | undefined;
-    productClick: (id: number) => void;
-}
-
-export const ProductsList = ({ category, subCategory, productClick }: ProductsListData) => {
+export const ProductsList = () => {
     const DB = process.env.REACT_APP_DB_SERVER;
     const [products, setProducts] = useState<Array<ProductData>>([]);
 
+    const { categoryId, subCategoryId } = useCategoryContext();
+
     useEffect(() => {
-        if (category !== undefined) axios.get(`http://${DB}/products?categoryId=${category}`).then((res) => setProducts(res.data));
-        else if (subCategory !== undefined) axios.get(`http://${DB}/products?subCategoryId=${subCategory}`).then((res) => setProducts(res.data));
+        if (categoryId !== undefined) axios.get(`http://${DB}/products?categoryId=${categoryId}`).then((res) => setProducts(res.data));
+        else if (subCategoryId !== undefined) axios.get(`http://${DB}/products?subCategoryId=${subCategoryId}`).then((res) => setProducts(res.data));
         else axios.get(`http://${DB}/products`).then((res) => setProducts(res.data));
-    }, [category, subCategory, DB]);
+    }, [categoryId, subCategoryId, DB]);
 
     return (
         <div>
             {products.map(({ id, name }: ProductData, i) => (
-                <Product key={i} id={id} name={name} productClick={productClick} />
+                <Product key={i} id={id} name={name} />
             ))}
         </div>
     );

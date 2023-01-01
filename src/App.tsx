@@ -1,34 +1,58 @@
-import { useState } from "react";
+import { useState, createContext, useContext } from "react";
 import CategoriesList from "./components/CategoriesList";
-import "./styles/style.scss";
 import ProductsList from "./components/ProductsList";
+import ProductView from "./components/ProductView";
+import "./styles/style.scss";
+
+type ProductContext = {
+    productId: number | undefined;
+    setProduct: (id: number) => void;
+};
+const MyProductContext = createContext<ProductContext>({ productId: undefined, setProduct: () => {} });
+export const useProductContext = () => useContext(MyProductContext);
+
+type CategoryContext = {
+    categoryId: number | undefined;
+    setCategory: (id: number) => void;
+
+    subCategoryId: number | undefined;
+    setSubCategory: (id: number) => void;
+};
+const MyCategoryContext = createContext<CategoryContext>({ categoryId: undefined, setCategory: () => {}, subCategoryId: undefined, setSubCategory: () => {} });
+export const useCategoryContext = () => useContext(MyCategoryContext);
 
 const App = () => {
-    const [categoryId, setCategoryId] = useState<number | undefined>(undefined);
     const [subCategoryId, setSubCategoryId] = useState<number | undefined>(undefined);
+    const [categoryId, setCategoryId] = useState<number | undefined>(undefined);
     const [productId, setProductId] = useState<number | undefined>(undefined);
 
-    return (
+    const setStates = (category: number | undefined, subCategory: number | undefined, product: number | undefined) => {
+        setCategoryId(category);
+        setSubCategoryId(subCategory);
+        setProductId(product);
+    };
+
+    const setCategory = (id: number) => setStates(id, undefined, undefined);
+    const setSubCategory = (id: number) => setStates(undefined, id, undefined);
+    const setProduct = (id: number) => setStates(undefined, undefined, id);
+    const setEmpty = () => setStates(undefined, undefined, undefined);
+
+    const useProviders = (jsx: JSX.Element) => (
         <div className="App">
-            <CategoriesList
-                categoryClick={(id: number) => {
-                    setCategoryId(id);
-                    setSubCategoryId(undefined);
-                }}
-                subCategoryClick={(id: number) => {
-                    setSubCategoryId(id);
-                    setCategoryId(undefined);
-                }}
-            />
-            <ProductsList
-                category={categoryId}
-                subCategory={subCategoryId}
-                productClick={(id: number) => {
-                    setProductId(id);
-                    console.log(id);
-                }}
-            />
+            <MyCategoryContext.Provider value={{ categoryId, setCategory, subCategoryId, setSubCategory }}>
+                <MyProductContext.Provider value={{ productId, setProduct }}>{jsx}</MyProductContext.Provider>
+            </MyCategoryContext.Provider>
         </div>
+    );
+
+    return useProviders(
+        <>
+            <div className="home" onClick={setEmpty}>
+                Sklep
+            </div>
+            <CategoriesList />
+            {productId === undefined ? <ProductsList /> : <ProductView />}
+        </>
     );
 };
 

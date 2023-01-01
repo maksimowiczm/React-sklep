@@ -1,14 +1,14 @@
+import { useProductContext } from "../App";
+
 export interface ProductData {
     id: number;
     name: string;
-    productClick: (id: number) => void;
-    categoryId?: number;
-    subCategoryId?: number;
 }
 
-export const Product = ({ id, name, productClick }: ProductData) => {
+export const Product = ({ id, name }: ProductData) => {
+    const { setProduct } = useProductContext();
     return (
-        <div className="product" onClick={() => productClick(id)}>
+        <div className="product" onClick={() => setProduct(id)}>
             <div className="name">{name}</div>
         </div>
     );
