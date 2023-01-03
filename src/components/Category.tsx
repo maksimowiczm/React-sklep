@@ -12,7 +12,7 @@ export const Category = function ({ id, name, subCategories }: CategoryData) {
 
     return (
         <div className="category">
-            <div className={`name ${categoryId === id ? "active" : ""}`} onClick={() => setCategory(id)}>
+            <div className={`name${categoryId === id ? " active" : ""}`} onClick={() => setCategory(id)}>
                 {name}
             </div>
             {subCategories.length > 0 && (

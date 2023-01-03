@@ -2,6 +2,7 @@ import { useState, createContext, useContext } from "react";
 import CategoriesList from "./components/CategoriesList";
 import ProductsList from "./components/ProductsList";
 import ProductView from "./components/ProductView";
+import SearchBar from "./components/SearchBar";
 import "./styles/style.scss";
 
 type ProductContext = {
@@ -47,11 +48,16 @@ const App = () => {
 
     return useProviders(
         <>
-            <div className="home" onClick={setEmpty}>
-                Sklep
+            <nav className="header">
+                <div className="home" onClick={setEmpty}>
+                    Sklep
+                </div>
+                <CategoriesList />
+            </nav>
+            <div className="content">
+                <SearchBar />
+                {productId === undefined ? <ProductsList /> : <ProductView />}
             </div>
-            <CategoriesList />
-            {productId === undefined ? <ProductsList /> : <ProductView />}
         </>
     );
 };

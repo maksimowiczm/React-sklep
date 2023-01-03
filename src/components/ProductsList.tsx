@@ -16,7 +16,7 @@ export const ProductsList = () => {
     }, [categoryId, subCategoryId, DB]);
 
     return (
-        <div>
+        <div className="productList">
             {products.map(({ id, name }: ProductData, i) => (
                 <Product key={i} id={id} name={name} />
             ))}

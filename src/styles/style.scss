@@ -1,10 +1,27 @@
+$base-color: #333;
+$base-font-color: #fff;
+$active-font-color: #ff0000;
+$product-list-color: #444;
+
 body {
-    background-color: #333;
-    color: white;
+    background-color: $base-color;
+    color: $base-font-color;
+}
+
+.App {
+    display: flex;
+    padding: 1em;
+    .header {
+        width: 33%;
+    }
+    .content {
+        width: 66%;
+    }
 }
 
 .categoriesList {
     display: flex;
+    flex-direction: column;
 
     .category {
         padding: 1em;
@@ -18,10 +35,37 @@ body {
 }
 
 .home,
-.name {
+.name,
+.product {
     cursor: pointer;
 }
 
+.searchBar {
+    margin-bottom: 1em;
+    display: flex;
+    justify-content: center;
+
+    input {
+        width: 50%;
+    }
+}
+
+.productList {
+    display: grid;
+    grid-template-columns: repeat(3, 33%);
+    gap: 10px;
+}
+
+.product {
+    box-sizing: border-box;
+    border: 1px solid $product-list-color;
+    height: 15vh;
+
+    &:hover {
+        background-color: $product-list-color;
+    }
+}
+
 .active {
-    color: red;
+    color: $active-font-color;
 }
