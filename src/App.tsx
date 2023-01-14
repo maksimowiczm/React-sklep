@@ -28,6 +28,7 @@ const App = () => {
     const [categoryId, setCategoryId] = useState<number | undefined>(undefined);
     const [productId, setProductId] = useState<number | undefined>(undefined);
     const [sortType, setSortType] = useState<"asc" | "desc">("asc");
+    const [searchPhrase, setSearchPhrase] = useState<string | undefined>(undefined);
 
     const setStates = (category: number | undefined, subCategory: number | undefined, product: number | undefined) => {
         setCategoryId(category);
@@ -45,6 +46,7 @@ const App = () => {
         else
             setSortType("asc")
     }
+    const setSearch = (phrase: string) => setSearchPhrase(phrase);
 
     const useProviders = (jsx: JSX.Element) => (
         <div className="App">
@@ -63,9 +65,9 @@ const App = () => {
                 <CategoriesList />
             </nav>
             <div className="content">
-                <SearchBar />
+                <SearchBar setSearchPhrase={setSearch} />
                 <SortButton setSortType={setSort} />
-                {productId === undefined ? <ProductsList sortType={sortType} /> : <ProductView />}
+                {productId === undefined ? <ProductsList sortType={sortType} searchPhrase={searchPhrase} /> : <ProductView />}
             </div>
         </>
     );

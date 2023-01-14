@@ -1,7 +1,7 @@
-const SearchBar = () => {
+const SearchBar = ({ setSearchPhrase }: { setSearchPhrase: (phrase: string) => void }) => {
     return (
         <div className="searchBar">
-            <input type="text" placeholder="Nazwa produktu" />
+            <input id="searchField" type="text" onChange={(e) => setSearchPhrase(e.target.value)} placeholder="Nazwa produktu" />
         </div>
     );
 };
