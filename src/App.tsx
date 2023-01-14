@@ -1,16 +1,19 @@
-import { Grid } from "@mui/material";
 import { useState, useContext } from "react";
-import { ThemeProvider, createTheme, SxProps } from "@mui/material/styles";
-import CssBaseline from "@mui/material/CssBaseline";
+import "./styles/style.scss";
+
+import { MyAppContext } from "./Context";
+import { Status, SortType } from "./Types";
+
+import MyAppBar from "./components/AppBar";
 import CategoriesList from "./components/CategoriesList";
 import ProductEditView from "./components/ProductEditView";
 import ProductsList from "./components/ProductsList";
 import ProductView from "./components/ProductView";
-import "./styles/style.scss";
-import { MyAppContext } from "./Context";
-import MyAppBar from "./components/AppBar";
+
+import { Grid } from "@mui/material";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
 import FloatingButton from "./components/FloatingButton";
-import { Status, SortType } from "./Types";
 
 export const DB = process.env.REACT_APP_DB_SERVER;
 
@@ -43,6 +46,7 @@ const App = () => {
 
                 update,
                 setUpdate,
+
                 status,
                 setStatus,
 
@@ -96,7 +100,7 @@ const App = () => {
                         {status !== "none" ? <ProductEditView /> : <>{productId === undefined ? <ProductsList /> : <ProductView />}</>}
                     </Grid>
                 </Grid>
-                <FloatingButton />
+                {productId === undefined && status === "none" && <FloatingButton />}
             </>
         )
     );
