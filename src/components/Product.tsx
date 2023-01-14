@@ -8,7 +8,7 @@ export const Product = ({ id, name }: ProductData) => {
 
     return (
         <Card className="product" onClick={() => setProduct(id)} variant="outlined">
-            <CardContent sx={{ minHeight: 150 }}>
+            <CardContent sx={{ minHeight: 200 }}>
                 <Typography sx={{ fontSize: 14 }} align="justify" color="text.secondary" gutterBottom>
                     Nazwa Produktu
                 </Typography>

@@ -3,7 +3,7 @@ import axios from "axios";
 import { DB, useAppContext } from "../App";
 import { ProductData } from "../Types";
 import Product from "./Product";
-import { Grid } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 
 export const ProductsList = ({ sortType, searchPhrase }: { sortType: string; searchPhrase: string | undefined }) => {
     const [products, setProducts] = useState<Array<ProductData>>([]);
@@ -20,6 +20,13 @@ export const ProductsList = ({ sortType, searchPhrase }: { sortType: string; sea
                 .then((res) => setProducts(res.data));
         else axios.get(`http://${DB}/products?${serarchPartial}_sort=name&_order=${sortType}`).then((res) => setProducts(res.data));
     }, [categoryId, subCategoryId, sortType, searchPhrase, update]);
+
+    if (products.length === 0)
+        return (
+            <Typography variant="h4" align="center" className="empty" marginTop={10}>
+                Brak wyników
+            </Typography>
+        );
 
     return (
         <Grid container spacing={2}>
