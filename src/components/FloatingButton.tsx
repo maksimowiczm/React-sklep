@@ -33,14 +33,15 @@ const FloatingButton = () => {
     return (
         <Tooltip title="Sortowanie">
             <SpeedDial
-                onClick={() => setStatus("add")}
+                onClick={() => admin && setStatus("add")}
                 ariaLabel=""
-                sx={{
-                    position: "absolute",
-                    bottom: 50,
-                    right: 50,
-                }}
                 icon={admin ? <AddIcon /> : <SortIcon />}
+                sx={{
+                    position: "sticky",
+                    bottom: 50,
+                    width: 0,
+                    left: "95vw",
+                }}
             >
                 {actions.map((action) => (
                     <SpeedDialAction
