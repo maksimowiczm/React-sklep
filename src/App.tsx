@@ -28,16 +28,22 @@ const App = () => {
         <MyAppContext.Provider
             value={{
                 subCategoryId,
-                categoryId,
-                productId,
-                admin,
-                update,
-                status,
                 setSubCategory,
+
+                categoryId,
                 setCategory,
+
+                productId,
                 setProduct,
+
+                admin,
+                switchAdmin: () => setAdmin(!admin),
+
+                update,
                 setUpdate,
+                status,
                 setStatus,
+
                 reset: setEmpty,
                 setSearchPhrase,
             }}
@@ -75,34 +81,6 @@ const App = () => {
         else setSortType("asc");
     };
 
-    const AdminButton = () => {
-        if (status !== "none") return <></>;
-
-        return (
-            <>
-                <div
-                    className={`admin ${admin ? " active" : ""}`}
-                    onClick={() => {
-                        setAdmin(!admin);
-                    }}
-                >
-                    ADMIN
-                </div>
-                {admin && (
-                    <div
-                        className="add"
-                        onClick={() => {
-                            setProduct(undefined);
-                            setStatus("add");
-                        }}
-                    >
-                        Dodaj
-                    </div>
-                )}
-            </>
-        );
-    };
-
     // TODO
     // sort button
     // wczyszczenie filtrów button
@@ -114,7 +92,6 @@ const App = () => {
                 <Grid container spacing={2} padding={2}>
                     <Grid item xs={3}>
                         {status === "none" && <CategoriesList />}
-                        <AdminButton />
                     </Grid>
                     <Grid item xs={9}>
                         {status !== "none" ? (

@@ -1,9 +1,11 @@
-import { AppBar, Toolbar, Typography } from "@mui/material";
+import { AppBar, IconButton, Toolbar, Typography } from "@mui/material";
 import { useAppContext } from "../App";
 import SearchBar from "./SearchBar";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 const MyAppBar = () => {
-    const { reset } = useAppContext();
+    const { reset, admin, switchAdmin } = useAppContext();
+
     return (
         <AppBar position="static">
             <Toolbar>
@@ -11,6 +13,9 @@ const MyAppBar = () => {
                     Sklep
                 </Typography>
                 <SearchBar />
+                <IconButton sx={{ marginLeft: 1 }} onClick={switchAdmin}>
+                    {admin ? <AccountCircleIcon color="secondary" /> : <AccountCircleIcon />}
+                </IconButton>
             </Toolbar>
         </AppBar>
     );

@@ -11,6 +11,7 @@ type AppContext = {
     setProduct: (id: number | undefined) => void;
 
     admin: boolean;
+    switchAdmin: () => void;
 
     status: "edit" | "add" | "none";
     setStatus: (edit: "edit" | "add" | "none") => void;
@@ -34,6 +35,7 @@ export const MyAppContext = createContext<AppContext>({
     setProduct: () => {},
 
     admin: false,
+    switchAdmin: () => {},
 
     status: "none",
     setStatus: () => {},
