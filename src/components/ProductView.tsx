@@ -1,11 +1,13 @@
-import { useProductContext } from "../App";
+import { useAdminContext, useProductContext } from "../App";
 import { useState, useEffect } from "react";
 import { ProductData } from "./Product";
 import axios from "axios";
+import AdminControls from "./AdminControls";
 
 export const ProductView = () => {
     const { productId } = useProductContext();
     const [product, setProduct] = useState<ProductData | undefined>(undefined);
+    const admin = useAdminContext();
 
     const DB = process.env.REACT_APP_DB_SERVER;
     useEffect(() => {
@@ -17,6 +19,7 @@ export const ProductView = () => {
             <div>Produkt:</div>
             <div className="productView">
                 <div>{product?.name}</div>
+                {admin && <AdminControls productId={productId as number} />}
             </div>
         </div>
     );

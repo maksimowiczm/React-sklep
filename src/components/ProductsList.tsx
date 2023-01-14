@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Product, { ProductData } from "./Product";
-import { useCategoryContext } from "../App";
+import { useCategoryContext, useUpdateContext } from "../App";
 
 export const ProductsList = ({ sortType, searchPhrase }: { sortType: string, searchPhrase: string | undefined }) => {
     const DB = process.env.REACT_APP_DB_SERVER;
     const [products, setProducts] = useState<Array<ProductData>>([]);
 
     const { categoryId, subCategoryId } = useCategoryContext();
+    const { update } = useUpdateContext();
 
 
     useEffect(() => {
