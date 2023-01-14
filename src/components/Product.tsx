@@ -1,4 +1,5 @@
-import { useProductContext } from "../App";
+import { useAdminContext, useProductContext } from "../App";
+import AdminControls from "./AdminControls";
 
 export interface ProductData {
     id: number;
@@ -7,9 +8,12 @@ export interface ProductData {
 
 export const Product = ({ id, name }: ProductData) => {
     const { setProduct } = useProductContext();
+    const admin = useAdminContext();
+
     return (
         <div className="product" onClick={() => setProduct(id)}>
             <div className="name">{name}</div>
+            {admin && <AdminControls />}
         </div>
     );
 };

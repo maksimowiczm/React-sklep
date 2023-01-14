@@ -68,4 +68,13 @@ body {
 
 .active {
     color: $active-font-color;
+    // user-select: none;
+}
+
+.admin {
+    cursor: pointer;
+    // user-select: none;
+    &.active {
+        color: pink !important;
+    }
 }

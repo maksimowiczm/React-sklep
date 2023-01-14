@@ -22,10 +22,14 @@ type CategoryContext = {
 const MyCategoryContext = createContext<CategoryContext>({ categoryId: undefined, setCategory: () => {}, subCategoryId: undefined, setSubCategory: () => {} });
 export const useCategoryContext = () => useContext(MyCategoryContext);
 
+const AdminContext = createContext<boolean>(false);
+export const useAdminContext = () => useContext(AdminContext);
+
 const App = () => {
     const [subCategoryId, setSubCategoryId] = useState<number | undefined>(undefined);
     const [categoryId, setCategoryId] = useState<number | undefined>(undefined);
     const [productId, setProductId] = useState<number | undefined>(undefined);
+    const [admin, setAdmin] = useState<boolean>(false);
 
     const setStates = (category: number | undefined, subCategory: number | undefined, product: number | undefined) => {
         setCategoryId(category);
@@ -40,10 +44,26 @@ const App = () => {
 
     const useProviders = (jsx: JSX.Element) => (
         <div className="App">
-            <MyCategoryContext.Provider value={{ categoryId, setCategory, subCategoryId, setSubCategory }}>
-                <MyProductContext.Provider value={{ productId, setProduct }}>{jsx}</MyProductContext.Provider>
-            </MyCategoryContext.Provider>
+            <AdminContext.Provider value={admin}>
+                <MyCategoryContext.Provider value={{ categoryId, setCategory, subCategoryId, setSubCategory }}>
+                    <MyProductContext.Provider value={{ productId, setProduct }}>{jsx}</MyProductContext.Provider>
+                </MyCategoryContext.Provider>
+            </AdminContext.Provider>
         </div>
+    );
+
+    const AdminButton = () => (
+        <>
+            <div
+                className={`admin ${admin ? " active" : ""}`}
+                onClick={() => {
+                    setAdmin(!admin);
+                }}
+            >
+                ADMIN
+            </div>
+            {admin && <div>Dodaj</div>}
+        </>
     );
 
     return useProviders(
@@ -52,6 +72,7 @@ const App = () => {
                 <div className="home" onClick={setEmpty}>
                     Sklep
                 </div>
+                <AdminButton />
                 <CategoriesList />
             </nav>
             <div className="content">
