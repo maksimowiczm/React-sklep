@@ -1,3 +1,4 @@
+import { Button } from "@mui/material";
 import axios from "axios";
 import { useEditContext, useProductContext, useUpdateContext } from "../App";
 
@@ -23,8 +24,12 @@ const AdminControls = ({ productId }: { productId: number }) => {
 
     return (
         <>
-            <div onClick={editAction}>Edytuj</div>
-            <div onClick={remove}>Usuń</div>
+            <Button onClick={editAction} size="small">
+                Edit
+            </Button>
+            <Button onClick={remove} size="small">
+                Delete
+            </Button>
         </>
     );
 };
