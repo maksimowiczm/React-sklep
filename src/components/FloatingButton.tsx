@@ -43,7 +43,15 @@ const FloatingButton = () => {
                 icon={admin ? <AddIcon /> : <SortIcon />}
             >
                 {actions.map((action) => (
-                    <SpeedDialAction key={action.name} icon={action.icon} tooltipTitle={action.name} onClick={action.click} />
+                    <SpeedDialAction
+                        key={action.name}
+                        icon={action.icon}
+                        tooltipTitle={action.name}
+                        onClick={(e) => {
+                            action.click();
+                            e.stopPropagation();
+                        }}
+                    />
                 ))}
             </SpeedDial>
         </Tooltip>
