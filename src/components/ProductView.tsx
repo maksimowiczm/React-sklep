@@ -17,8 +17,6 @@ export const ProductView = () => {
 
     const { edit } = useEditContext();
 
-    if (edit && product !== undefined) return <ProductEditView productId={product.id} />;
-
     return (
         <div>
             <div>Produkt:</div>

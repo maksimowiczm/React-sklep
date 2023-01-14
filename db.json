@@ -1,147 +1,64 @@
 {
-    "categories": [
-        {
-            "id": 1,
-            "name": "Smartfony i smartwatche"
-        },
-        {
-            "id": 2,
-            "name": "Podzespoły komputerowe"
-        },
-        {
-            "id": 3,
-            "name": "Laptopy i komputery"
-        }
-    ],
-    "subCategories": [
-        {
-            "id": 1,
-            "name": "Dyski twarde HDD i SSD",
-            "categoryId": 2
-        },
-        {
-            "id": 2,
-            "name": "Karty graficzne",
-            "categoryId": 2
-        },
-        {
-            "id": 3,
-            "name": "Laptopy/Notebooki/Ultrabooki",
-            "categoryId": 3
-        }
-    ],
-    "tagTypes": [
-        {
-            "id": 1,
-            "name": "Producent"
-        },
-        {
-            "id": 2,
-            "name": "Przekątna ekranu"
-        },
-        {
-            "id": 3,
-            "name": "Pamięć"
-        }
-    ],
-    "tags": [
-        {
-            "id": 1,
-            "name": "ASUS",
-            "tagTypesId": 1
-        },
-        {
-            "id": 2,
-            "name": "14\" - 16,1\"",
-            "tagTypesId": 2
-        },
-        {
-            "id": 3,
-            "name": "13,4\" i mniejsze",
-            "tagTypesId": 2
-        },
-        {
-            "id": 4,
-            "name": "Microsoft",
-            "tagTypesId": 1
-        },
-        {
-            "id": 5,
-            "name": "WD",
-            "tagTypesId": 1
-        },
-        {
-            "id": 6,
-            "name": "Palit",
-            "tagTypesId": 1
-        },
-        {
-            "id": 7,
-            "name": "24 GB",
-            "tagTypesId": 3
-        }
-    ],
-    "productTag": [
-        {
-            "id": 1,
-            "tagsId": 1,
-            "productId": 1
-        },
-        {
-            "id": 1,
-            "tagsId": 2,
-            "productId": 1
-        },
-        {
-            "id": 1,
-            "tagsId": 4,
-            "productId": 2
-        },
-        {
-            "id": 1,
-            "tagsId": 3,
-            "productId": 2
-        },
-        {
-            "id": 1,
-            "tagsId": 5,
-            "productId": 3
-        },
-        {
-            "id": 1,
-            "tagsId": 6,
-            "productId": 4
-        },
-        {
-            "id": 1,
-            "tagsId": 7,
-            "productId": 4
-        }
-    ],
-    "products": [
-        {
-            "id": 1,
-            "name": "ASUS ZenBook 14 UM425QA",
-            "categoryId": 3,
-            "subCategoryId": 3
-        },
-        {
-            "id": 2,
-            "name": "Microsoft Surface Go 3",
-            "categoryId": 3,
-            "subCategoryId": 3
-        },
-        {
-            "id": 3,
-            "name": "WD 1TB M.2 PCIe Gen4 NVMe Black SN770",
-            "categoryId": 2,
-            "subCategoryId": 1
-        },
-        {
-            "id": 4,
-            "name": "Palit GeForce RTX 4090 GameRock 24GB GDDR6X",
-            "categoryId": 2,
-            "subCategoryId": 2
-        }
-    ]
+  "categories": [
+    {
+      "id": 1,
+      "name": "Smartfony i smartwatche"
+    },
+    {
+      "id": 2,
+      "name": "Podzespoły komputerowe"
+    },
+    {
+      "id": 3,
+      "name": "Laptopy i komputery"
+    }
+  ],
+  "subCategories": [
+    {
+      "id": 1,
+      "name": "Dyski twarde HDD i SSD",
+      "categoryId": 2
+    },
+    {
+      "id": 2,
+      "name": "Karty graficzne",
+      "categoryId": 2
+    },
+    {
+      "id": 3,
+      "name": "Laptopy/Notebooki/Ultrabooki",
+      "categoryId": 3
+    },
+    {
+      "id": 4,
+      "name": "Apple",
+      "categoryId": 1
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "name": "ASUS ZenBook 14 UM425QA",
+      "categoryId": 3,
+      "subCategoryId": 3
+    },
+    {
+      "id": 2,
+      "name": "Microsoft Surface Go 3",
+      "categoryId": 3,
+      "subCategoryId": 3
+    },
+    {
+      "id": 3,
+      "name": "WD 1TB M.2 PCIe Gen4 NVMe Black SN770",
+      "categoryId": 2,
+      "subCategoryId": 1
+    },
+    {
+      "id": 4,
+      "name": "Palit GeForce RTX 4090 GameRock 24GB GDDR6X",
+      "categoryId": 2,
+      "subCategoryId": 2
+    }
+  ]
 }

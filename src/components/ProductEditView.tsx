@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { DB, useEditContext } from "../App";
 
 export const ProductEditView = ({ productId }: { productId: number | undefined }) => {
-    const { edit } = useEditContext();
+    const { edit, setEdit } = useEditContext();
     const [categories, setCategories] = useState<Array<CategoryData>>([]);
     const [product, setProduct] = useState<ProductData>({ name: "", id: 0 });
     const [chosenCategory, setChosenCategory] = useState<number>(0);
@@ -25,12 +25,16 @@ export const ProductEditView = ({ productId }: { productId: number | undefined }
     }, [productId]);
 
     const patch = () => {
-        console.log(name, chosenCategory, chosenSub);
         axios.patch(`http://${DB}/products/${productId}`, { name: name, categoryId: chosenCategory, subCategoryId: chosenSub });
+        setEdit("none");
+    };
+    const add = () => {
+        axios.post(`http://${DB}/products`, { name: name, categoryId: chosenCategory, subCategoryId: chosenSub });
+        setEdit("none");
     };
 
     let button;
-    if (edit == "add") button = <button>Dodaj</button>;
+    if (edit == "add") button = <button onClick={add}>Dodaj</button>;
     else if (edit == "edit") button = <button onClick={patch}>Edytuj</button>;
 
     return (

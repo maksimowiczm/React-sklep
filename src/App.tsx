@@ -1,5 +1,6 @@
 import { useState, createContext, useContext } from "react";
 import CategoriesList from "./components/CategoriesList";
+import ProductEditView from "./components/ProductEditView";
 import ProductsList from "./components/ProductsList";
 import ProductView from "./components/ProductView";
 import SearchBar from "./components/SearchBar";
@@ -83,7 +84,11 @@ const App = () => {
             >
                 ADMIN
             </div>
-            {admin && <div>Dodaj</div>}
+            {admin && (
+                <div className="add" onClick={() => setEdit("add")}>
+                    Dodaj
+                </div>
+            )}
         </>
     );
 
@@ -98,7 +103,7 @@ const App = () => {
             </nav>
             <div className="content">
                 <SearchBar />
-                {productId === undefined ? <ProductsList /> : <ProductView />}
+                {edit !== "none" ? <ProductEditView productId={productId} /> : productId === undefined ? <ProductsList /> : <ProductView />}
             </div>
         </>
     );
