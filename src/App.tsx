@@ -75,29 +75,34 @@ const App = () => {
         </div>
     );
 
-    const AdminButton = () => (
-        <>
-            <div
-                className={`admin ${admin ? " active" : ""}`}
-                onClick={() => {
-                    setAdmin(!admin);
-                }}
-            >
-                ADMIN
-            </div>
-            {admin && edit === "none" && (
-                <div
-                    className="add"
-                    onClick={() => {
-                        setProduct(undefined);
-                        setEdit("add");
-                    }}
-                >
-                    Dodaj
-                </div>
-            )}
-        </>
-    );
+    const AdminButton = () => {
+        if (edit === "none")
+            return (
+                <>
+                    <div
+                        className={`admin ${admin ? " active" : ""}`}
+                        onClick={() => {
+                            setAdmin(!admin);
+                        }}
+                    >
+                        ADMIN
+                    </div>
+                    {admin && (
+                        <div
+                            className="add"
+                            onClick={() => {
+                                setProduct(undefined);
+                                setEdit("add");
+                            }}
+                        >
+                            Dodaj
+                        </div>
+                    )}
+                </>
+            );
+
+        return <></>;
+    };
 
     return useProviders(
         <>
