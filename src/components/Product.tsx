@@ -2,6 +2,7 @@ import { useAdminContext, useProductContext } from "../App";
 import AdminControls from "./AdminControls";
 import { CategoryData } from "./Category";
 import { SubCategoryData } from "./SubCategory";
+import { Card, CardActions, CardContent, Button, Typography } from "@mui/material";
 
 export interface ProductData {
     id: number;
@@ -15,10 +16,21 @@ export const Product = ({ id, name }: ProductData) => {
     const admin = useAdminContext();
 
     return (
-        <div className="product" onClick={() => setProduct(id)}>
-            <div className="name">{name}</div>
-            {admin && <AdminControls productId={id} />}
-        </div>
+        <Card sx={{ minWidth: 275 }} onClick={() => setProduct(id)}>
+            <CardContent>
+                <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                    Nazwa Produktu
+                </Typography>
+                <Typography variant="h5" component="div">
+                    {name}
+                </Typography>
+            </CardContent>
+            <CardActions>
+                {admin && <AdminControls productId={id} />}
+                <Button size="small">Edit</Button>
+                <Button size="small">Delete</Button>
+            </CardActions>
+        </Card>
     );
 };
 

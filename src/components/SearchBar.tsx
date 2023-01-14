@@ -1,7 +1,9 @@
+import TextField from '@mui/material/TextField';
 const SearchBar = ({ setSearchPhrase }: { setSearchPhrase: (phrase: string) => void }) => {
     return (
         <div className="searchBar">
-            <input id="searchField" type="text" onChange={(e) => setSearchPhrase(e.target.value)} placeholder="Nazwa produktu" />
+            <TextField fullWidth color="secondary" onChange={(e) => setSearchPhrase(e.target.value)} label="Szukaj po nazwie produktu" />
+
         </div>
     );
 };

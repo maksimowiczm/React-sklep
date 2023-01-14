@@ -1,3 +1,5 @@
+import List from "@mui/material/List";
+import ListItemButton from "@mui/material/ListItemButton";
 import { useCategoryContext } from "../App";
 import { SubCategoryData, SubCategory } from "./SubCategory";
 
@@ -16,14 +18,15 @@ export const Category = function ({ id, name, subCategories }: CategoryData) {
                 {name}
             </div>
             {subCategories.length > 0 && (
-                <div className="subCategories">
+                <List component="div" disablePadding>
                     {subCategories.map((subCategory: SubCategoryData, j: number) => (
-                        <SubCategory key={j} id={subCategory.id} name={subCategory.name} />
+                        <ListItemButton sx={{ pl: 4 }}><SubCategory key={j} id={subCategory.id} name={subCategory.name} />  </ListItemButton>
                     ))}
-                </div>
+                </List>
             )}
         </div>
     );
+
 };
 
 export default Category;

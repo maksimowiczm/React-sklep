@@ -1,3 +1,4 @@
+import { Typography } from "@mui/material";
 import { useState, createContext, useContext } from "react";
 import CategoriesList from "./components/CategoriesList";
 import ProductEditView from "./components/ProductEditView";
@@ -116,10 +117,14 @@ const App = () => {
         <>
             <nav className="header">
                 <div className="home" onClick={setEmpty}>
-                    Sklep
+                    <Typography onClick={setEmpty} component="legend">
+                        Sklep
+                    </Typography>
                 </div>
                 <AdminButton />
                 {edit === "none" && <CategoriesList />}
+
+                <CategoriesList />
             </nav>
             <div className="content">
                 {edit !== "none" ? (
