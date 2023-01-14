@@ -17,6 +17,7 @@ const AdminControls = ({ productId }: { productId: number }) => {
     const remove = (e: React.MouseEvent) => {
         axios.delete(`http://${DB}/products/${productId}`);
         setUpdate(update + 1);
+        setProduct(undefined);
         e.stopPropagation();
     };
 

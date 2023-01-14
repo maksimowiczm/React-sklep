@@ -15,8 +15,6 @@ export const ProductView = () => {
         axios.get(`http://${DB}/products/${productId}`).then((res) => setProduct(res.data));
     }, [productId, DB]);
 
-    const { edit } = useEditContext();
-
     return (
         <div>
             <div>Produkt:</div>
