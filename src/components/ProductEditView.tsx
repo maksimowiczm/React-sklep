@@ -1,8 +1,7 @@
-import { ProductData } from "./Product";
-import { CategoryData } from "./Category";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { DB, useEditContext, useProductContext } from "../App";
+import { CategoryData, ProductData } from "../Types";
 
 export const ProductEditView = () => {
     const { productId } = useProductContext();

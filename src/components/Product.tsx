@@ -1,15 +1,7 @@
 import { useAdminContext, useProductContext } from "../App";
 import AdminControls from "./AdminControls";
-import { CategoryData } from "./Category";
-import { SubCategoryData } from "./SubCategory";
 import { Card, CardActions, CardContent, Typography } from "@mui/material";
-
-export interface ProductData {
-    id: number;
-    name: string;
-    category?: CategoryData;
-    subCategory?: SubCategoryData;
-}
+import { ProductData } from "../Types";
 
 export const Product = ({ id, name }: ProductData) => {
     const { setProduct } = useProductContext();

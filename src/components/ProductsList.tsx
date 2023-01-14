@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import Product, { ProductData } from "./Product";
 import { useCategoryContext, useUpdateContext } from "../App";
+import { ProductData } from "../Types";
+import Product from "./Product";
 
 export const ProductsList = ({ sortType, searchPhrase }: { sortType: string; searchPhrase: string | undefined }) => {
     const DB = process.env.REACT_APP_DB_SERVER;

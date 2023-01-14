@@ -1,8 +1,8 @@
 import { useAdminContext, useProductContext } from "../App";
 import { useState, useEffect } from "react";
-import { ProductData } from "./Product";
 import axios from "axios";
 import AdminControls from "./AdminControls";
+import { ProductData } from "../Types";
 
 export const ProductView = () => {
     const { productId } = useProductContext();
