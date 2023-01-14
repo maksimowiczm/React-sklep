@@ -1,4 +1,4 @@
-import { Grid, Typography } from "@mui/material";
+import { Grid } from "@mui/material";
 import { useState, useContext } from "react";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -6,10 +6,9 @@ import CategoriesList from "./components/CategoriesList";
 import ProductEditView from "./components/ProductEditView";
 import ProductsList from "./components/ProductsList";
 import ProductView from "./components/ProductView";
-import SearchBar from "./components/SearchBar";
-import SortButton from "./components/SortButton";
 import "./styles/style.scss";
 import { MyAppContext } from "./Context";
+import MyAppBar from "./components/AppBar";
 
 export const DB = process.env.REACT_APP_DB_SERVER;
 
@@ -27,7 +26,21 @@ const App = () => {
 
     const useProviders = (jsx: JSX.Element) => (
         <MyAppContext.Provider
-            value={{ subCategoryId, categoryId, productId, admin, update, status, setSubCategory, setCategory, setProduct, setUpdate, setStatus }}
+            value={{
+                subCategoryId,
+                categoryId,
+                productId,
+                admin,
+                update,
+                status,
+                setSubCategory,
+                setCategory,
+                setProduct,
+                setUpdate,
+                setStatus,
+                reset: setEmpty,
+                setSearchPhrase,
+            }}
         >
             {jsx}
         </MyAppContext.Provider>
@@ -90,33 +103,25 @@ const App = () => {
         );
     };
 
+    // TODO
+    // sort button
+    // wczyszczenie filtrów button
+
     return useProviders(
         useDarkTheme(
             <>
-                <Grid container spacing={2}>
+                <MyAppBar />
+                <Grid container spacing={2} padding={2}>
                     <Grid item xs={3}>
-                        <nav className="header">
-                            <div className="home" onClick={setEmpty}>
-                                <Typography onClick={setEmpty} component="legend" align="center" padding={2}>
-                                    Sklep
-                                </Typography>
-                            </div>
-                            {status === "none" && <CategoriesList />}
-                            <AdminButton />
-                        </nav>
+                        {status === "none" && <CategoriesList />}
+                        <AdminButton />
                     </Grid>
                     <Grid item xs={9}>
-                        <div className="content">
-                            {status !== "none" ? (
-                                <ProductEditView />
-                            ) : (
-                                <>
-                                    <SearchBar setSearchPhrase={setSearchPhrase.bind(this)} />
-                                    <SortButton setSortType={setSort} />
-                                    {productId === undefined ? <ProductsList sortType={sortType} searchPhrase={searchPhrase} /> : <ProductView />}
-                                </>
-                            )}
-                        </div>
+                        {status !== "none" ? (
+                            <ProductEditView />
+                        ) : (
+                            <>{productId === undefined ? <ProductsList sortType={sortType} searchPhrase={searchPhrase} /> : <ProductView />}</>
+                        )}
                     </Grid>
                 </Grid>
             </>

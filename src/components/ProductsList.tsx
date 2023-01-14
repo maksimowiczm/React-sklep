@@ -3,6 +3,7 @@ import axios from "axios";
 import { DB, useAppContext } from "../App";
 import { ProductData } from "../Types";
 import Product from "./Product";
+import { Grid } from "@mui/material";
 
 export const ProductsList = ({ sortType, searchPhrase }: { sortType: string; searchPhrase: string | undefined }) => {
     const [products, setProducts] = useState<Array<ProductData>>([]);
@@ -21,11 +22,13 @@ export const ProductsList = ({ sortType, searchPhrase }: { sortType: string; sea
     }, [categoryId, subCategoryId, sortType, searchPhrase, update]);
 
     return (
-        <div className="productList">
+        <Grid container spacing={2}>
             {products.map(({ id, name }: ProductData, i) => (
-                <Product key={i} id={id} name={name} />
+                <Grid key={i} item xs={4}>
+                    <Product id={id} name={name} />
+                </Grid>
             ))}
-        </div>
+        </Grid>
     );
 };
 

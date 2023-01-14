@@ -2,11 +2,12 @@ $base-color: #333;
 $base-font-color: #fff;
 $active-font-color: #ff0000;
 $product-list-color: #444;
+$product-hover-color: #222;
+$text-hover-color: #ddd;
 
 body {
     background-color: $base-color;
     color: $base-font-color;
-    padding: 1em;
 }
 
 .subCategory {
@@ -18,12 +19,26 @@ body {
 }
 
 .admin {
-    cursor: pointer;
     &.active {
         color: pink !important;
     }
 }
 
-.add {
+.add,
+.product,
+.admin,
+.home {
     cursor: pointer;
+}
+
+.name {
+    &:hover {
+        color: $text-hover-color;
+    }
+}
+
+.product {
+    &:hover {
+        background-color: $product-hover-color;
+    }
 }

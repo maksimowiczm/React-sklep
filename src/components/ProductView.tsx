@@ -10,7 +10,7 @@ export const ProductView = () => {
 
     useEffect(() => {
         axios.get(`http://${DB}/products/${productId}`).then((res) => setProduct(res.data));
-    }, [productId, DB]);
+    }, [productId]);
 
     return (
         <div>

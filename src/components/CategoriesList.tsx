@@ -8,7 +8,7 @@ const CategoriesList = () => {
     const [categories, setCategories] = useState<Array<CategoryData>>([]);
     useEffect(() => {
         axios.get(`http://${DB}/categories?_embed=subCategories`).then((res) => setCategories(res.data));
-    }, [DB]);
+    }, []);
 
     const { categoryId, setCategory } = useAppContext();
 

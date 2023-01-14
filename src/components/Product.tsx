@@ -7,8 +7,8 @@ export const Product = ({ id, name }: ProductData) => {
     const { setProduct, admin } = useAppContext();
 
     return (
-        <Card onClick={() => setProduct(id)} variant="outlined">
-            <CardContent sx={{ minHeight: 100 }}>
+        <Card className="product" onClick={() => setProduct(id)} variant="outlined">
+            <CardContent sx={{ minHeight: 150 }}>
                 <Typography sx={{ fontSize: 14 }} align="justify" color="text.secondary" gutterBottom>
                     Nazwa Produktu
                 </Typography>

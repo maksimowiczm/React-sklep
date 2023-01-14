@@ -17,6 +17,10 @@ type AppContext = {
 
     update: number;
     setUpdate: (next: number) => void;
+
+    reset: () => void;
+
+    setSearchPhrase: (phase: string | undefined) => void;
 };
 
 export const MyAppContext = createContext<AppContext>({
@@ -36,4 +40,8 @@ export const MyAppContext = createContext<AppContext>({
 
     update: 0,
     setUpdate: () => {},
+
+    reset: () => {},
+
+    setSearchPhrase: () => {},
 });
