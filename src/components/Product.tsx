@@ -1,11 +1,10 @@
-import { useAdminContext, useProductContext } from "../App";
+import { useAppContext } from "../App";
 import AdminControls from "./AdminControls";
 import { Card, CardActions, CardContent, Typography } from "@mui/material";
 import { ProductData } from "../Types";
 
 export const Product = ({ id, name }: ProductData) => {
-    const { setProduct } = useProductContext();
-    const admin = useAdminContext();
+    const { setProduct, admin } = useAppContext();
 
     return (
         <Card onClick={() => setProduct(id)} variant="outlined">

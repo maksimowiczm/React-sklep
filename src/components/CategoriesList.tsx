@@ -1,11 +1,35 @@
 import React, { useEffect, useState } from "react";
-import { Divider, ListItemButton, Typography } from "@mui/material";
+import { Divider, ListItemButton } from "@mui/material";
 import axios from "axios";
-import { useCategoryContext } from "../App";
+import { DB, useAppContext } from "../App";
 import { SubCategoryData, CategoryData } from "../Types";
 
+const CategoriesList = () => {
+    const [categories, setCategories] = useState<Array<CategoryData>>([]);
+    useEffect(() => {
+        axios.get(`http://${DB}/categories?_embed=subCategories`).then((res) => setCategories(res.data));
+    }, [DB]);
+
+    const { categoryId, setCategory } = useAppContext();
+
+    return (
+        <>
+            <Divider />
+            {categories.map(({ id, name, subCategories }: CategoryData, i: number) => (
+                <React.Fragment key={i}>
+                    <ListItemButton className={`name${categoryId === id ? " active" : ""}`} onClick={() => setCategory(id)}>
+                        {name}
+                    </ListItemButton>
+                    <SubCategoriesList subCategories={subCategories} />
+                    <Divider />
+                </React.Fragment>
+            ))}
+        </>
+    );
+};
+
 const SubCategoriesList = ({ subCategories }: { subCategories: Array<SubCategoryData> }) => {
-    const { subCategoryId, setSubCategory } = useCategoryContext();
+    const { subCategoryId, setSubCategory } = useAppContext();
 
     return (
         <>
@@ -21,32 +45,6 @@ const SubCategoriesList = ({ subCategories }: { subCategories: Array<SubCategory
                 >
                     - {name}
                 </ListItemButton>
-            ))}
-        </>
-    );
-};
-
-const CategoriesList = () => {
-    const DB = process.env.REACT_APP_DB_SERVER;
-
-    const [categories, setCategories] = useState<Array<CategoryData>>([]);
-    useEffect(() => {
-        axios.get(`http://${DB}/categories?_embed=subCategories`).then((res) => setCategories(res.data));
-    }, [DB]);
-
-    const { categoryId, setCategory } = useCategoryContext();
-
-    return (
-        <>
-            <Divider />
-            {categories.map(({ id, name, subCategories }: CategoryData, i: number) => (
-                <React.Fragment key={i}>
-                    <ListItemButton className={`name${categoryId === id ? " active" : ""}`} onClick={() => setCategory(id)}>
-                        {name}
-                    </ListItemButton>
-                    <SubCategoriesList subCategories={subCategories} />
-                    <Divider />
-                </React.Fragment>
             ))}
         </>
     );

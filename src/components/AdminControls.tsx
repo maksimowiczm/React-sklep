@@ -1,17 +1,13 @@
 import { Button } from "@mui/material";
 import axios from "axios";
-import { useEditContext, useProductContext, useUpdateContext } from "../App";
+import { DB, useAppContext } from "../App";
 
 const AdminControls = ({ productId }: { productId: number }) => {
-    const DB = process.env.REACT_APP_DB_SERVER;
-
-    const { update, setUpdate } = useUpdateContext();
-    const { setEdit } = useEditContext();
-    const { setProduct } = useProductContext();
+    const { update, setUpdate, setStatus, setProduct } = useAppContext();
 
     const editAction = (e: React.MouseEvent) => {
         setProduct(productId);
-        setEdit("edit");
+        setStatus("edit");
         e.stopPropagation();
     };
 

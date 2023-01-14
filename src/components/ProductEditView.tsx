@@ -1,11 +1,10 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { DB, useEditContext, useProductContext } from "../App";
+import { DB, useAppContext } from "../App";
 import { CategoryData, ProductData } from "../Types";
 
 export const ProductEditView = () => {
-    const { productId } = useProductContext();
-    const { edit, setEdit } = useEditContext();
+    const { productId, status, setStatus } = useAppContext();
     const [categories, setCategories] = useState<Array<CategoryData>>([]);
     const [product, setProduct] = useState<ProductData>({ name: "", id: 0 });
     const [chosenCategory, setChosenCategory] = useState<number>(0);
@@ -47,25 +46,25 @@ export const ProductEditView = () => {
         if (!validateForm()) return;
 
         axios.patch(`http://${DB}/products/${productId}`, { name: name, categoryId: chosenCategory, subCategoryId: chosenSub });
-        setEdit("none");
+        setStatus("none");
     };
     const add = () => {
         if (!validateForm()) return;
 
         axios.post(`http://${DB}/products`, { name: name, categoryId: chosenCategory, subCategoryId: chosenSub });
-        setEdit("none");
+        setStatus("none");
     };
 
     let button;
-    if (edit === "add") button = <button onClick={add}>Dodaj</button>;
-    else if (edit === "edit") button = <button onClick={patch}>Edytuj</button>;
+    if (status === "add") button = <button onClick={add}>Dodaj</button>;
+    else if (status === "edit") button = <button onClick={patch}>Edytuj</button>;
 
     return (
         <div className="edit">
             {error !== "none" && <div>{error}</div>}
             <div className="name">
                 <label htmlFor="name">Nazwa</label>
-                <input id="name" defaultValue={edit ? product?.name : ""} onInput={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)} />
+                <input id="name" defaultValue={status ? product?.name : ""} onInput={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)} />
             </div>
             <div className="category">
                 <label htmlFor="category">Kategoria</label>
