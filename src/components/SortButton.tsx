@@ -1,7 +1,8 @@
+import Button from '@mui/material/Button';
 const SortButton = ({ setSortType }: { setSortType: () => void }) => {
     return (
         <div className="sortButton" >
-            <button onClick={setSortType}>Sortuj</button>
+            <Button color="secondary" variant="contained" onClick={setSortType}>Sortuj</Button>
         </div>
     );
 };

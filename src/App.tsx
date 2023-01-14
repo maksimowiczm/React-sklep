@@ -1,3 +1,4 @@
+import Typography from "@mui/material/Typography";
 import { useState, createContext, useContext } from "react";
 import CategoriesList from "./components/CategoriesList";
 import ProductsList from "./components/ProductsList";
@@ -59,9 +60,7 @@ const App = () => {
     return useProviders(
         <>
             <nav className="header">
-                <div className="home" onClick={setEmpty}>
-                    Sklep
-                </div>
+                <Typography onClick={setEmpty} component="legend">Sklep</Typography>
                 <CategoriesList />
             </nav>
             <div className="content">
