@@ -6,13 +6,9 @@ export interface SubCategoryData {
 }
 
 export const SubCategory = ({ id, name }: SubCategoryData) => {
-    const { subCategoryId, setSubCategory } = useCategoryContext();
+    const { subCategoryId } = useCategoryContext();
 
-    return (
-        <div className={`subCategory name ${subCategoryId === id ? "active" : ""}`} onClick={() => setSubCategory(id)}>
-            {name}
-        </div>
-    );
+    return <div className={`subCategory name ${subCategoryId === id ? "active" : ""}`}>{name}</div>;
 };
 
 export default SubCategory;

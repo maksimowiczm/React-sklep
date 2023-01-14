@@ -6,31 +6,15 @@ $product-list-color: #444;
 body {
     background-color: $base-color;
     color: $base-font-color;
-}
-
-.App {
-    display: flex;
     padding: 1em;
-    .header {
-        width: 33%;
-    }
-    .content {
-        width: 66%;
-    }
 }
 
-.categoriesList {
-    display: flex;
-    flex-direction: column;
-
-    .category {
-        padding: 1em;
-        .subCategory {
-            margin-left: 1em;
-            &::before {
-                content: "- ";
-            }
-        }
+.subCategory {
+    font-size: 0.8em;
+    margin-left: 1em;
+    padding: 0.1em;
+    &::before {
+        content: "- ";
     }
 }
 
@@ -67,7 +51,7 @@ body {
 }
 
 .active {
-    color: $active-font-color;
+    color: $active-font-color !important;
     // user-select: none;
 }
 

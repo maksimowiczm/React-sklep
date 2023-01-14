@@ -1,4 +1,4 @@
-import { Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import { useState, createContext, useContext } from "react";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -79,12 +79,10 @@ const App = () => {
     });
 
     const useDarkTheme = (jsx: JSX.Element) => (
-        <div className="App">
-            <ThemeProvider theme={darkTheme}>
-                <CssBaseline />
-                {jsx}
-            </ThemeProvider>
-        </div>
+        <ThemeProvider theme={darkTheme}>
+            <CssBaseline />
+            {jsx}
+        </ThemeProvider>
     );
 
     const useProviders = (jsx: JSX.Element) =>
@@ -131,26 +129,32 @@ const App = () => {
 
     return useProviders(
         <>
-            <nav className="header">
-                <div className="home" onClick={setEmpty}>
-                    <Typography onClick={setEmpty} component="legend">
-                        Sklep
-                    </Typography>
-                </div>
-                <AdminButton />
-                {edit === "none" && <CategoriesList />}
-            </nav>
-            <div className="content">
-                {edit !== "none" ? (
-                    <ProductEditView />
-                ) : (
-                    <>
-                        <SearchBar setSearchPhrase={setSearch} />
-                        <SortButton setSortType={setSort} />
-                        {productId === undefined ? <ProductsList sortType={sortType} searchPhrase={searchPhrase} /> : <ProductView />}
-                    </>
-                )}
-            </div>
+            <Grid container spacing={2}>
+                <Grid item xs={3}>
+                    <nav className="header">
+                        <div className="home" onClick={setEmpty}>
+                            <Typography onClick={setEmpty} component="legend" align="center" padding={2}>
+                                Sklep
+                            </Typography>
+                        </div>
+                        {edit === "none" && <CategoriesList />}
+                        <AdminButton />
+                    </nav>
+                </Grid>
+                <Grid item xs={9}>
+                    <div className="content">
+                        {edit !== "none" ? (
+                            <ProductEditView />
+                        ) : (
+                            <>
+                                <SearchBar setSearchPhrase={setSearch} />
+                                <SortButton setSortType={setSort} />
+                                {productId === undefined ? <ProductsList sortType={sortType} searchPhrase={searchPhrase} /> : <ProductView />}
+                            </>
+                        )}
+                    </div>
+                </Grid>
+            </Grid>
         </>
     );
 };

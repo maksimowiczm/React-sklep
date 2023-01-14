@@ -2,7 +2,7 @@ import { useAdminContext, useProductContext } from "../App";
 import AdminControls from "./AdminControls";
 import { CategoryData } from "./Category";
 import { SubCategoryData } from "./SubCategory";
-import { Card, CardActions, CardContent, Button, Typography } from "@mui/material";
+import { Card, CardActions, CardContent, Typography } from "@mui/material";
 
 export interface ProductData {
     id: number;
@@ -34,7 +34,4 @@ export const Product = ({ id, name }: ProductData) => {
     );
 };
 
-{
-    /* <AdminControls productId={id} />; */
-}
 export default Product;
