@@ -2,16 +2,17 @@ import { ProductData } from "./Product";
 import { CategoryData } from "./Category";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { DB, useEditContext } from "../App";
+import { DB, useEditContext, useProductContext } from "../App";
 
-export const ProductEditView = ({ productId }: { productId: number | undefined }) => {
+export const ProductEditView = () => {
+    const { productId } = useProductContext();
     const { edit, setEdit } = useEditContext();
     const [categories, setCategories] = useState<Array<CategoryData>>([]);
     const [product, setProduct] = useState<ProductData>({ name: "", id: 0 });
     const [chosenCategory, setChosenCategory] = useState<number>(0);
     const [chosenSub, setChosenSub] = useState<number>(0);
     const [name, setName] = useState<string>("");
-    const error: "none" | "name" | "cat" | "sub" = "none";
+    const [error, setError] = useState<"none" | "name" | "cat" | "sub">("none");
 
     useEffect(() => {
         axios.get(`http://${DB}/categories?_embed=subCategories`).then((res) => setCategories(res.data));
@@ -26,10 +27,20 @@ export const ProductEditView = ({ productId }: { productId: number | undefined }
     }, [productId]);
 
     const validateForm = () => {
-        if (name === "") return false;
-        if (chosenCategory === 0) return false;
-        if (chosenSub === 0) return false;
+        if (name === "") {
+            setError("name");
+            return false;
+        }
+        if (chosenCategory === 0) {
+            setError("cat");
+            return false;
+        }
+        if (chosenSub === 0) {
+            setError("sub");
+            return false;
+        }
 
+        setError("none");
         return true;
     };
 
@@ -52,6 +63,7 @@ export const ProductEditView = ({ productId }: { productId: number | undefined }
 
     return (
         <div className="edit">
+            {error !== "none" && <div>{error}</div>}
             <div className="name">
                 <label htmlFor="name">Nazwa</label>
                 <input id="name" defaultValue={edit ? product?.name : ""} onInput={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)} />

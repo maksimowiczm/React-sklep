@@ -53,6 +53,7 @@ const App = () => {
         setCategoryId(category);
         setSubCategoryId(subCategory);
         setProductId(product);
+        setEdit("none");
     };
 
     const setCategory = (id: number) => setStates(id, undefined, undefined);
@@ -84,8 +85,14 @@ const App = () => {
             >
                 ADMIN
             </div>
-            {admin && (
-                <div className="add" onClick={() => setEdit("add")}>
+            {admin && edit === "none" && (
+                <div
+                    className="add"
+                    onClick={() => {
+                        setProduct(undefined);
+                        setEdit("add");
+                    }}
+                >
                     Dodaj
                 </div>
             )}
@@ -99,11 +106,11 @@ const App = () => {
                     Sklep
                 </div>
                 <AdminButton />
-                <CategoriesList />
+                {edit === "none" && <CategoriesList />}
             </nav>
             <div className="content">
                 <SearchBar />
-                {edit !== "none" ? <ProductEditView productId={productId} /> : productId === undefined ? <ProductsList /> : <ProductView />}
+                {edit !== "none" ? <ProductEditView /> : productId === undefined ? <ProductsList /> : <ProductView />}
             </div>
         </>
     );
