@@ -1,11 +1,16 @@
 import axios from "axios";
-import { useUpdateContext } from "../App";
+import { useEditContext, useProductContext, useUpdateContext } from "../App";
 
 const AdminControls = ({ productId }: { productId: number }) => {
     const DB = process.env.REACT_APP_DB_SERVER;
 
     const { update, setUpdate } = useUpdateContext();
-    const edit = (e: React.MouseEvent) => {
+    const { setEdit } = useEditContext();
+    const { setProduct } = useProductContext();
+
+    const editAction = (e: React.MouseEvent) => {
+        setProduct(productId);
+        setEdit("edit");
         e.stopPropagation();
     };
 
@@ -17,7 +22,7 @@ const AdminControls = ({ productId }: { productId: number }) => {
 
     return (
         <>
-            <div onClick={edit}>Edytuj</div>
+            <div onClick={editAction}>Edytuj</div>
             <div onClick={remove}>Usuń</div>
         </>
     );

@@ -5,6 +5,7 @@ import ProductView from "./components/ProductView";
 import SearchBar from "./components/SearchBar";
 import "./styles/style.scss";
 
+export const DB = process.env.REACT_APP_DB_SERVER;
 type ProductContext = {
     productId: number | undefined;
     setProduct: (id: number | undefined) => void;
@@ -25,6 +26,13 @@ export const useCategoryContext = () => useContext(MyCategoryContext);
 const AdminContext = createContext<boolean>(false);
 export const useAdminContext = () => useContext(AdminContext);
 
+type EditContext = {
+    edit: "edit" | "add" | "none";
+    setEdit: (edit: "edit" | "add" | "none") => void;
+};
+const MyEditContext = createContext<EditContext>({ edit: "none", setEdit: () => {} });
+export const useEditContext = () => useContext(MyEditContext);
+
 type UpdateContext = {
     update: number;
     setUpdate: (next: number) => void;
@@ -38,6 +46,7 @@ const App = () => {
     const [productId, setProductId] = useState<number | undefined>(undefined);
     const [admin, setAdmin] = useState<boolean>(true);
     const [update, setUpdate] = useState<number>(0);
+    const [edit, setEdit] = useState<"edit" | "add" | "none">("none");
 
     const setStates = (category: number | undefined, subCategory: number | undefined, product: number | undefined) => {
         setCategoryId(category);
@@ -53,11 +62,13 @@ const App = () => {
     const useProviders = (jsx: JSX.Element) => (
         <div className="App">
             <MyUpdateContext.Provider value={{ update, setUpdate }}>
-                <AdminContext.Provider value={admin}>
-                    <MyCategoryContext.Provider value={{ categoryId, setCategory, subCategoryId, setSubCategory }}>
-                        <MyProductContext.Provider value={{ productId, setProduct }}>{jsx}</MyProductContext.Provider>
-                    </MyCategoryContext.Provider>
-                </AdminContext.Provider>
+                <MyEditContext.Provider value={{ edit, setEdit }}>
+                    <AdminContext.Provider value={admin}>
+                        <MyCategoryContext.Provider value={{ categoryId, setCategory, subCategoryId, setSubCategory }}>
+                            <MyProductContext.Provider value={{ productId, setProduct }}>{jsx}</MyProductContext.Provider>
+                        </MyCategoryContext.Provider>
+                    </AdminContext.Provider>
+                </MyEditContext.Provider>
             </MyUpdateContext.Provider>
         </div>
     );
