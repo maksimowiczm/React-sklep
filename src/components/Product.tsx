@@ -13,7 +13,7 @@ export const Product = ({ id, name }: ProductData) => {
     return (
         <div className="product" onClick={() => setProduct(id)}>
             <div className="name">{name}</div>
-            {admin && <AdminControls />}
+            {admin && <AdminControls productId={id} />}
         </div>
     );
 };

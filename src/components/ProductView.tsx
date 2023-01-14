@@ -19,7 +19,7 @@ export const ProductView = () => {
             <div>Produkt:</div>
             <div className="productView">
                 <div>{product?.name}</div>
-                {admin && <AdminControls />}
+                {admin && <AdminControls productId={productId as number} />}
             </div>
         </div>
     );
