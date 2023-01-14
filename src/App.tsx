@@ -12,7 +12,7 @@ type ProductContext = {
     productId: number | undefined;
     setProduct: (id: number | undefined) => void;
 };
-const MyProductContext = createContext<ProductContext>({ productId: undefined, setProduct: () => { } });
+const MyProductContext = createContext<ProductContext>({ productId: undefined, setProduct: () => {} });
 export const useProductContext = () => useContext(MyProductContext);
 
 type CategoryContext = {
@@ -22,7 +22,7 @@ type CategoryContext = {
     subCategoryId: number | undefined;
     setSubCategory: (id: number) => void;
 };
-const MyCategoryContext = createContext<CategoryContext>({ categoryId: undefined, setCategory: () => { }, subCategoryId: undefined, setSubCategory: () => { } });
+const MyCategoryContext = createContext<CategoryContext>({ categoryId: undefined, setCategory: () => {}, subCategoryId: undefined, setSubCategory: () => {} });
 export const useCategoryContext = () => useContext(MyCategoryContext);
 
 const AdminContext = createContext<boolean>(false);
@@ -64,11 +64,9 @@ const App = () => {
     const setProduct = (id: number | undefined) => setStates(undefined, undefined, id);
     const setEmpty = () => setStates(undefined, undefined, undefined);
     const setSort = () => {
-        if (sortType === "asc")
-            setSortType("desc")
-        else
-            setSortType("asc")
-    }
+        if (sortType === "asc") setSortType("desc");
+        else setSortType("asc");
+    };
     const setSearch = (phrase: string) => setSearchPhrase(phrase);
 
     const useProviders = (jsx: JSX.Element) => (
@@ -124,15 +122,13 @@ const App = () => {
                 {edit === "none" && <CategoriesList />}
             </nav>
             <div className="content">
-                <SearchBar />
                 {edit !== "none" ? (
                     <ProductEditView />
                 ) : (
                     <>
-                        (
                         <SearchBar setSearchPhrase={setSearch} />
                         <SortButton setSortType={setSort} />
-                        {productId === undefined ? <ProductsList sortType={sortType} searchPhrase={searchPhrase} /> : <ProductView />})
+                        {productId === undefined ? <ProductsList sortType={sortType} searchPhrase={searchPhrase} /> : <ProductView />}
                     </>
                 )}
             </div>
