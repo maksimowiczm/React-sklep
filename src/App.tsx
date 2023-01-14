@@ -4,6 +4,7 @@ import ProductEditView from "./components/ProductEditView";
 import ProductsList from "./components/ProductsList";
 import ProductView from "./components/ProductView";
 import SearchBar from "./components/SearchBar";
+import SortButton from "./components/SortButton";
 import "./styles/style.scss";
 
 export const DB = process.env.REACT_APP_DB_SERVER;
@@ -11,7 +12,7 @@ type ProductContext = {
     productId: number | undefined;
     setProduct: (id: number | undefined) => void;
 };
-const MyProductContext = createContext<ProductContext>({ productId: undefined, setProduct: () => {} });
+const MyProductContext = createContext<ProductContext>({ productId: undefined, setProduct: () => { } });
 export const useProductContext = () => useContext(MyProductContext);
 
 type CategoryContext = {
@@ -21,7 +22,7 @@ type CategoryContext = {
     subCategoryId: number | undefined;
     setSubCategory: (id: number) => void;
 };
-const MyCategoryContext = createContext<CategoryContext>({ categoryId: undefined, setCategory: () => {}, subCategoryId: undefined, setSubCategory: () => {} });
+const MyCategoryContext = createContext<CategoryContext>({ categoryId: undefined, setCategory: () => { }, subCategoryId: undefined, setSubCategory: () => { } });
 export const useCategoryContext = () => useContext(MyCategoryContext);
 
 const AdminContext = createContext<boolean>(false);
@@ -48,6 +49,8 @@ const App = () => {
     const [admin, setAdmin] = useState<boolean>(true);
     const [update, setUpdate] = useState<number>(0);
     const [edit, setEdit] = useState<"edit" | "add" | "none">("none");
+    const [sortType, setSortType] = useState<"asc" | "desc">("asc");
+    const [searchPhrase, setSearchPhrase] = useState<string | undefined>(undefined);
 
     const setStates = (category: number | undefined, subCategory: number | undefined, product: number | undefined) => {
         setCategoryId(category);
@@ -60,6 +63,13 @@ const App = () => {
     const setSubCategory = (id: number) => setStates(undefined, id, undefined);
     const setProduct = (id: number | undefined) => setStates(undefined, undefined, id);
     const setEmpty = () => setStates(undefined, undefined, undefined);
+    const setSort = () => {
+        if (sortType === "asc")
+            setSortType("desc")
+        else
+            setSortType("asc")
+    }
+    const setSearch = (phrase: string) => setSearchPhrase(phrase);
 
     const useProviders = (jsx: JSX.Element) => (
         <div className="App">
@@ -115,7 +125,16 @@ const App = () => {
             </nav>
             <div className="content">
                 <SearchBar />
-                {edit !== "none" ? <ProductEditView /> : productId === undefined ? <ProductsList /> : <ProductView />}
+                {edit !== "none" ? (
+                    <ProductEditView />
+                ) : (
+                    <>
+                        (
+                        <SearchBar setSearchPhrase={setSearch} />
+                        <SortButton setSortType={setSort} />
+                        {productId === undefined ? <ProductsList sortType={sortType} searchPhrase={searchPhrase} /> : <ProductView />})
+                    </>
+                )}
             </div>
         </>
     );
