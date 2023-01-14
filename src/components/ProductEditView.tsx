@@ -11,6 +11,7 @@ export const ProductEditView = ({ productId }: { productId: number | undefined }
     const [chosenCategory, setChosenCategory] = useState<number>(0);
     const [chosenSub, setChosenSub] = useState<number>(0);
     const [name, setName] = useState<string>("");
+    const error: "none" | "name" | "cat" | "sub" = "none";
 
     useEffect(() => {
         axios.get(`http://${DB}/categories?_embed=subCategories`).then((res) => setCategories(res.data));
@@ -24,11 +25,23 @@ export const ProductEditView = ({ productId }: { productId: number | undefined }
         }
     }, [productId]);
 
+    const validateForm = () => {
+        if (name === "") return false;
+        if (chosenCategory === 0) return false;
+        if (chosenSub === 0) return false;
+
+        return true;
+    };
+
     const patch = () => {
+        if (!validateForm()) return;
+
         axios.patch(`http://${DB}/products/${productId}`, { name: name, categoryId: chosenCategory, subCategoryId: chosenSub });
         setEdit("none");
     };
     const add = () => {
+        if (!validateForm()) return;
+
         axios.post(`http://${DB}/products`, { name: name, categoryId: chosenCategory, subCategoryId: chosenSub });
         setEdit("none");
     };
@@ -41,7 +54,7 @@ export const ProductEditView = ({ productId }: { productId: number | undefined }
         <div className="edit">
             <div className="name">
                 <label htmlFor="name">Nazwa</label>
-                <input id="name" defaultValue={edit ? product?.name : ""} onChange={(e) => setName(e.target.value)} />
+                <input id="name" defaultValue={edit ? product?.name : ""} onInput={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)} />
             </div>
             <div className="category">
                 <label htmlFor="category">Kategoria</label>
@@ -50,6 +63,7 @@ export const ProductEditView = ({ productId }: { productId: number | undefined }
                     value={chosenCategory}
                     onChange={(e) => {
                         setChosenCategory(Number(e.target.value));
+                        setChosenSub(0);
                     }}
                 >
                     <option value={0}>Wybierz kategorię</option>
