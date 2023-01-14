@@ -14,14 +14,14 @@ export const ProductEditView = ({ productId }: { productId: number | undefined }
 
     useEffect(() => {
         axios.get(`http://${DB}/categories?_embed=subCategories`).then((res) => setCategories(res.data));
-        if (productId !== undefined)
+        if (productId !== undefined) {
             axios.get(`http://${DB}/products/${productId}?_expand=category&_expand=subCategory`).then((res) => {
-                console.log(res);
                 setProduct(res.data);
                 setName(res.data?.name);
                 setChosenCategory(res.data?.category?.id!!);
                 setChosenSub(res.data?.subCategory?.id!!);
             });
+        }
     }, [productId]);
 
     const patch = () => {
@@ -34,8 +34,8 @@ export const ProductEditView = ({ productId }: { productId: number | undefined }
     };
 
     let button;
-    if (edit == "add") button = <button onClick={add}>Dodaj</button>;
-    else if (edit == "edit") button = <button onClick={patch}>Edytuj</button>;
+    if (edit === "add") button = <button onClick={add}>Dodaj</button>;
+    else if (edit === "edit") button = <button onClick={patch}>Edytuj</button>;
 
     return (
         <div className="edit">

@@ -1,9 +1,8 @@
-import { useAdminContext, useEditContext, useProductContext } from "../App";
+import { useAdminContext, useProductContext } from "../App";
 import { useState, useEffect } from "react";
 import { ProductData } from "./Product";
 import axios from "axios";
 import AdminControls from "./AdminControls";
-import ProductEditView from "./ProductEditView";
 
 export const ProductView = () => {
     const { productId } = useProductContext();
