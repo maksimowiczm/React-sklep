@@ -78,22 +78,27 @@ const App = () => {
         },
     });
 
-    const useProviders = (jsx: JSX.Element) => (
+    const useDarkTheme = (jsx: JSX.Element) => (
         <div className="App">
             <ThemeProvider theme={darkTheme}>
                 <CssBaseline />
-                <MyUpdateContext.Provider value={{ update, setUpdate }}>
-                    <MyEditContext.Provider value={{ edit, setEdit }}>
-                        <AdminContext.Provider value={admin}>
-                            <MyCategoryContext.Provider value={{ categoryId, setCategory, subCategoryId, setSubCategory }}>
-                                <MyProductContext.Provider value={{ productId, setProduct }}>{jsx}</MyProductContext.Provider>
-                            </MyCategoryContext.Provider>
-                        </AdminContext.Provider>
-                    </MyEditContext.Provider>
-                </MyUpdateContext.Provider>
+                {jsx}
             </ThemeProvider>
         </div>
     );
+
+    const useProviders = (jsx: JSX.Element) =>
+        useDarkTheme(
+            <MyUpdateContext.Provider value={{ update, setUpdate }}>
+                <MyEditContext.Provider value={{ edit, setEdit }}>
+                    <AdminContext.Provider value={admin}>
+                        <MyCategoryContext.Provider value={{ categoryId, setCategory, subCategoryId, setSubCategory }}>
+                            <MyProductContext.Provider value={{ productId, setProduct }}>{jsx}</MyProductContext.Provider>
+                        </MyCategoryContext.Provider>
+                    </AdminContext.Provider>
+                </MyEditContext.Provider>
+            </MyUpdateContext.Provider>
+        );
 
     const AdminButton = () => {
         if (edit === "none")
