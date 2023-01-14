@@ -1,5 +1,7 @@
 import { Typography } from "@mui/material";
 import { useState, createContext, useContext } from "react";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
 import CategoriesList from "./components/CategoriesList";
 import ProductEditView from "./components/ProductEditView";
 import ProductsList from "./components/ProductsList";
@@ -70,17 +72,26 @@ const App = () => {
     };
     const setSearch = (phrase: string) => setSearchPhrase(phrase);
 
+    const darkTheme = createTheme({
+        palette: {
+            mode: "dark",
+        },
+    });
+
     const useProviders = (jsx: JSX.Element) => (
         <div className="App">
-            <MyUpdateContext.Provider value={{ update, setUpdate }}>
-                <MyEditContext.Provider value={{ edit, setEdit }}>
-                    <AdminContext.Provider value={admin}>
-                        <MyCategoryContext.Provider value={{ categoryId, setCategory, subCategoryId, setSubCategory }}>
-                            <MyProductContext.Provider value={{ productId, setProduct }}>{jsx}</MyProductContext.Provider>
-                        </MyCategoryContext.Provider>
-                    </AdminContext.Provider>
-                </MyEditContext.Provider>
-            </MyUpdateContext.Provider>
+            <ThemeProvider theme={darkTheme}>
+                <CssBaseline />
+                <MyUpdateContext.Provider value={{ update, setUpdate }}>
+                    <MyEditContext.Provider value={{ edit, setEdit }}>
+                        <AdminContext.Provider value={admin}>
+                            <MyCategoryContext.Provider value={{ categoryId, setCategory, subCategoryId, setSubCategory }}>
+                                <MyProductContext.Provider value={{ productId, setProduct }}>{jsx}</MyProductContext.Provider>
+                            </MyCategoryContext.Provider>
+                        </AdminContext.Provider>
+                    </MyEditContext.Provider>
+                </MyUpdateContext.Provider>
+            </ThemeProvider>
         </div>
     );
 
@@ -123,8 +134,6 @@ const App = () => {
                 </div>
                 <AdminButton />
                 {edit === "none" && <CategoriesList />}
-
-                <CategoriesList />
             </nav>
             <div className="content">
                 {edit !== "none" ? (
