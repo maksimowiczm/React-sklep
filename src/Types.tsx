@@ -15,3 +15,10 @@ export type ProductData = {
     category?: CategoryData;
     subCategory?: SubCategoryData;
 };
+
+export type SortType = {
+    prop: "name" | "price";
+    direction: "asc" | "desc";
+};
+
+export type Status = "edit" | "add" | "none";

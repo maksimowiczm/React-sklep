@@ -5,12 +5,13 @@ import { ProductData } from "../Types";
 import Product from "./Product";
 import { Grid, Typography } from "@mui/material";
 
-export const ProductsList = ({ sortType, searchPhrase }: { sortType: string; searchPhrase: string | undefined }) => {
+export const ProductsList = () => {
     const [products, setProducts] = useState<Array<ProductData>>([]);
 
-    const { categoryId, subCategoryId, update } = useAppContext();
+    const { categoryId, subCategoryId, update, sortType, searchPhrase } = useAppContext();
 
     useEffect(() => {
+        const { prop, direction } = sortType;
         let serarchPartial = searchPhrase ? "name_like=" + searchPhrase + "&" : "";
         if (categoryId !== undefined)
             axios.get(`http://${DB}/products?categoryId=${categoryId}&${serarchPartial}_sort=name&_order=${sortType}`).then((res) => setProducts(res.data));
@@ -18,7 +19,7 @@ export const ProductsList = ({ sortType, searchPhrase }: { sortType: string; sea
             axios
                 .get(`http://${DB}/products?subCategoryId=${subCategoryId}&${serarchPartial}_sort=name&_order=${sortType}`)
                 .then((res) => setProducts(res.data));
-        else axios.get(`http://${DB}/products?${serarchPartial}_sort=name&_order=${sortType}`).then((res) => setProducts(res.data));
+        else axios.get(`http://${DB}/products?${serarchPartial}_sort=${prop}&_order=${direction}`).then((res) => setProducts(res.data));
     }, [categoryId, subCategoryId, sortType, searchPhrase, update]);
 
     if (products.length === 0)

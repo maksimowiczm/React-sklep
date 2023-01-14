@@ -1,4 +1,5 @@
 import { createContext } from "react";
+import { SortType } from "./Types";
 
 type AppContext = {
     categoryId: number | undefined;
@@ -21,7 +22,11 @@ type AppContext = {
 
     reset: () => void;
 
+    searchPhrase: string | undefined;
     setSearchPhrase: (phase: string | undefined) => void;
+
+    sortType: SortType;
+    setSortType: (sortType: SortType) => void;
 };
 
 export const MyAppContext = createContext<AppContext>({
@@ -45,5 +50,9 @@ export const MyAppContext = createContext<AppContext>({
 
     reset: () => {},
 
+    searchPhrase: undefined,
     setSearchPhrase: () => {},
+
+    sortType: { prop: "name", direction: "asc" },
+    setSortType: () => {},
 });

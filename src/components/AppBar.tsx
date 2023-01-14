@@ -14,7 +14,7 @@ const MyAppBar = () => {
                 </Typography>
                 <SearchBar />
                 <IconButton sx={{ marginLeft: 1 }} onClick={switchAdmin}>
-                    {admin ? <AccountCircleIcon color="secondary" /> : <AccountCircleIcon />}
+                    <AccountCircleIcon color={admin ? "success" : "disabled"} />
                 </IconButton>
             </Toolbar>
         </AppBar>

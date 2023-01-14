@@ -1,6 +1,6 @@
 import { Grid } from "@mui/material";
 import { useState, useContext } from "react";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { ThemeProvider, createTheme, SxProps } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import CategoriesList from "./components/CategoriesList";
 import ProductEditView from "./components/ProductEditView";
@@ -9,6 +9,8 @@ import ProductView from "./components/ProductView";
 import "./styles/style.scss";
 import { MyAppContext } from "./Context";
 import MyAppBar from "./components/AppBar";
+import FloatingButton from "./components/FloatingButton";
+import { Status, SortType } from "./Types";
 
 export const DB = process.env.REACT_APP_DB_SERVER;
 
@@ -20,8 +22,8 @@ const App = () => {
     const [productId, setProductId] = useState<number | undefined>(undefined);
     const [admin, setAdmin] = useState<boolean>(true);
     const [update, setUpdate] = useState<number>(0);
-    const [status, setStatus] = useState<"edit" | "add" | "none">("none");
-    const [sortType, setSortType] = useState<"asc" | "desc">("asc");
+    const [status, setStatus] = useState<Status>("none");
+    const [sortType, setSortType] = useState<SortType>({ prop: "name", direction: "asc" });
     const [searchPhrase, setSearchPhrase] = useState<string | undefined>(undefined);
 
     const useProviders = (jsx: JSX.Element) => (
@@ -45,7 +47,12 @@ const App = () => {
                 setStatus,
 
                 reset: setEmpty,
+
+                searchPhrase,
                 setSearchPhrase,
+
+                sortType,
+                setSortType,
             }}
         >
             {jsx}
@@ -76,14 +83,6 @@ const App = () => {
     const setSubCategory = (id: number) => setStates(undefined, id, undefined);
     const setProduct = (id: number | undefined) => setStates(undefined, undefined, id);
     const setEmpty = () => setStates(undefined, undefined, undefined);
-    const setSort = () => {
-        if (sortType === "asc") setSortType("desc");
-        else setSortType("asc");
-    };
-
-    // TODO
-    // sort button
-    // wczyszczenie filtrów button
 
     return useProviders(
         useDarkTheme(
@@ -94,13 +93,10 @@ const App = () => {
                         {status === "none" && <CategoriesList />}
                     </Grid>
                     <Grid item xs={9}>
-                        {status !== "none" ? (
-                            <ProductEditView />
-                        ) : (
-                            <>{productId === undefined ? <ProductsList sortType={sortType} searchPhrase={searchPhrase} /> : <ProductView />}</>
-                        )}
+                        {status !== "none" ? <ProductEditView /> : <>{productId === undefined ? <ProductsList /> : <ProductView />}</>}
                     </Grid>
                 </Grid>
+                <FloatingButton />
             </>
         )
     );
