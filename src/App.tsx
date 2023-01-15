@@ -93,12 +93,20 @@ const App = () => {
             <>
                 <MyAppBar />
                 <Grid container spacing={2} padding={2}>
-                    <Grid item xs={3}>
-                        {status === "none" && <CategoriesList />}
-                    </Grid>
-                    <Grid item xs={9}>
-                        {status !== "none" ? <ProductEditView /> : <>{productId === undefined ? <ProductsList /> : <ProductView />}</>}
-                    </Grid>
+                    {status === "none" ? (
+                        <>
+                            <Grid item xs={3}>
+                                <CategoriesList />
+                            </Grid>
+                            <Grid item xs={9}>
+                                {productId === undefined ? <ProductsList /> : <ProductView />}
+                            </Grid>
+                        </>
+                    ) : (
+                        <Grid item xs={12} display="flex" justifyContent="center" alignItems="center">
+                            <ProductEditView />
+                        </Grid>
+                    )}
                 </Grid>
                 {productId === undefined && status === "none" && <FloatingButton />}
             </>
