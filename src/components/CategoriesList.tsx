@@ -7,14 +7,23 @@ import AdminControls from "./AdminControlsCategory";
 
 const CategoriesList = () => {
     const [categories, setCategories] = useState<Array<CategoryData>>([]);
+    const { categoryId, setCategory, update, setStatus, admin } = useAppContext();
+
     useEffect(() => {
         axios.get(`http://${DB}/categories?_embed=subCategories`).then((res) => setCategories(res.data));
-    }, []);
+    }, [update]);
 
-    const { categoryId, setCategory, admin } = useAppContext();
+
+    const addAction = (e: React.MouseEvent) => {
+        setStatus("addCategory");
+        e.stopPropagation();
+    };
 
     return (
         <>
+            {admin && (
+                <div onClick={addAction}>Dodaj kategorie</div>
+            )}
             <Divider />
             {categories.map(({ id, name, subCategories }: CategoryData, i: number) => (
                 <React.Fragment key={i}>
