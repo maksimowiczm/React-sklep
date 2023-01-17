@@ -1,5 +1,5 @@
 import { useAppContext } from "../App";
-import AdminControls from "./AdminControls";
+import AdminControls from "./AdminControlsProduct";
 import { Card, CardActions, CardContent, Typography } from "@mui/material";
 import { ProductData } from "../Types";
 

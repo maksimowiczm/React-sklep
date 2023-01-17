@@ -3,6 +3,7 @@ import { Divider, ListItemButton } from "@mui/material";
 import axios from "axios";
 import { DB, useAppContext } from "../App";
 import { SubCategoryData, CategoryData } from "../Types";
+import AdminControls from "./AdminControlsCategory";
 
 const CategoriesList = () => {
     const [categories, setCategories] = useState<Array<CategoryData>>([]);
@@ -10,7 +11,7 @@ const CategoriesList = () => {
         axios.get(`http://${DB}/categories?_embed=subCategories`).then((res) => setCategories(res.data));
     }, []);
 
-    const { categoryId, setCategory } = useAppContext();
+    const { categoryId, setCategory, admin } = useAppContext();
 
     return (
         <>
@@ -20,6 +21,13 @@ const CategoriesList = () => {
                     <ListItemButton className={`name${categoryId === id ? " active" : ""}`} onClick={() => setCategory(id)}>
                         {name}
                     </ListItemButton>
+
+                    {admin && (
+                        <ListItemButton>
+                            <AdminControls categoryId={id} />
+                        </ListItemButton>
+                    )}
+
                     <SubCategoriesList subCategories={subCategories} />
                     <Divider />
                 </React.Fragment>

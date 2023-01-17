@@ -75,13 +75,13 @@ export const ProductEditView = () => {
     };
 
     let button;
-    if (status === "add")
+    if (status === "addProduct")
         button = (
             <Button variant="contained" onClick={add}>
                 Dodaj
             </Button>
         );
-    else if (status === "edit")
+    else if (status === "editProduct")
         button = (
             <Button variant="contained" onClick={patch}>
                 Edytuj
@@ -91,7 +91,7 @@ export const ProductEditView = () => {
     return (
         <Stack spacing={2} width={500} direction="column" justifyContent="center" alignItems="center">
             <Typography variant="h5" align="center">
-                {status === "add" ? "Dodaj" : "Edytuj"} produkt
+                {status === "addProduct" ? "Dodaj" : status === "editProduct" ? "Edytuj" : ""} produkt
             </Typography>
             <FormControl fullWidth>{textfield}</FormControl>
             <FormControl fullWidth>

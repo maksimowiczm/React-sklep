@@ -3,7 +3,7 @@ import { SortType } from "./Types";
 
 type AppContext = {
     categoryId: number | undefined;
-    setCategory: (id: number) => void;
+    setCategory: (id: number | undefined) => void;
 
     subCategoryId: number | undefined;
     setSubCategory: (id: number) => void;
@@ -14,8 +14,8 @@ type AppContext = {
     admin: boolean;
     switchAdmin: () => void;
 
-    status: "edit" | "add" | "none";
-    setStatus: (edit: "edit" | "add" | "none") => void;
+    status: "editProduct" | "addProduct" | "editCategory" | "addCategory" | "none";
+    setStatus: (edit: "editProduct" | "addProduct" | "editCategory" | "addCategory" | "none") => void;
 
     update: number;
     setUpdate: (next: number) => void;
@@ -31,28 +31,28 @@ type AppContext = {
 
 export const MyAppContext = createContext<AppContext>({
     categoryId: undefined,
-    setCategory: () => {},
+    setCategory: () => { },
 
     subCategoryId: undefined,
-    setSubCategory: () => {},
+    setSubCategory: () => { },
 
     productId: undefined,
-    setProduct: () => {},
+    setProduct: () => { },
 
     admin: false,
-    switchAdmin: () => {},
+    switchAdmin: () => { },
 
     status: "none",
-    setStatus: () => {},
+    setStatus: () => { },
 
     update: 0,
-    setUpdate: () => {},
+    setUpdate: () => { },
 
-    reset: () => {},
+    reset: () => { },
 
     searchPhrase: undefined,
-    setSearchPhrase: () => {},
+    setSearchPhrase: () => { },
 
     sortType: { prop: "name", direction: "asc" },
-    setSortType: () => {},
+    setSortType: () => { },
 });

@@ -14,6 +14,7 @@ import { Grid } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import FloatingButton from "./components/FloatingButton";
+import CategoryEditView from "./components/CategoryEditView";
 
 export const DB = process.env.REACT_APP_DB_SERVER;
 
@@ -83,10 +84,28 @@ const App = () => {
         setStatus("none");
     };
 
-    const setCategory = (id: number) => setStates(id, undefined, undefined);
+    const setCategory = (id: number | undefined) => setStates(id, undefined, undefined);
     const setSubCategory = (id: number) => setStates(undefined, id, undefined);
     const setProduct = (id: number | undefined) => setStates(undefined, undefined, id);
     const setEmpty = () => setStates(undefined, undefined, undefined);
+
+    const getContentForStatus = (status: Status) => {
+        switch (status) {
+            case "addProduct":
+                return (<ProductEditView />)
+
+            case "editProduct":
+                return (<ProductEditView />)
+
+            case "editCategory":
+                return (<CategoryEditView />)
+
+            case "addCategory":
+                return (<CategoryEditView />)
+
+        }
+
+    }
 
     return useProviders(
         useDarkTheme(
@@ -104,7 +123,7 @@ const App = () => {
                         </>
                     ) : (
                         <Grid item xs={12} display="flex" justifyContent="center" alignItems="center">
-                            <ProductEditView />
+                            {getContentForStatus(status)};
                         </Grid>
                     )}
                 </Grid>

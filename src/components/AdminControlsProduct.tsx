@@ -5,12 +5,12 @@ import { DB, useAppContext } from "../App";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 
-const AdminControls = ({ productId }: { productId: number }) => {
+const AdminControlsProduct = ({ productId }: { productId: number }) => {
     const { update, setUpdate, setStatus, setProduct } = useAppContext();
 
     const editAction = (e: React.MouseEvent) => {
         setProduct(productId);
-        setStatus("edit");
+        setStatus("editProduct");
         e.stopPropagation();
     };
 
@@ -54,4 +54,4 @@ const AdminControls = ({ productId }: { productId: number }) => {
     );
 };
 
-export default AdminControls;
+export default AdminControlsProduct;

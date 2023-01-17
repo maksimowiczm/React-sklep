@@ -1,7 +1,7 @@
 import { DB, useAppContext } from "../App";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import AdminControls from "./AdminControls";
+import AdminControls from "./AdminControlsProduct";
 import { ProductData } from "../Types";
 
 export const ProductView = () => {

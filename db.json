@@ -2,11 +2,11 @@
   "categories": [
     {
       "id": 1,
-      "name": "Smartfony i smartwatche"
+      "name": "Smartfony i smartwatchee"
     },
     {
       "id": 2,
-      "name": "Podzespoły komputerowe"
+      "name": "Podzespoły komputerowe1"
     },
     {
       "id": 3,
@@ -38,13 +38,7 @@
   "products": [
     {
       "id": 1,
-      "name": "ASUS ZenBook 14 UM425QA",
-      "categoryId": 3,
-      "subCategoryId": 3
-    },
-    {
-      "id": 2,
-      "name": "Microsoft Surface Go 3",
+      "name": "ASUS ZenBook 14 UM425QAA",
       "categoryId": 3,
       "subCategoryId": 3
     },
