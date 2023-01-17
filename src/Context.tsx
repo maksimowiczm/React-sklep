@@ -6,7 +6,7 @@ type AppContext = {
     setCategory: (id: number | undefined) => void;
 
     subCategoryId: number | undefined;
-    setSubCategory: (id: number) => void;
+    setSubCategory: (id: number | undefined) => void;
 
     productId: number | undefined;
     setProduct: (id: number | undefined) => void;
@@ -14,8 +14,8 @@ type AppContext = {
     admin: boolean;
     switchAdmin: () => void;
 
-    status: "editProduct" | "addProduct" | "editCategory" | "addCategory" | "none";
-    setStatus: (edit: "editProduct" | "addProduct" | "editCategory" | "addCategory" | "none") => void;
+    status: "editProduct" | "addProduct" | "editCategory" | "addCategory" | "editSubCategory" | "addSubCategory" | "none";
+    setStatus: (edit: "editProduct" | "addProduct" | "editCategory" | "addCategory" | "editSubCategory" | "addSubCategory" | "none") => void;
 
     update: number;
     setUpdate: (next: number) => void;

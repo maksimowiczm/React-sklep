@@ -15,6 +15,7 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import FloatingButton from "./components/FloatingButton";
 import CategoryEditView from "./components/CategoryEditView";
+import SubcategoryEditView from "./components/SubcategoryEditView";
 
 export const DB = process.env.REACT_APP_DB_SERVER;
 
@@ -85,7 +86,7 @@ const App = () => {
     };
 
     const setCategory = (id: number | undefined) => setStates(id, undefined, undefined);
-    const setSubCategory = (id: number) => setStates(undefined, id, undefined);
+    const setSubCategory = (id: number | undefined) => setStates(undefined, id, undefined);
     const setProduct = (id: number | undefined) => setStates(undefined, undefined, id);
     const setEmpty = () => setStates(undefined, undefined, undefined);
 
@@ -102,6 +103,12 @@ const App = () => {
 
             case "addCategory":
                 return (<CategoryEditView />)
+
+            case "editSubCategory":
+                return (<SubcategoryEditView />)
+
+            case "addSubCategory":
+                return (<SubcategoryEditView />)
 
         }
 
@@ -123,7 +130,7 @@ const App = () => {
                         </>
                     ) : (
                         <Grid item xs={12} display="flex" justifyContent="center" alignItems="center">
-                            {getContentForStatus(status)};
+                            {getContentForStatus(status)}
                         </Grid>
                     )}
                 </Grid>

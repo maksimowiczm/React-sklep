@@ -21,4 +21,4 @@ export type SortType = {
     direction: "asc" | "desc";
 };
 
-export type Status = "editProduct" | "addProduct" | "editCategory" | "addCategory" | "none";
+export type Status = "editProduct" | "addProduct" | "editCategory" | "addCategory" | "editSubCategory" | "addSubCategory" | "none";
