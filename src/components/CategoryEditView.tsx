@@ -1,4 +1,4 @@
-import { FormControl, InputLabel, Select, MenuItem, Button, TextField, Stack, Typography } from "@mui/material";
+import { FormControl, Button, TextField, Stack, Typography } from "@mui/material";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { DB, useAppContext } from "../App";
@@ -10,11 +10,7 @@ const InputField = ({ defaultValue, onInput, error }: { defaultValue: string; on
 export const ProductEditView = () => {
     const { categoryId, status, setStatus } = useAppContext();
 
-    // const [categories, setCategories] = useState<Array<CategoryData>>([]);
     const [name, setName] = useState<string>("");
-
-    //TODO wyswietlanie bledow
-    const [error, setError] = useState<"none" | "name">("none");
 
     // xd
     const [textfield, setTextfield] = useState<JSX.Element>(
@@ -26,7 +22,6 @@ export const ProductEditView = () => {
     );
 
     useEffect(() => {
-        //axios.get(`http://${DB}/categories?_embed=subCategories`).then((res) => setCategories(res.data));
         if (categoryId !== undefined) {
             axios.get(`http://${DB}/categories/${categoryId}`).then((res) => {
                 setName(res.data?.name);
@@ -38,17 +33,7 @@ export const ProductEditView = () => {
         }
     }, [categoryId]);
 
-
-
-    const validateForm = () => {
-        if (name === "") {
-            setError("name");
-            return false;
-        }
-
-        setError("none");
-        return true;
-    };
+    const validateForm = () => name !== "";
 
     const patch = () => {
         if (!validateForm()) return;
@@ -76,7 +61,6 @@ export const ProductEditView = () => {
                 Edytuj
             </Button>
         );
-
 
     return (
         <Stack spacing={2} width={500} direction="column" justifyContent="center" alignItems="center">

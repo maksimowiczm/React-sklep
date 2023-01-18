@@ -9,14 +9,11 @@ const InputField = ({ defaultValue, onInput, error }: { defaultValue: string; on
 );
 
 export const SubcategoryEditView = () => {
-    const { subCategoryId, status, setStatus, categoryId } = useAppContext();
+    const { subCategoryId, status, setStatus } = useAppContext();
 
     const [categories, setCategories] = useState<Array<CategoryData>>([]);
     const [chosenCategory, setChosenCategory] = useState<number | "">("");
     const [name, setName] = useState<string>("");
-
-    //TODO wyswietlanie bledow
-    const [error, setError] = useState<"none" | "name" | "cat">("none");
 
     // xd
     const [textfield, setTextfield] = useState<JSX.Element>(
@@ -41,19 +38,7 @@ export const SubcategoryEditView = () => {
         }
     }, [subCategoryId]);
 
-    const validateForm = () => {
-        if (name === "") {
-            setError("name");
-            return false;
-        }
-        if (chosenCategory === 0) {
-            setError("cat");
-            return false;
-        }
-
-        setError("none");
-        return true;
-    };
+    const validateForm = () => !(name === "" || chosenCategory === 0);
 
     const patch = () => {
         if (!validateForm()) return;
@@ -96,7 +81,7 @@ export const SubcategoryEditView = () => {
                     value={chosenCategory}
                     label="Kategoria"
                     onChange={(e) => {
-                        setChosenCategory(Number(e.target.value))
+                        setChosenCategory(Number(e.target.value));
                     }}
                 >
                     {categories.map((c, i) => (
@@ -109,7 +94,7 @@ export const SubcategoryEditView = () => {
 
             {button}
         </Stack>
-    )
-}
+    );
+};
 
 export default SubcategoryEditView;

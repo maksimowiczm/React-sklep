@@ -15,7 +15,6 @@ const CategoriesList = () => {
         axios.get(`http://${DB}/categories?_embed=subCategories`).then((res) => setCategories(res.data));
     }, [update]);
 
-
     const addAction = (e: React.MouseEvent) => {
         setStatus("addCategory");
         e.stopPropagation();
@@ -28,28 +27,24 @@ const CategoriesList = () => {
     return (
         <>
             {admin && (
-                <div onClick={addAction}><AddIcon />Dodaj kategorie</div>
+                <div onClick={addAction}>
+                    <AddIcon />
+                    Dodaj kategorie
+                </div>
             )}
             {admin && (
-                <div onClick={addSubCategoryAction}><AddIcon />Dodaj podkategorie</div>
+                <div onClick={addSubCategoryAction}>
+                    <AddIcon />
+                    Dodaj podkategorie
+                </div>
             )}
             <Divider />
             {categories.map(({ id, name, subCategories }: CategoryData, i: number) => (
                 <React.Fragment key={i}>
                     <ListItemButton className={`name${categoryId === id ? " active" : ""}`} onClick={() => setCategory(id)}>
                         {name}
-                        {admin && (
-                            <ListItemButton>
-                                <AdminControls categoryId={id} />
-                            </ListItemButton>)
-                        }
-
-
+                        {admin && <AdminControls categoryId={id} />}
                     </ListItemButton>
-
-
-
-
 
                     <SubCategoriesList subCategories={subCategories} />
                     <Divider />
@@ -75,11 +70,7 @@ const SubCategoriesList = ({ subCategories }: { subCategories: Array<SubCategory
                     sx={{ marginLeft: 1 }}
                 >
                     - {name}
-                    {admin && (
-                        <ListItemButton>
-                            <AdminControlsSubcategory subcategoryId={id} />
-                        </ListItemButton>)
-                    }
+                    {admin && <AdminControlsSubcategory subcategoryId={id} />}
                 </ListItemButton>
             ))}
         </>

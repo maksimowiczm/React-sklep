@@ -16,9 +16,6 @@ export const ProductEditView = () => {
     const [chosenSub, setChosenSub] = useState<number | "">("");
     const [name, setName] = useState<string>("");
 
-    //TODO wyswietlanie bledow
-    const [error, setError] = useState<"none" | "name" | "cat" | "sub">("none");
-
     // xd
     const [textfield, setTextfield] = useState<JSX.Element>(
         productId === undefined ? (
@@ -43,23 +40,7 @@ export const ProductEditView = () => {
         }
     }, [productId]);
 
-    const validateForm = () => {
-        if (name === "") {
-            setError("name");
-            return false;
-        }
-        if (chosenCategory === 0) {
-            setError("cat");
-            return false;
-        }
-        if (chosenSub === 0) {
-            setError("sub");
-            return false;
-        }
-
-        setError("none");
-        return true;
-    };
+    const validateForm = () => !(name === "" || chosenCategory === 0 || chosenSub === 0);
 
     const patch = () => {
         if (!validateForm()) return;
