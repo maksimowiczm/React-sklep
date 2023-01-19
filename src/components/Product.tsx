@@ -1,24 +1,27 @@
-import { useAdminContext, useProductContext } from "../App";
-import AdminControls from "./AdminControls";
-import { CategoryData } from "./Category";
-import { SubCategoryData } from "./SubCategory";
-
-export interface ProductData {
-    id: number;
-    name: string;
-    category?: CategoryData;
-    subCategory?: SubCategoryData;
-}
+import { useAppContext } from "../App";
+import AdminControls from "./AdminControlsProduct";
+import { Card, CardActions, CardContent, Typography } from "@mui/material";
+import { ProductData } from "../Types";
 
 export const Product = ({ id, name }: ProductData) => {
-    const { setProduct } = useProductContext();
-    const admin = useAdminContext();
+    const { setProduct, admin } = useAppContext();
 
     return (
-        <div className="product" onClick={() => setProduct(id)}>
-            <div className="name">{name}</div>
-            {admin && <AdminControls productId={id} />}
-        </div>
+        <Card className="product" onClick={() => setProduct(id)} variant="outlined">
+            <CardContent sx={{ minHeight: 200 }}>
+                <Typography sx={{ fontSize: 14 }} align="justify" color="text.secondary" gutterBottom>
+                    Nazwa Produktu
+                </Typography>
+                <Typography variant="h5" component="div">
+                    {name}
+                </Typography>
+            </CardContent>
+            {admin && (
+                <CardActions>
+                    <AdminControls productId={id} />
+                </CardActions>
+            )}
+        </Card>
     );
 };
 

@@ -1,29 +1,42 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import Product, { ProductData } from "./Product";
-import { useCategoryContext, useUpdateContext } from "../App";
+import { DB, useAppContext } from "../App";
+import { ProductData } from "../Types";
+import Product from "./Product";
+import { Grid, Typography } from "@mui/material";
 
-export const ProductsList = ({ sortType, searchPhrase }: { sortType: string, searchPhrase: string | undefined }) => {
-    const DB = process.env.REACT_APP_DB_SERVER;
+export const ProductsList = () => {
     const [products, setProducts] = useState<Array<ProductData>>([]);
 
-    const { categoryId, subCategoryId } = useCategoryContext();
-    const { update } = useUpdateContext();
-
+    const { categoryId, subCategoryId, update, sortType, searchPhrase } = useAppContext();
 
     useEffect(() => {
+        const { prop, direction } = sortType;
         let serarchPartial = searchPhrase ? "name_like=" + searchPhrase + "&" : "";
-        if (categoryId !== undefined) axios.get(`http://${DB}/products?categoryId=${categoryId}&${serarchPartial}_sort=name&_order=${sortType}`).then((res) => setProducts(res.data));
-        else if (subCategoryId !== undefined) axios.get(`http://${DB}/products?subCategoryId=${subCategoryId}&${serarchPartial}_sort=name&_order=${sortType}`).then((res) => setProducts(res.data));
-        else axios.get(`http://${DB}/products?${serarchPartial}_sort=name&_order=${sortType}`).then((res) => setProducts(res.data));
-    }, [categoryId, subCategoryId, DB, sortType, searchPhrase]);
+        if (categoryId !== undefined)
+            axios.get(`http://${DB}/products?categoryId=${categoryId}&${serarchPartial}_sort=name&_order=${sortType}`).then((res) => setProducts(res.data));
+        else if (subCategoryId !== undefined)
+            axios
+                .get(`http://${DB}/products?subCategoryId=${subCategoryId}&${serarchPartial}_sort=name&_order=${sortType}`)
+                .then((res) => setProducts(res.data));
+        else axios.get(`http://${DB}/products?${serarchPartial}_sort=${prop}&_order=${direction}`).then((res) => setProducts(res.data));
+    }, [categoryId, subCategoryId, sortType, searchPhrase, update]);
+
+    if (products.length === 0)
+        return (
+            <Typography variant="h4" align="center" className="empty" marginTop={10}>
+                Brak wyników
+            </Typography>
+        );
 
     return (
-        <div className="productList">
+        <Grid container spacing={2}>
             {products.map(({ id, name }: ProductData, i) => (
-                <Product key={i} id={id} name={name} />
+                <Grid key={i} item xs={4}>
+                    <Product id={id} name={name} />
+                </Grid>
             ))}
-        </div>
+        </Grid>
     );
 };
 
