@@ -12,6 +12,7 @@ export type SubCategoryData = {
 export type ProductData = {
     id: number;
     name: string;
+    price: number;
     category?: CategoryData;
     subCategory?: SubCategoryData;
 };

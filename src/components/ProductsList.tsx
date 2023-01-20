@@ -31,9 +31,9 @@ export const ProductsList = () => {
 
     return (
         <Grid container spacing={2}>
-            {products.map(({ id, name }: ProductData, i) => (
+            {products.map(({ id, name, price }: ProductData, i) => (
                 <Grid key={i} item xs={4}>
-                    <Product id={id} name={name} />
+                    <Product id={id} name={name} price={price} />
                 </Grid>
             ))}
         </Grid>

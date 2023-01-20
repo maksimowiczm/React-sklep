@@ -2,8 +2,10 @@ $base-color: #333;
 $base-font-color: #fff;
 $active-font-color: #ff0000;
 $product-list-color: #444;
-$product-hover-color: #222;
-$text-hover-color: #ddd;
+$product-color-hover: #222;
+$text-color-hover: #ddd;
+$shop-icon-color: rgb(0, 200, 0);
+$shop-icon-color-hover: green;
 
 body {
     background-color: $base-color;
@@ -33,17 +35,24 @@ body {
 
 .name {
     &:hover {
-        color: $text-hover-color;
+        color: $text-color-hover;
     }
 }
 
 .product {
     &:hover {
-        background-color: $product-hover-color;
+        background-color: $product-color-hover;
     }
 }
 
 .empty {
     cursor: default;
     color: #ddd;
+}
+
+.addToCart {
+    color: $shop-icon-color;
+    &:hover {
+        color: $shop-icon-color-hover;
+    }
 }
