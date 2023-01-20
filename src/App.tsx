@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import "./styles/style.scss";
 
 import { MyAppContext } from "./Context";
-import { Status, SortType } from "./Types";
+import { Status, SortType, ProductData } from "./Types";
 
 import MyAppBar from "./components/AppBar";
 import CategoriesList from "./components/CategoriesList";
@@ -31,6 +31,7 @@ const App = () => {
     const [status, setStatus] = useState<Status>("none");
     const [sortType, setSortType] = useState<SortType>({ prop: "name", direction: "asc" });
     const [searchPhrase, setSearchPhrase] = useState<string | undefined>(undefined);
+    const [basket, setBasket] = useState<Array<ProductData>>([]);
 
     const useProviders = (jsx: JSX.Element) => (
         <MyAppContext.Provider
@@ -60,6 +61,14 @@ const App = () => {
 
                 sortType,
                 setSortType,
+
+                basket,
+                addToBasket: (product: ProductData) => {
+                    let newBasket = basket;
+                    newBasket.push(product);
+                    setBasket(newBasket);
+                },
+                clearBasket: () => setBasket([]),
             }}
         >
             {jsx}

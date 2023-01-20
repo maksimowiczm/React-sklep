@@ -1,5 +1,9 @@
+import { useAppContext } from "../App";
+
 const Basket = () => {
-    return <>Basket</>;
+    const { basket } = useAppContext();
+
+    return <>{basket.map((p) => p.name)}</>;
 };
 
 export default Basket;
