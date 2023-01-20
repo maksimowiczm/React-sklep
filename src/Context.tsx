@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { SortType } from "./Types";
+import { SortType, Status } from "./Types";
 
 type AppContext = {
     categoryId: number | undefined;
@@ -14,8 +14,8 @@ type AppContext = {
     admin: boolean;
     switchAdmin: () => void;
 
-    status: "editProduct" | "addProduct" | "editCategory" | "addCategory" | "editSubCategory" | "addSubCategory" | "none";
-    setStatus: (edit: "editProduct" | "addProduct" | "editCategory" | "addCategory" | "editSubCategory" | "addSubCategory" | "none") => void;
+    status: Status;
+    setStatus: (edit: Status) => void;
 
     update: number;
     setUpdate: (next: number) => void;
@@ -31,28 +31,28 @@ type AppContext = {
 
 export const MyAppContext = createContext<AppContext>({
     categoryId: undefined,
-    setCategory: () => { },
+    setCategory: () => {},
 
     subCategoryId: undefined,
-    setSubCategory: () => { },
+    setSubCategory: () => {},
 
     productId: undefined,
-    setProduct: () => { },
+    setProduct: () => {},
 
     admin: false,
-    switchAdmin: () => { },
+    switchAdmin: () => {},
 
     status: "none",
-    setStatus: () => { },
+    setStatus: () => {},
 
     update: 0,
-    setUpdate: () => { },
+    setUpdate: () => {},
 
-    reset: () => { },
+    reset: () => {},
 
     searchPhrase: undefined,
-    setSearchPhrase: () => { },
+    setSearchPhrase: () => {},
 
     sortType: { prop: "name", direction: "asc" },
-    setSortType: () => { },
+    setSortType: () => {},
 });

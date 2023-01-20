@@ -16,6 +16,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import FloatingButton from "./components/FloatingButton";
 import CategoryEditView from "./components/CategoryEditView";
 import SubcategoryEditView from "./components/SubcategoryEditView";
+import Basket from "./components/Basket";
 
 export const DB = process.env.REACT_APP_DB_SERVER;
 
@@ -93,26 +94,27 @@ const App = () => {
     const getContentForStatus = (status: Status) => {
         switch (status) {
             case "addProduct":
-                return (<ProductEditView />)
+                return <ProductEditView />;
 
             case "editProduct":
-                return (<ProductEditView />)
+                return <ProductEditView />;
 
             case "editCategory":
-                return (<CategoryEditView />)
+                return <CategoryEditView />;
 
             case "addCategory":
-                return (<CategoryEditView />)
+                return <CategoryEditView />;
 
             case "editSubCategory":
-                return (<SubcategoryEditView />)
+                return <SubcategoryEditView />;
 
             case "addSubCategory":
-                return (<SubcategoryEditView />)
+                return <SubcategoryEditView />;
 
+            case "basket":
+                return <Basket />;
         }
-
-    }
+    };
 
     return useProviders(
         useDarkTheme(
