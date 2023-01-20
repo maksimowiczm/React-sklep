@@ -63,11 +63,8 @@ const App = () => {
                 setSortType,
 
                 basket,
-                addToBasket: (product: ProductData) => {
-                    let newBasket = basket;
-                    newBasket.push(product);
-                    setBasket(newBasket);
-                },
+                addToBasket: (product: ProductData) => setBasket((prev) => [product, ...prev]),
+                removeFromBasket: (product: ProductData) => setBasket((prev) => [...prev.filter(({ id }) => id !== product.id)]),
                 clearBasket: () => setBasket([]),
             }}
         >

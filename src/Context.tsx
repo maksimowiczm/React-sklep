@@ -30,6 +30,7 @@ type AppContext = {
 
     basket: Array<ProductData>;
     addToBasket: (product: ProductData) => void;
+    removeFromBasket: (product: ProductData) => void;
     clearBasket: () => void;
 };
 
@@ -62,5 +63,6 @@ export const MyAppContext = createContext<AppContext>({
 
     basket: [],
     addToBasket: () => {},
+    removeFromBasket: () => {},
     clearBasket: () => {},
 });
