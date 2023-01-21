@@ -36,7 +36,13 @@ const App = () => {
     const [basketLoaded, setBasketLoaded] = useState<boolean>(false);
     const [user, setUser] = useState<string | undefined>(undefined);
 
+    // Wczytywanie koszyka z localstorage
     useEffect(() => {
+        if (localStorage.getItem("basket") === null) {
+            localStorage.setItem("basket", JSON.stringify(basket));
+            localStorage.setItem("itemsInBasket", itemsInBasket.toString());
+        }
+
         if (basketLoaded) {
             localStorage.setItem("basket", JSON.stringify(basket));
             localStorage.setItem("itemsInBasket", itemsInBasket.toString());
@@ -53,8 +59,9 @@ const App = () => {
                 setBasketLoaded(true);
             }
         }
-    }, [basket, basketLoaded, itemsInBasket]);
+    }, [itemsInBasket, basket, basketLoaded]);
 
+    // Inicjalizacja kontekstu aplikacji
     const useProviders = (jsx: JSX.Element) => (
         <MyAppContext.Provider
             value={{
@@ -146,12 +153,12 @@ const App = () => {
         setProductId(product);
         setStatus("none");
     };
-
     const setCategory = (id: number | undefined) => setStates(id, undefined, undefined);
     const setSubCategory = (id: number | undefined) => setStates(undefined, id, undefined);
     const setProduct = (id: number | undefined) => setStates(undefined, undefined, id);
     const setEmpty = () => setStates(undefined, undefined, undefined);
 
+    // Wybranie elementu do wyświetlania
     const getContentForStatus = (status: Status) => {
         switch (status) {
             case "addProduct":

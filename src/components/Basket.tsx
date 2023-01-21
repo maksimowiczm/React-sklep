@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { DB, useAppContext } from "../App";
 import { BasketItem } from "../Types";
@@ -59,7 +59,7 @@ const RenderItem = ({ item, handleRemoveItem }: RenderItemOptions) => {
 };
 
 const Basket = () => {
-    const { basket, removeFromBasket, clearBasket, user } = useAppContext();
+    const { basket, removeFromBasket, clearBasket, user, itemsInBasket } = useAppContext();
 
     const [ordered, setOrdered] = useState<boolean>(false);
     const [basketVisible, setBasketVisible] = useState<boolean>(basket.length > 0);
@@ -77,6 +77,13 @@ const Basket = () => {
             setBasketVisible(false);
         }, 3000);
     };
+
+    useEffect(() => {
+        if (itemsInBasket === 0) {
+            setOrdered(false);
+            setBasketVisible(false);
+        }
+    }, [itemsInBasket]);
 
     return (
         <>
