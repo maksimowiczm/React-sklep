@@ -34,6 +34,7 @@ const App = () => {
     const [basket, setBasket] = useState<Array<BasketItem>>([]);
     const [itemsInBasket, setItemsInBasket] = useState<number>(0);
     const [basketLoaded, setBasketLoaded] = useState<boolean>(false);
+    const [user, setUser] = useState<string | undefined>(undefined);
 
     useEffect(() => {
         if (basketLoaded) {
@@ -68,6 +69,9 @@ const App = () => {
 
                 admin,
                 switchAdmin: () => setAdmin(!admin),
+
+                user,
+                setUser,
 
                 update,
                 setUpdate,

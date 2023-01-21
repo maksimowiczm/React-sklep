@@ -14,6 +14,9 @@ type AppContext = {
     admin: boolean;
     switchAdmin: () => void;
 
+    user: string | undefined;
+    setUser: (user: string) => void;
+
     status: Status;
     setStatus: (edit: Status) => void;
 
@@ -48,6 +51,9 @@ export const MyAppContext = createContext<AppContext>({
 
     admin: false,
     switchAdmin: () => {},
+
+    user: undefined,
+    setUser: () => {},
 
     status: "none",
     setStatus: () => {},

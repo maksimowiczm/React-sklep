@@ -57,11 +57,11 @@ const RenderItem = ({ item, handleRemoveItem }: RenderItemOptions) => {
 };
 
 const Basket = () => {
-    const { basket, removeFromBasket, clearBasket } = useAppContext();
+    const { basket, removeFromBasket, clearBasket, user } = useAppContext();
 
     const handleRemoveItem = (item: BasketItem) => removeFromBasket(item);
     const handleOrder = () => {
-        axios.post(`http://${DB}/orders`, { order: basket, user: "defaultUser" });
+        axios.post(`http://${DB}/orders`, { order: basket, user: user });
         clearBasket();
     };
 
