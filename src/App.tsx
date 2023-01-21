@@ -17,6 +17,7 @@ import FloatingButton from "./components/FloatingButton";
 import CategoryEditView from "./components/admin/crud/CategoryEditView";
 import SubcategoryEditView from "./components/admin/crud/SubcategoryEditView";
 import Basket from "./components/Basket";
+import LoginForm from "./components/Login";
 
 export const DB = process.env.REACT_APP_DB_SERVER;
 
@@ -184,6 +185,9 @@ const App = () => {
 
             case "basket":
                 return <Basket />;
+
+            case "login":
+                return <LoginForm />;
         }
     };
 

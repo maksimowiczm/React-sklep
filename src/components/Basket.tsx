@@ -91,8 +91,8 @@ const Basket = () => {
             <Box position="absolute" top="0" padding={2} height="100vh" width="100vw" display="flex" flexDirection="column" alignItems="center" zIndex={-1}>
                 <Box flexGrow={1} />
                 <Collapse in={ordered} sx={{ width: "100%" }}>
-                    <Alert variant="outlined" sx={{ mb: 2 }}>
-                        Zamówienie złożone
+                    <Alert variant="outlined" sx={{ mb: 2 }} severity={`${user === undefined ? "error" : "success"}`}>
+                        {`${user === undefined ? "Aby złożyć zamówienie musisz się zalogować" : "Zamówienie złożone"}`}
                     </Alert>
                 </Collapse>
             </Box>

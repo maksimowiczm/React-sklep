@@ -14,7 +14,7 @@ const StyledBadge = styled(Badge)<BadgeProps>(({ theme }) => ({
 }));
 
 const MyAppBar = () => {
-    const { reset, admin, switchAdmin, setStatus, itemsInBasket } = useAppContext();
+    const { reset, user, setStatus, itemsInBasket } = useAppContext();
 
     return (
         <AppBar position="static">
@@ -23,9 +23,9 @@ const MyAppBar = () => {
                     Sklep
                 </Typography>
                 <SearchBar />
-                <IconButton sx={{ marginLeft: 1 }} onClick={switchAdmin}>
+                <IconButton sx={{ marginLeft: 1 }} onClick={() => setStatus("login")}>
                     <Tooltip title="Konto">
-                        <AccountCircleIcon color={admin ? "success" : "disabled"} />
+                        <AccountCircleIcon color={user ? "success" : "disabled"} />
                     </Tooltip>
                 </IconButton>
                 <IconButton sx={{ marginLeft: 1 }} onClick={() => setStatus("basket")}>
