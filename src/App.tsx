@@ -115,6 +115,7 @@ const App = () => {
                 },
                 clearBasket: () => {
                     setBasket([]);
+                    setItemsInBasket(0);
                 },
             }}
         >
