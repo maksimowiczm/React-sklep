@@ -1,11 +1,20 @@
-import { AppBar, IconButton, Toolbar, Typography } from "@mui/material";
+import { AppBar, Badge, BadgeProps, IconButton, styled, Toolbar, Typography } from "@mui/material";
 import { useAppContext } from "../App";
 import SearchBar from "./SearchBar";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 
+const StyledBadge = styled(Badge)<BadgeProps>(({ theme }) => ({
+    "& .MuiBadge-badge": {
+        right: -3,
+        top: 13,
+        border: `2px solid ${theme.palette.background.paper}`,
+        padding: "0 4px",
+    },
+}));
+
 const MyAppBar = () => {
-    const { reset, admin, switchAdmin, setStatus } = useAppContext();
+    const { reset, admin, switchAdmin, setStatus, itemsInBasket } = useAppContext();
 
     return (
         <AppBar position="static">
@@ -18,7 +27,9 @@ const MyAppBar = () => {
                     <AccountCircleIcon color={admin ? "success" : "disabled"} />
                 </IconButton>
                 <IconButton sx={{ marginLeft: 1 }} onClick={() => setStatus("basket")}>
-                    <ShoppingCartOutlinedIcon />
+                    <StyledBadge badgeContent={itemsInBasket} color="primary">
+                        <ShoppingCartOutlinedIcon />
+                    </StyledBadge>
                 </IconButton>
             </Toolbar>
         </AppBar>

@@ -1,4 +1,5 @@
 {
+  "orders": [],
   "categories": [
     {
       "id": 1,
@@ -39,21 +40,21 @@
     {
       "id": 1,
       "name": "ASUS ZenBook 14 UM425QAA",
-      "price": 3499.00,
+      "price": 3499,
       "categoryId": 3,
       "subCategoryId": 3
     },
     {
       "id": 3,
       "name": "WD 1TB M.2 PCIe Gen4 NVMe Black SN770",
-      "price": 436.00,
+      "price": 436,
       "categoryId": 2,
       "subCategoryId": 1
     },
     {
       "id": 4,
       "name": "Palit GeForce RTX 4090 GameRock 24GB GDDR6X",
-      "price": 9999.00,
+      "price": 9999,
       "categoryId": 2,
       "subCategoryId": 2
     }

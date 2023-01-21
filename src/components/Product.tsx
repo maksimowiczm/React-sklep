@@ -5,10 +5,11 @@ import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { ProductData } from "../Types";
 
 export const Product = ({ id, name, price }: ProductData) => {
-    const { setProduct, admin } = useAppContext();
+    const { setProduct, admin, addOneToBasket } = useAppContext();
 
     const addToCart = (e: React.MouseEvent) => {
         e.stopPropagation();
+        addOneToBasket({ id, name, price });
     };
 
     return (

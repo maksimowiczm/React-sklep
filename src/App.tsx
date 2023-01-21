@@ -1,8 +1,8 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import "./styles/style.scss";
 
 import { MyAppContext } from "./Context";
-import { Status, SortType } from "./Types";
+import { Status, SortType, ProductData, BasketItem } from "./Types";
 
 import MyAppBar from "./components/AppBar";
 import CategoriesList from "./components/CategoriesList";
@@ -31,6 +31,28 @@ const App = () => {
     const [status, setStatus] = useState<Status>("none");
     const [sortType, setSortType] = useState<SortType>({ prop: "name", direction: "asc" });
     const [searchPhrase, setSearchPhrase] = useState<string | undefined>(undefined);
+    const [basket, setBasket] = useState<Array<BasketItem>>([]);
+    const [itemsInBasket, setItemsInBasket] = useState<number>(0);
+    const [basketLoaded, setBasketLoaded] = useState<boolean>(false);
+
+    useEffect(() => {
+        if (basketLoaded) {
+            localStorage.setItem("basket", JSON.stringify(basket));
+            localStorage.setItem("itemsInBasket", itemsInBasket.toString());
+        } else {
+            let basketJson = localStorage.getItem("basket");
+            let itemsInBasketJson = localStorage.getItem("itemsInBasket");
+
+            if (basketJson && itemsInBasketJson) {
+                let cookieBasket = JSON.parse(basketJson);
+                let cookieItemsInBasket = Number(itemsInBasketJson);
+
+                setBasket(cookieBasket);
+                setItemsInBasket(cookieItemsInBasket);
+                setBasketLoaded(true);
+            }
+        }
+    }, [basket, basketLoaded, itemsInBasket]);
 
     const useProviders = (jsx: JSX.Element) => (
         <MyAppContext.Provider
@@ -60,6 +82,41 @@ const App = () => {
 
                 sortType,
                 setSortType,
+
+                basket,
+                itemsInBasket,
+                addOneToBasket: (product: ProductData) => {
+                    let newBasket = basket;
+                    let item = newBasket.find((p) => p.product.id === product.id);
+
+                    setItemsInBasket((prev) => prev + 1);
+                    if (item === undefined) {
+                        setBasket((prev) => [{ product, quantity: 1 }, ...prev]);
+                        return;
+                    }
+
+                    item!!.quantity++;
+                    setBasket(newBasket);
+                },
+                removeOneFromBasket: ({ product }: BasketItem) => {
+                    let newBasket = basket;
+                    let item = newBasket.find((p) => p.product.id === product.id)!!;
+                    if (item.quantity <= 1) return;
+
+                    setItemsInBasket((prev) => prev - 1);
+                    item.quantity--;
+                    setBasket(newBasket);
+                },
+                removeFromBasket: ({ product }: BasketItem) => {
+                    let newBasket = basket;
+                    let item = newBasket.find((p) => p.product.id === product.id)!!;
+                    setItemsInBasket((prev) => prev - item.quantity);
+                    setBasket((prev) => prev.filter((item) => item.product.id !== product.id));
+                },
+                clearBasket: () => {
+                    setBasket([]);
+                    setItemsInBasket(0);
+                },
             }}
         >
             {jsx}

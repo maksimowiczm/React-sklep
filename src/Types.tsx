@@ -23,3 +23,8 @@ export type SortType = {
 };
 
 export type Status = "editProduct" | "addProduct" | "editCategory" | "addCategory" | "editSubCategory" | "addSubCategory" | "none" | "basket";
+
+export type BasketItem = {
+    product: ProductData;
+    quantity: number;
+};
