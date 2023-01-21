@@ -3,6 +3,7 @@ import axios from "axios";
 import { useState } from "react";
 import { DB, useAppContext } from "../../App";
 import { EditIconTooltip, DeleteIconTooltip } from "./IconTooltips";
+import ConfirmDialog from "./ConfirmDialog";
 
 const AdminControlsCategory = ({ categoryId }: { categoryId: number }) => {
     const { update, setUpdate, setStatus, setCategory } = useAppContext();
@@ -38,13 +39,7 @@ const AdminControlsCategory = ({ categoryId }: { categoryId: number }) => {
                 }}
             />
 
-            <Dialog open={open} onClose={close}>
-                <DialogTitle>Czy napewno chcesz usunąć te kategorie?</DialogTitle>
-                <DialogActions>
-                    <Button onClick={close}>Anuluj</Button>
-                    <Button onClick={remove}>Potwierdź</Button>
-                </DialogActions>
-            </Dialog>
+            <ConfirmDialog open={open} close={close} confirm={remove} />
         </>
     );
 };

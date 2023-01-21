@@ -2,6 +2,7 @@ import { Box, Button, Dialog, DialogActions, DialogTitle } from "@mui/material";
 import axios from "axios";
 import { useState } from "react";
 import { DB, useAppContext } from "../../App";
+import ConfirmDialog from "./ConfirmDialog";
 import { EditIconTooltip, DeleteIconTooltip } from "./IconTooltips";
 
 const AdminControlsProduct = ({ productId }: { productId: number }) => {
@@ -38,13 +39,7 @@ const AdminControlsProduct = ({ productId }: { productId: number }) => {
                 }}
             />
 
-            <Dialog open={open} onClose={close}>
-                <DialogTitle>Czy napewno chcesz usunąć ten produkt?</DialogTitle>
-                <DialogActions>
-                    <Button onClick={close}>Anuluj</Button>
-                    <Button onClick={remove}>Potwierdź</Button>
-                </DialogActions>
-            </Dialog>
+            <ConfirmDialog open={open} close={close} confirm={remove} />
         </>
     );
 };
