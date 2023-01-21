@@ -63,6 +63,15 @@
       "rating": 5,
       "categoryId": 2,
       "subCategoryId": 2
+    },
+    {
+      "name": "Epic Product",
+      "description": "Fabulous description",
+      "price": 69.69,
+      "rating": 5,
+      "categoryId": 1,
+      "subCategoryId": 4,
+      "id": 5
     }
   ]
 }

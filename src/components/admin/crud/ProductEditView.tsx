@@ -1,12 +1,24 @@
-import { FormControl, InputLabel, Select, MenuItem, Button, TextField, Stack, Typography } from "@mui/material";
+import { FormControl, InputLabel, Select, MenuItem, Button, TextField, Stack, Typography, Rating } from "@mui/material";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { DB, useAppContext } from "../../../App";
 import { CategoryData } from "../../../Types";
 
-const InputField = ({ defaultValue, onInput, error }: { defaultValue: string; onInput: (e: React.ChangeEvent<HTMLInputElement>) => void; error: boolean }) => (
-    <TextField defaultValue={defaultValue} label="Nazwa" autoFocus onInput={onInput} error={error} />
-);
+const InputField = ({
+    defaultValue,
+    onInput,
+    label,
+    multiline,
+    maxRows,
+    type,
+}: {
+    defaultValue: string;
+    label: string;
+    multiline?: boolean;
+    maxRows?: number;
+    type?: string;
+    onInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}) => <TextField defaultValue={defaultValue} label={label} onInput={onInput} multiline={multiline} maxRows={maxRows} type={type} />;
 
 export const ProductEditView = () => {
     const { productId, status, setStatus } = useAppContext();
@@ -15,11 +27,28 @@ export const ProductEditView = () => {
     const [chosenCategory, setChosenCategory] = useState<number | "">("");
     const [chosenSub, setChosenSub] = useState<number | "">("");
     const [name, setName] = useState<string>("");
+    const [desc, setDesc] = useState<string>("");
+    const [price, setPrice] = useState<string>("");
+    const [rating, setRating] = useState<number | null>(2);
 
     // xd
-    const [textfield, setTextfield] = useState<JSX.Element>(
+    const [nameTextField, setNameTextField] = useState<JSX.Element>(
         productId === undefined ? (
-            <InputField defaultValue="" onInput={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)} error={false} />
+            <InputField label="Nazwa" defaultValue="" onInput={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)} />
+        ) : (
+            <></>
+        )
+    );
+    const [descTextField, setDescTextField] = useState<JSX.Element>(
+        productId === undefined ? (
+            <InputField label="Opis" multiline maxRows={8} defaultValue="" onInput={(e: React.ChangeEvent<HTMLInputElement>) => setDesc(e.target.value)} />
+        ) : (
+            <></>
+        )
+    );
+    const [priceTextFiled, setPriceTextField] = useState<JSX.Element>(
+        productId === undefined ? (
+            <InputField label="Cena" defaultValue="" onInput={(e: React.ChangeEvent<HTMLInputElement>) => setPrice(e.target.value)} type="number" />
         ) : (
             <></>
         )
@@ -33,14 +62,29 @@ export const ProductEditView = () => {
                 setChosenCategory(res.data?.category?.id!!);
                 setChosenSub(res.data?.subCategory?.id!!);
 
-                setTextfield(
-                    <InputField defaultValue={res.data?.name} onInput={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)} error={false} />
+                setNameTextField(
+                    <InputField label="Nazwa" defaultValue={res.data?.name} onInput={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)} />
                 );
+                setDescTextField(
+                    <InputField
+                        label="Opis"
+                        multiline
+                        maxRows={8}
+                        defaultValue={res.data?.description}
+                        onInput={(e: React.ChangeEvent<HTMLInputElement>) => setDesc(e.target.value)}
+                    />
+                );
+                setPriceTextField(
+                    <InputField label="Cena" defaultValue={res.data?.price} onInput={(e: React.ChangeEvent<HTMLInputElement>) => setPrice(e.target.value)} />
+                );
+                setRating(res.data?.rating);
             });
         }
     }, [productId]);
 
-    const validateForm = () => !(name === "" || chosenCategory === 0 || chosenSub === 0);
+    const validateForm = () => {
+        return !(Number(price) <= 0 || name === "" || desc === "" || rating === null || chosenCategory === 0 || chosenSub === 0);
+    };
 
     const patch = () => {
         if (!validateForm()) return;
@@ -51,7 +95,14 @@ export const ProductEditView = () => {
     const add = () => {
         if (!validateForm()) return;
 
-        axios.post(`http://${DB}/products`, { name: name, categoryId: chosenCategory, subCategoryId: chosenSub });
+        axios.post(`http://${DB}/products`, {
+            name: name,
+            description: desc,
+            price: Number(price),
+            rating: rating,
+            categoryId: chosenCategory,
+            subCategoryId: chosenSub,
+        });
         setStatus("none");
     };
 
@@ -74,7 +125,16 @@ export const ProductEditView = () => {
             <Typography variant="h5" align="center">
                 {status === "addProduct" ? "Dodaj" : status === "editProduct" ? "Edytuj" : ""} produkt
             </Typography>
-            <FormControl fullWidth>{textfield}</FormControl>
+            <FormControl fullWidth>{nameTextField}</FormControl>
+            <FormControl fullWidth>{descTextField}</FormControl>
+            <FormControl fullWidth>{priceTextFiled}</FormControl>
+            <Rating
+                name="simple-controlled"
+                value={rating}
+                onChange={(event, newValue) => {
+                    setRating(newValue);
+                }}
+            />
             <FormControl fullWidth>
                 <InputLabel id="category-label">Kategoria</InputLabel>
                 <Select
