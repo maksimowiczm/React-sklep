@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Divider, ListItemButton } from "@mui/material";
+import { Box, Button, Divider, ListItemButton } from "@mui/material";
 import axios from "axios";
 import { DB, useAppContext } from "../App";
 import { SubCategoryData, CategoryData } from "../Types";
@@ -15,7 +15,7 @@ const CategoriesList = () => {
         axios.get(`http://${DB}/categories?_embed=subCategories`).then((res) => setCategories(res.data));
     }, [update]);
 
-    const addAction = (e: React.MouseEvent) => {
+    const addCategoryAction = (e: React.MouseEvent) => {
         setStatus("addCategory");
         e.stopPropagation();
     };
@@ -23,21 +23,30 @@ const CategoriesList = () => {
         setStatus("addSubCategory");
         e.stopPropagation();
     };
-    //TODO dodac przycisk dodawania zamiast napisu
+    const addProductAction = (e: React.MouseEvent) => {
+        setStatus("addProduct");
+        e.stopPropagation();
+    };
+
     return (
         <>
             {admin && (
-                <div onClick={addAction}>
-                    <AddIcon />
-                    Dodaj kategorie
-                </div>
+                <Box display="flex" flexDirection="column" alignItems="flex-start">
+                    <Button onClick={addCategoryAction}>
+                        <AddIcon />
+                        Dodaj Kategorię
+                    </Button>
+                    <Button onClick={addSubCategoryAction}>
+                        <AddIcon />
+                        Dodaj podkategorie
+                    </Button>
+                    <Button onClick={addProductAction}>
+                        <AddIcon />
+                        Dodaj Produkt
+                    </Button>
+                </Box>
             )}
-            {admin && (
-                <div onClick={addSubCategoryAction}>
-                    <AddIcon />
-                    Dodaj podkategorie
-                </div>
-            )}
+
             <Divider />
             {categories.map(({ id, name, subCategories }: CategoryData, i: number) => (
                 <React.Fragment key={i}>

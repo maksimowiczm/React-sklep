@@ -3,12 +3,11 @@ import SpeedDialAction from "@mui/material/SpeedDialAction";
 import SortByAlphaIcon from "@mui/icons-material/SortByAlpha";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import SortIcon from "@mui/icons-material/Sort";
-import AddIcon from "@mui/icons-material/Add";
 import { useAppContext } from "../App";
 import { Box, Tooltip } from "@mui/material";
 
 const FloatingButton = () => {
-    const { sortType, setSortType, setStatus, admin } = useAppContext();
+    const { sortType, setSortType } = useAppContext();
     const actions = [
         {
             icon: <SortByAlphaIcon color={sortType.prop === "name" ? (sortType.direction === "asc" ? "success" : "error") : "primary"} />,
@@ -35,9 +34,8 @@ const FloatingButton = () => {
             <Box flexGrow={1} />
             <Tooltip title="Sortowanie">
                 <SpeedDial
-                    onClick={() => admin && setStatus("addProduct")}
                     ariaLabel=""
-                    icon={admin ? <AddIcon /> : <SortIcon />}
+                    icon={<SortIcon />}
                     sx={{
                         position: "sticky",
                         bottom: 50,
