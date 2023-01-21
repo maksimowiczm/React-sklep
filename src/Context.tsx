@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { ProductData, SortType, Status } from "./Types";
+import { BasketItem, ProductData, SortType, Status } from "./Types";
 
 type AppContext = {
     categoryId: number | undefined;
@@ -28,9 +28,10 @@ type AppContext = {
     sortType: SortType;
     setSortType: (sortType: SortType) => void;
 
-    basket: Array<ProductData>;
-    addToBasket: (product: ProductData) => void;
-    removeFromBasket: (product: ProductData) => void;
+    basket: Array<BasketItem>;
+    addOneToBasket: (product: ProductData) => void;
+    removeOneFromBasket: (product: BasketItem) => void;
+    removeFromBasket: (product: BasketItem) => void;
     clearBasket: () => void;
 };
 
@@ -62,7 +63,8 @@ export const MyAppContext = createContext<AppContext>({
     setSortType: () => {},
 
     basket: [],
-    addToBasket: () => {},
+    addOneToBasket: () => {},
+    removeOneFromBasket: () => {},
     removeFromBasket: () => {},
     clearBasket: () => {},
 });
