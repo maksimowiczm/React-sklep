@@ -5,17 +5,33 @@ import { DB, useAppContext } from "../../App";
 import { EditIconTooltip, DeleteIconTooltip } from "./IconTooltips";
 import ConfirmDialog from "./ConfirmDialog";
 import React from "react";
+import { Status } from "../../Types";
 
 interface AdminControlsProps {
-    edit: (e: React.MouseEvent) => void;
-    remove: (e: React.MouseEvent) => void;
+    id: number;
+    item: string;
+    status: Status;
+    setItem: (id: number | undefined) => void;
 }
 
-const AdminControls = ({ edit, remove }: AdminControlsProps) => {
+const AdminControls = ({ id, item, status, setItem }: AdminControlsProps) => {
+    const { setStatus, setUpdate, update } = useAppContext();
     const [open, setOpen] = useState(false);
     const close = (e: React.MouseEvent) => {
         setOpen(false);
         e.stopPropagation();
+    };
+
+    const edit = (e: React.MouseEvent) => {
+        setItem(id);
+        setStatus(status);
+        e.stopPropagation();
+    };
+
+    const remove = () => {
+        axios.delete(`http://${DB}/${item}/${id}`);
+        setUpdate(update + 1);
+        setItem(undefined);
     };
 
     return (
@@ -34,7 +50,8 @@ const AdminControls = ({ edit, remove }: AdminControlsProps) => {
                 close={close}
                 confirm={(e) => {
                     setOpen(false);
-                    remove(e);
+                    remove();
+                    e.stopPropagation();
                 }}
             />
         </>
@@ -42,55 +59,16 @@ const AdminControls = ({ edit, remove }: AdminControlsProps) => {
 };
 
 export const AdminControlsCategory = ({ categoryId }: { categoryId: number }) => {
-    const { update, setUpdate, setStatus, setCategory } = useAppContext();
-
-    const edit = (e: React.MouseEvent) => {
-        setCategory(categoryId);
-        setStatus("editCategory");
-        e.stopPropagation();
-    };
-
-    const remove = () => {
-        axios.delete(`http://${DB}/categories/${categoryId}`);
-        setUpdate(update + 1);
-        setCategory(undefined);
-    };
-
-    return <AdminControls edit={edit} remove={remove} />;
+    const { setCategory } = useAppContext();
+    return <AdminControls id={categoryId} item={"categories"} setItem={setCategory} status="editCategory" />;
 };
 
 export const AdminControlsSubcategory = ({ subcategoryId }: { subcategoryId: number }) => {
-    const { update, setUpdate, setStatus, setSubCategory } = useAppContext();
-
-    const edit = (e: React.MouseEvent) => {
-        setSubCategory(subcategoryId);
-        setStatus("editSubCategory");
-        e.stopPropagation();
-    };
-
-    const remove = () => {
-        axios.delete(`http://${DB}/subcategories/${subcategoryId}`);
-        setUpdate(update + 1);
-        setSubCategory(undefined);
-    };
-
-    return <AdminControls edit={edit} remove={remove} />;
+    const { setSubCategory } = useAppContext();
+    return <AdminControls id={subcategoryId} item={"subcategories"} setItem={setSubCategory} status="editSubCategory" />;
 };
 
 export const AdminControlsProduct = ({ productId }: { productId: number }) => {
-    const { update, setUpdate, setStatus, setProduct } = useAppContext();
-
-    const edit = (e: React.MouseEvent) => {
-        setProduct(productId);
-        setStatus("editProduct");
-        e.stopPropagation();
-    };
-
-    const remove = (e: React.MouseEvent) => {
-        axios.delete(`http://${DB}/products/${productId}`);
-        setUpdate(update + 1);
-        setProduct(undefined);
-    };
-
-    return <AdminControls edit={edit} remove={remove} />;
+    const { setProduct } = useAppContext();
+    return <AdminControls id={productId} item={"products"} setItem={setProduct} status="editProduct" />;
 };
