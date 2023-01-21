@@ -3,12 +3,13 @@ import { useEffect, useState } from "react";
 import { DB, useAppContext } from "../App";
 import { BasketItem } from "../Types";
 
-import { ListItem, IconButton, ListItemText, Box, Collapse, List, Typography, Button, Alert } from "@mui/material";
+import { ListItem, IconButton, ListItemText, Box, Collapse, List, Typography, Button, Alert, Tooltip } from "@mui/material";
 import { TransitionGroup } from "react-transition-group";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import axios from "axios";
+import { DeleteIconTooltip } from "./admin/IconTooltips";
 
 interface RenderItemOptions {
     item: BasketItem;
@@ -27,13 +28,14 @@ const RenderItem = ({ item, handleRemoveItem }: RenderItemOptions) => {
 
             <Box display="flex" justifyContent="center" alignItems="center" className="cartQuantity">
                 <IconButton
-                    title="Zwiększ ilość"
                     onClick={() => {
                         setCount((prev) => prev + 1);
                         addOneToBasket(product);
                     }}
                 >
-                    <AddIcon />
+                    <Tooltip title="Zwiększ ilość">
+                        <AddIcon />
+                    </Tooltip>
                 </IconButton>
 
                 <Typography align="center" width={30} textAlign="center" sx={{ cursor: "default" }}>
@@ -41,19 +43,18 @@ const RenderItem = ({ item, handleRemoveItem }: RenderItemOptions) => {
                 </Typography>
 
                 <IconButton
-                    title="Zmniejsz ilość"
                     onClick={() => {
                         setCount((prev) => (prev - 2 > 0 ? prev - 1 : 1));
                         removeOneFromBasket(item);
                     }}
                 >
-                    <RemoveIcon />
+                    <Tooltip title="Zmniejsz ilość">
+                        <RemoveIcon />
+                    </Tooltip>
                 </IconButton>
             </Box>
 
-            <IconButton title="Usuń" onClick={() => handleRemoveItem(item)}>
-                <DeleteIcon />
-            </IconButton>
+            <DeleteIconTooltip onClick={() => handleRemoveItem(item)} />
         </ListItem>
     );
 };
