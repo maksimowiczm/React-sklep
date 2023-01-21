@@ -13,6 +13,8 @@ export type ProductData = {
     id: number;
     name: string;
     price: number;
+    rating?: number;
+    description?: string;
     category?: CategoryData;
     subCategory?: SubCategoryData;
 };

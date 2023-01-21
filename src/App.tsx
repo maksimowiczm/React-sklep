@@ -6,7 +6,7 @@ import { Status, SortType, ProductData, BasketItem } from "./Types";
 
 import MyAppBar from "./components/AppBar";
 import CategoriesList from "./components/CategoriesList";
-import ProductEditView from "./components/ProductEditView";
+import ProductEditView from "./components/admin/crud/ProductEditView";
 import ProductsList from "./components/ProductsList";
 import ProductView from "./components/ProductView";
 
@@ -14,8 +14,8 @@ import { Grid } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import FloatingButton from "./components/FloatingButton";
-import CategoryEditView from "./components/CategoryEditView";
-import SubcategoryEditView from "./components/SubcategoryEditView";
+import CategoryEditView from "./components/admin/crud/CategoryEditView";
+import SubcategoryEditView from "./components/admin/crud/SubcategoryEditView";
 import Basket from "./components/Basket";
 
 export const DB = process.env.REACT_APP_DB_SERVER;
@@ -26,7 +26,7 @@ const App = () => {
     const [subCategoryId, setSubCategoryId] = useState<number | undefined>(undefined);
     const [categoryId, setCategoryId] = useState<number | undefined>(undefined);
     const [productId, setProductId] = useState<number | undefined>(undefined);
-    const [admin, setAdmin] = useState<boolean>(true);
+    const [admin, setAdmin] = useState<boolean>(false);
     const [update, setUpdate] = useState<number>(0);
     const [status, setStatus] = useState<Status>("none");
     const [sortType, setSortType] = useState<SortType>({ prop: "name", direction: "asc" });

@@ -1,23 +1,23 @@
 import { Box, Button, Dialog, DialogActions, DialogTitle, IconButton } from "@mui/material";
 import axios from "axios";
 import { useState } from "react";
-import { DB, useAppContext } from "../App";
+import { DB, useAppContext } from "../../App";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 
-const AdminControlsCategory = ({ categoryId }: { categoryId: number }) => {
-    const { update, setUpdate, setStatus, setCategory } = useAppContext();
+const AdminControlsSubcategory = ({ subcategoryId }: { subcategoryId: number }) => {
+    const { update, setUpdate, setStatus, setSubCategory } = useAppContext();
 
     const editAction = (e: React.MouseEvent) => {
-        setCategory(categoryId);
-        setStatus("editCategory");
+        setSubCategory(subcategoryId);
+        setStatus("editSubCategory");
         e.stopPropagation();
     };
 
     const remove = (e: React.MouseEvent) => {
-        axios.delete(`http://${DB}/categories/${categoryId}`);
+        axios.delete(`http://${DB}/subcategories/${subcategoryId}`);
         setUpdate(update + 1);
-        setCategory(undefined);
+        setSubCategory(undefined);
         close(e);
     };
 
@@ -44,7 +44,7 @@ const AdminControlsCategory = ({ categoryId }: { categoryId: number }) => {
             </IconButton>
 
             <Dialog open={open} onClose={close}>
-                <DialogTitle>Czy napewno chcesz usunąć te kategorie?</DialogTitle>
+                <DialogTitle>Czy napewno chcesz usunąć te podkategorie?</DialogTitle>
                 <DialogActions>
                     <Button onClick={close}>Anuluj</Button>
                     <Button onClick={remove}>Potwierdź</Button>
@@ -54,4 +54,4 @@ const AdminControlsCategory = ({ categoryId }: { categoryId: number }) => {
     );
 };
 
-export default AdminControlsCategory;
+export default AdminControlsSubcategory;
