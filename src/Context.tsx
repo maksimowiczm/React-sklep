@@ -29,6 +29,7 @@ type AppContext = {
     setSortType: (sortType: SortType) => void;
 
     basket: Array<BasketItem>;
+    itemsInBasket: number;
     addOneToBasket: (product: ProductData) => void;
     removeOneFromBasket: (product: BasketItem) => void;
     removeFromBasket: (product: BasketItem) => void;
@@ -63,6 +64,7 @@ export const MyAppContext = createContext<AppContext>({
     setSortType: () => {},
 
     basket: [],
+    itemsInBasket: 0,
     addOneToBasket: () => {},
     removeOneFromBasket: () => {},
     removeFromBasket: () => {},
