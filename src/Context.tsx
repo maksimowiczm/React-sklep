@@ -15,7 +15,7 @@ type AppContext = {
     switchAdmin: () => void;
 
     user: string | undefined;
-    setUser: (user: string) => void;
+    setUser: (user: string | undefined) => void;
 
     status: Status;
     setStatus: (edit: Status) => void;
