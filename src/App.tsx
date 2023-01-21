@@ -89,7 +89,10 @@ const App = () => {
                 reset: setEmpty,
 
                 searchPhrase,
-                setSearchPhrase,
+                setSearchPhrase: (e) => {
+                    setSearchPhrase(e);
+                    setEmpty();
+                },
 
                 sortType,
                 setSortType,

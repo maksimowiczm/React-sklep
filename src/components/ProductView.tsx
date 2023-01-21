@@ -1,7 +1,7 @@
 import { DB, useAppContext } from "../App";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import AdminControls from "./admin/AdminControlsProduct";
+import { AdminControlsProduct } from "./admin/AdminControls";
 import { ProductData } from "../Types";
 import { Box, IconButton, Rating, Tooltip, Typography } from "@mui/material";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
@@ -30,7 +30,7 @@ export const ProductView = () => {
                     <Typography variant="h4" marginBottom={2}>
                         {product?.name}
                     </Typography>
-                    {admin && <AdminControls productId={productId as number} />}
+                    {admin && <AdminControlsProduct productId={productId as number} />}
                 </Box>
                 <Box display="flex" alignItems="center">
                     <Box marginRight={3}>

@@ -3,8 +3,7 @@ import { Box, Button, Divider, ListItemButton } from "@mui/material";
 import axios from "axios";
 import { DB, useAppContext } from "../App";
 import { SubCategoryData, CategoryData } from "../Types";
-import AdminControls from "./admin/AdminControlsCategory";
-import AdminControlsSubcategory from "./admin/AdminControlsSubcategory";
+import { AdminControlsCategory, AdminControlsSubcategory } from "./admin/AdminControls";
 import AddIcon from "@mui/icons-material/Add";
 
 const CategoriesList = () => {
@@ -52,7 +51,7 @@ const CategoriesList = () => {
                 <React.Fragment key={i}>
                     <ListItemButton className={`name${categoryId === id ? " active" : ""}`} onClick={() => setCategory(id)}>
                         {name}
-                        {admin && <AdminControls categoryId={id} />}
+                        {admin && <AdminControlsCategory categoryId={id} />}
                     </ListItemButton>
 
                     <SubCategoriesList subCategories={subCategories} />

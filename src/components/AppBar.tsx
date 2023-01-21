@@ -1,4 +1,4 @@
-import { AppBar, Badge, BadgeProps, IconButton, styled, Toolbar, Typography } from "@mui/material";
+import { AppBar, Badge, BadgeProps, IconButton, styled, Toolbar, Tooltip, Typography } from "@mui/material";
 import { useAppContext } from "../App";
 import SearchBar from "./SearchBar";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
@@ -24,11 +24,15 @@ const MyAppBar = () => {
                 </Typography>
                 <SearchBar />
                 <IconButton sx={{ marginLeft: 1 }} onClick={switchAdmin}>
-                    <AccountCircleIcon color={admin ? "success" : "disabled"} />
+                    <Tooltip title="Konto">
+                        <AccountCircleIcon color={admin ? "success" : "disabled"} />
+                    </Tooltip>
                 </IconButton>
                 <IconButton sx={{ marginLeft: 1 }} onClick={() => setStatus("basket")}>
                     <StyledBadge badgeContent={itemsInBasket} color="primary">
-                        <ShoppingCartOutlinedIcon />
+                        <Tooltip title="Koszyk">
+                            <ShoppingCartOutlinedIcon />
+                        </Tooltip>
                     </StyledBadge>
                 </IconButton>
             </Toolbar>
