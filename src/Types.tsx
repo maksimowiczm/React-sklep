@@ -24,7 +24,7 @@ export type SortType = {
     direction: "asc" | "desc";
 };
 
-export type Status = "editProduct" | "addProduct" | "editCategory" | "addCategory" | "editSubCategory" | "addSubCategory" | "none" | "basket";
+export type Status = "editProduct" | "addProduct" | "editCategory" | "addCategory" | "editSubCategory" | "addSubCategory" | "none" | "basket" | "login";
 
 export type BasketItem = {
     product: ProductData;
