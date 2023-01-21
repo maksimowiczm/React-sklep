@@ -1,11 +1,13 @@
-import { Box, Button, Dialog, DialogActions, DialogTitle } from "@mui/material";
+import React, { useState } from "react";
 import axios from "axios";
-import { useState } from "react";
-import { DB, useAppContext } from "../../App";
-import { EditIconTooltip, DeleteIconTooltip } from "./IconTooltips";
-import ConfirmDialog from "./ConfirmDialog";
-import React from "react";
+
 import { Status } from "../../Types";
+
+import { DB, useAppContext } from "../../App";
+import ConfirmDialog from "./ConfirmDialog";
+import { EditIconTooltip, DeleteIconTooltip } from "./IconTooltips";
+
+import { Box } from "@mui/material";
 
 interface AdminControlsProps {
     id: number;
