@@ -1,5 +1,5 @@
 import { useAppContext } from "../App";
-import AdminControls from "./admin/AdminControlsProduct";
+import { AdminControlsProduct } from "./admin/AdminControls";
 import { Box, Card, CardActions, CardContent, IconButton, Tooltip, Typography } from "@mui/material";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { ProductData } from "../Types";
@@ -30,7 +30,7 @@ export const Product = ({ id, name, price }: ProductData) => {
             </CardContent>
             <CardActions>
                 <Box flexGrow={1} />
-                {admin && <AdminControls productId={id} />}
+                {admin && <AdminControlsProduct productId={id} />}
                 <Tooltip title="Dodaj do koszyka">
                     <IconButton onClick={addToCart}>
                         <AddShoppingCartIcon className="addToCart" />
