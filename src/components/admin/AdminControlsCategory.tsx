@@ -1,23 +1,23 @@
 import { Box, Button, Dialog, DialogActions, DialogTitle, IconButton } from "@mui/material";
 import axios from "axios";
 import { useState } from "react";
-import { DB, useAppContext } from "../App";
+import { DB, useAppContext } from "../../App";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 
-const AdminControlsProduct = ({ productId }: { productId: number }) => {
-    const { update, setUpdate, setStatus, setProduct } = useAppContext();
+const AdminControlsCategory = ({ categoryId }: { categoryId: number }) => {
+    const { update, setUpdate, setStatus, setCategory } = useAppContext();
 
     const editAction = (e: React.MouseEvent) => {
-        setProduct(productId);
-        setStatus("editProduct");
+        setCategory(categoryId);
+        setStatus("editCategory");
         e.stopPropagation();
     };
 
     const remove = (e: React.MouseEvent) => {
-        axios.delete(`http://${DB}/products/${productId}`);
+        axios.delete(`http://${DB}/categories/${categoryId}`);
         setUpdate(update + 1);
-        setProduct(undefined);
+        setCategory(undefined);
         close(e);
     };
 
@@ -44,7 +44,7 @@ const AdminControlsProduct = ({ productId }: { productId: number }) => {
             </IconButton>
 
             <Dialog open={open} onClose={close}>
-                <DialogTitle>Czy napewno chcesz usunąć ten produkt?</DialogTitle>
+                <DialogTitle>Czy napewno chcesz usunąć te kategorie?</DialogTitle>
                 <DialogActions>
                     <Button onClick={close}>Anuluj</Button>
                     <Button onClick={remove}>Potwierdź</Button>
@@ -54,4 +54,4 @@ const AdminControlsProduct = ({ productId }: { productId: number }) => {
     );
 };
 
-export default AdminControlsProduct;
+export default AdminControlsCategory;

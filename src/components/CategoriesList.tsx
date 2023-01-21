@@ -3,8 +3,8 @@ import { Box, Button, Divider, ListItemButton } from "@mui/material";
 import axios from "axios";
 import { DB, useAppContext } from "../App";
 import { SubCategoryData, CategoryData } from "../Types";
-import AdminControls from "./AdminControlsCategory";
-import AdminControlsSubcategory from "./AdminControlsSubcategory";
+import AdminControls from "./admin/AdminControlsCategory";
+import AdminControlsSubcategory from "./admin/AdminControlsSubcategory";
 import AddIcon from "@mui/icons-material/Add";
 
 const CategoriesList = () => {

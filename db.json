@@ -41,20 +41,26 @@
       "id": 1,
       "name": "ASUS ZenBook 14 UM425QAA",
       "price": 3499,
+      "description": "Niewiarygodnie kompaktowy, smukły i lekki ZenBook 14 jest wyposażony w procesor AMD Ryzen™ 9 5900HX, który zapewnia wysoką ogólną wydajność, a ponadto oferuje gniazda HDMI, USB-C® i USB typu A oraz czytnik kart microSD i gniazdo dźwiękowe jack typu combo – dla niezrównanej wszechstronności. ZenBook 14 wyróżnia się pięknym, klasycznym wzornictwem i oferuje funkcje ułatwiające korzystanie w podróży. Z tym laptopem użytkownicy o aktywnym stylu życia „ciągle w drodze” będą cieszyć się najwyższym komfortem.",
+      "rating": 3,
       "categoryId": 3,
       "subCategoryId": 3
     },
     {
       "id": 3,
       "name": "WD 1TB M.2 PCIe Gen4 NVMe Black SN770",
+      "description": "Dołącz do akcji teraz dzięki WD_BLACK™ SN770 NVMe™ SSD4. Ten dysk specjalnie zaprojektowany do gier posiada interfejs PCIe® Gen42, który zapewnia oszałamiające prędkości do 5150 MB/s2 (modele 1 TB i 2 TB).",
       "price": 436,
+      "rating": 4,
       "categoryId": 2,
       "subCategoryId": 1
     },
     {
       "id": 4,
       "name": "Palit GeForce RTX 4090 GameRock 24GB GDDR6X",
+      "description": "Odkryj swoje gamingowe fantazje z Midnight Kaleidoscope.\nPalit GeForce RTX™ 4090 GameRock wykorzystuje układ nowej generacji od firmy NVIDIA kierowany do najbardziej wymagającyh graczy i twórców. Dzięki niemu mogą cieszyć się niesamowitymi wrażeniami w trakcie gry, oraz wydajnością podczas pracy.\nZ krystalicznym designem Gwiezdnej Czerni, GeForce RTX™ 4090 GameRock prezentuje nie tylko błyszczące ARGB, lecz także nowy wentylator Gale Hunter i finy Y Formula optymalizujące efektywność układu chłodzenia.",
       "price": 9999,
+      "rating": 5,
       "categoryId": 2,
       "subCategoryId": 2
     }

@@ -1,6 +1,6 @@
 import { useAppContext } from "../App";
-import AdminControls from "./AdminControlsProduct";
-import { Box, Card, CardActions, CardContent, IconButton, Typography } from "@mui/material";
+import AdminControls from "./admin/AdminControlsProduct";
+import { Box, Card, CardActions, CardContent, IconButton, Tooltip, Typography } from "@mui/material";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { ProductData } from "../Types";
 
@@ -31,9 +31,11 @@ export const Product = ({ id, name, price }: ProductData) => {
             <CardActions>
                 <Box flexGrow={1} />
                 {admin && <AdminControls productId={id} />}
-                <IconButton onClick={addToCart}>
-                    <AddShoppingCartIcon className="addToCart" />
-                </IconButton>
+                <Tooltip title="Dodaj do koszyka">
+                    <IconButton onClick={addToCart}>
+                        <AddShoppingCartIcon className="addToCart" />
+                    </IconButton>
+                </Tooltip>
             </CardActions>
         </Card>
     );

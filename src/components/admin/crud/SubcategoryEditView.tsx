@@ -1,8 +1,8 @@
 import { FormControl, InputLabel, Select, MenuItem, Button, TextField, Stack, Typography } from "@mui/material";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { DB, useAppContext } from "../App";
-import { CategoryData } from "../Types";
+import { DB, useAppContext } from "../../../App";
+import { CategoryData } from "../../../Types";
 
 const InputField = ({ defaultValue, onInput, error }: { defaultValue: string; onInput: (e: React.ChangeEvent<HTMLInputElement>) => void; error: boolean }) => (
     <TextField defaultValue={defaultValue} label="Nazwa" autoFocus onInput={onInput} error={error} />
