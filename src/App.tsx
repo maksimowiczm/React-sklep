@@ -17,6 +17,7 @@ import FloatingButton from "./components/FloatingButton";
 import CategoryEditView from "./components/CategoryEditView";
 import SubcategoryEditView from "./components/SubcategoryEditView";
 import Basket from "./components/Basket";
+import LoginForm from "./components/Login";
 
 export const DB = process.env.REACT_APP_DB_SERVER;
 
@@ -26,7 +27,7 @@ const App = () => {
     const [subCategoryId, setSubCategoryId] = useState<number | undefined>(undefined);
     const [categoryId, setCategoryId] = useState<number | undefined>(undefined);
     const [productId, setProductId] = useState<number | undefined>(undefined);
-    const [admin, setAdmin] = useState<boolean>(true);
+    const [admin, setAdmin] = useState<boolean>(false);
     const [update, setUpdate] = useState<number>(0);
     const [status, setStatus] = useState<Status>("none");
     const [sortType, setSortType] = useState<SortType>({ prop: "name", direction: "asc" });
@@ -174,6 +175,9 @@ const App = () => {
 
             case "basket":
                 return <Basket />;
+
+            case "login":
+                return <LoginForm />;
         }
     };
 
