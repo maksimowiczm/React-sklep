@@ -2,8 +2,7 @@ import { Box, Button, Dialog, DialogActions, DialogTitle, IconButton } from "@mu
 import axios from "axios";
 import { useState } from "react";
 import { DB, useAppContext } from "../../App";
-import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
+import { EditIconTooltip, DeleteIconTooltip } from "./IconTooltips";
 
 const AdminControlsSubcategory = ({ subcategoryId }: { subcategoryId: number }) => {
     const { update, setUpdate, setStatus, setSubCategory } = useAppContext();
@@ -31,17 +30,13 @@ const AdminControlsSubcategory = ({ subcategoryId }: { subcategoryId: number }) 
     return (
         <>
             <Box flexGrow={1} />
-            <IconButton onClick={editAction}>
-                <EditIcon />
-            </IconButton>
-            <IconButton
+            <EditIconTooltip onClick={editAction} />
+            <DeleteIconTooltip
                 onClick={(e) => {
                     setOpen(true);
                     e.stopPropagation();
                 }}
-            >
-                <DeleteIcon />
-            </IconButton>
+            />
 
             <Dialog open={open} onClose={close}>
                 <DialogTitle>Czy napewno chcesz usunąć te podkategorie?</DialogTitle>

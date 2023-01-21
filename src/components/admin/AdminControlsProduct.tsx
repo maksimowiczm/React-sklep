@@ -1,9 +1,8 @@
-import { Box, Button, Dialog, DialogActions, DialogTitle, IconButton } from "@mui/material";
+import { Box, Button, Dialog, DialogActions, DialogTitle } from "@mui/material";
 import axios from "axios";
 import { useState } from "react";
 import { DB, useAppContext } from "../../App";
-import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
+import { EditIconTooltip, DeleteIconTooltip } from "./IconTooltips";
 
 const AdminControlsProduct = ({ productId }: { productId: number }) => {
     const { update, setUpdate, setStatus, setProduct } = useAppContext();
@@ -31,17 +30,13 @@ const AdminControlsProduct = ({ productId }: { productId: number }) => {
     return (
         <>
             <Box flexGrow={1} />
-            <IconButton onClick={editAction}>
-                <EditIcon />
-            </IconButton>
-            <IconButton
+            <EditIconTooltip onClick={editAction} />
+            <DeleteIconTooltip
                 onClick={(e) => {
                     setOpen(true);
                     e.stopPropagation();
                 }}
-            >
-                <DeleteIcon />
-            </IconButton>
+            />
 
             <Dialog open={open} onClose={close}>
                 <DialogTitle>Czy napewno chcesz usunąć ten produkt?</DialogTitle>
