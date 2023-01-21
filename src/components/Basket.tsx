@@ -68,7 +68,6 @@ const Basket = () => {
     const handleRemoveItem = (item: BasketItem) => removeFromBasket(item);
     const handleOrder = () => {
         axios.post(`http://${DB}/orders`, { order: basket, user: user });
-        clearBasket();
 
         setOrdered(true);
 
@@ -76,6 +75,7 @@ const Basket = () => {
         setTimeout(() => {
             setOrdered(false);
             setBasketVisible(false);
+            clearBasket();
         }, 3000);
     };
 
