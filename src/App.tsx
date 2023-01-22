@@ -5,22 +5,30 @@ import { MyAppContext } from "./Context";
 import { Status, SortType, ProductData, BasketItem } from "./Types";
 
 import MyAppBar from "./components/AppBar";
-import CategoriesList from "./components/CategoriesList";
-import ProductEditView from "./components/admin/crud/ProductEditView";
-import ProductsList from "./components/ProductsList";
-import ProductView from "./components/ProductView";
 
-import { Grid } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import FloatingButton from "./components/FloatingButton";
-import CategoryEditView from "./components/admin/crud/CategoryEditView";
-import SubcategoryEditView from "./components/admin/crud/SubcategoryEditView";
-import Basket from "./components/Basket";
+import Content from "./components/Content";
 
 export const DB = process.env.REACT_APP_DB_SERVER;
 
 export const useAppContext = () => useContext(MyAppContext);
+
+const UseDarkTheme = ({ children }: { children: React.ReactNode }) => {
+    const darkTheme = createTheme({
+        palette: {
+            mode: "dark",
+        },
+    });
+
+    return (
+        <ThemeProvider theme={darkTheme}>
+            <CssBaseline />
+            {children}
+        </ThemeProvider>
+    );
+};
 
 const App = () => {
     const [subCategoryId, setSubCategoryId] = useState<number | undefined>(undefined);
@@ -62,7 +70,7 @@ const App = () => {
     }, [itemsInBasket, basket, basketLoaded]);
 
     // Inicjalizacja kontekstu aplikacji
-    const useProviders = (jsx: JSX.Element) => (
+    const UseProviders = ({ children }: { children: React.ReactNode }) => (
         <MyAppContext.Provider
             value={{
                 subCategoryId,
@@ -133,21 +141,8 @@ const App = () => {
                 },
             }}
         >
-            {jsx}
+            {children}
         </MyAppContext.Provider>
-    );
-
-    const darkTheme = createTheme({
-        palette: {
-            mode: "dark",
-        },
-    });
-
-    const useDarkTheme = (jsx: JSX.Element) => (
-        <ThemeProvider theme={darkTheme}>
-            <CssBaseline />
-            {jsx}
-        </ThemeProvider>
     );
 
     const setStates = (category: number | undefined, subCategory: number | undefined, product: number | undefined) => {
@@ -161,55 +156,14 @@ const App = () => {
     const setProduct = (id: number | undefined) => setStates(undefined, undefined, id);
     const setEmpty = () => setStates(undefined, undefined, undefined);
 
-    // Wybranie elementu do wyświetlania
-    const getContentForStatus = (status: Status) => {
-        switch (status) {
-            case "addProduct":
-                return <ProductEditView />;
-
-            case "editProduct":
-                return <ProductEditView />;
-
-            case "editCategory":
-                return <CategoryEditView />;
-
-            case "addCategory":
-                return <CategoryEditView />;
-
-            case "editSubCategory":
-                return <SubcategoryEditView />;
-
-            case "addSubCategory":
-                return <SubcategoryEditView />;
-
-            case "basket":
-                return <Basket />;
-        }
-    };
-
-    return useProviders(
-        useDarkTheme(
-            <>
+    return (
+        <UseProviders>
+            <UseDarkTheme>
                 <MyAppBar />
-                <Grid container spacing={2} padding={2}>
-                    {status === "none" ? (
-                        <>
-                            <Grid item xs={3}>
-                                <CategoriesList />
-                            </Grid>
-                            <Grid item xs={9}>
-                                {productId === undefined ? <ProductsList /> : <ProductView />}
-                            </Grid>
-                        </>
-                    ) : (
-                        <Grid item xs={12} display="flex" justifyContent="center" alignItems="center">
-                            {getContentForStatus(status)}
-                        </Grid>
-                    )}
-                </Grid>
+                <Content />
                 {productId === undefined && status === "none" && <FloatingButton />}
-            </>
-        )
+            </UseDarkTheme>
+        </UseProviders>
     );
 };
 
