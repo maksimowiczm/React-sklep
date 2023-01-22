@@ -6,6 +6,9 @@ declare module "@mui/material/styles" {
             odd: string;
             even: string;
         };
+        adminIcons: {
+            color: string;
+        };
     }
 
     // createTheme
@@ -13,6 +16,10 @@ declare module "@mui/material/styles" {
         basket: {
             odd: string;
             even: string;
+        };
+        adminIcons: {
+            lightColor: string;
+            darkColor: string;
         };
     }
 }
@@ -25,6 +32,10 @@ export const darkTheme = createTheme({
         odd: "#000",
         even: "#111",
     },
+    adminIcons: {
+        lightColor: "#fff",
+        darkColor: "#fff",
+    },
 });
 
 export const lightTheme = createTheme({
@@ -35,5 +46,9 @@ export const lightTheme = createTheme({
     basket: {
         odd: "#ccc",
         even: "#fff",
+    },
+    adminIcons: {
+        lightColor: "#fff",
+        darkColor: "#fff",
     },
 });

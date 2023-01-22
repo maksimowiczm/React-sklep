@@ -62,10 +62,8 @@ const Basket = () => {
                     <Box className="cart" display="flex" flexDirection="column" alignItems="center">
                         <Box marginBottom={2} display="flex" justifyContent="space-between" width="100%">
                             <Typography variant="h4">Koszyk</Typography>
-                            <IconButton sx={{ borderRadius: "10px" }} onClick={clearBasket} color="primary">
-                                <Tooltip title="Usuń">
-                                    <DeleteIcon />
-                                </Tooltip>
+                            <IconButton sx={{ borderRadius: "10px" }} onClick={clearBasket} color="error">
+                                <DeleteIcon sx={{ marginRight: 1 }} />
                                 Wyczyść koszyk
                             </IconButton>
                         </Box>
@@ -120,7 +118,9 @@ const RenderItem = ({ item, handleRemoveItem }: RenderItemOptions) => {
                 onClick={() => setProduct(product.id)}
             />
             <ItemCounter item={item} />
-            <DeleteIconTooltip onClick={() => handleRemoveItem(item)} />
+            <Box marginLeft={1}>
+                <DeleteIconTooltip onClick={() => handleRemoveItem(item)} />
+            </Box>
         </ListItem>
     );
 };
@@ -140,31 +140,31 @@ const ItemCounter = ({ item }: { item: BasketItem }) => {
     return (
         <QuantityWrapper>
             <Box display="flex" justifyContent="center" alignItems="center">
-                <IconButton
-                    onClick={() => {
-                        setCount((prev) => prev + 1);
-                        addOneToBasket(product);
-                    }}
-                >
-                    <Tooltip title="Zwiększ ilość">
+                <Tooltip title="Zwiększ ilość" sx={{ borderRadius: "10px 0 0 10px" }}>
+                    <IconButton
+                        onClick={() => {
+                            setCount((prev) => prev + 1);
+                            addOneToBasket(product);
+                        }}
+                    >
                         <AddIcon />
-                    </Tooltip>
-                </IconButton>
+                    </IconButton>
+                </Tooltip>
 
                 <Typography align="center" width={30} textAlign="center" sx={{ cursor: "default" }}>
                     {count}
                 </Typography>
 
-                <IconButton
-                    onClick={() => {
-                        setCount((prev) => (prev - 2 > 0 ? prev - 1 : 1));
-                        removeOneFromBasket(item);
-                    }}
-                >
-                    <Tooltip title="Zmniejsz ilość">
+                <Tooltip title="Zmniejsz ilość" sx={{ borderRadius: "0 10px 10px 0" }}>
+                    <IconButton
+                        onClick={() => {
+                            setCount((prev) => (prev - 2 > 0 ? prev - 1 : 1));
+                            removeOneFromBasket(item);
+                        }}
+                    >
                         <RemoveIcon />
-                    </Tooltip>
-                </IconButton>
+                    </IconButton>
+                </Tooltip>
             </Box>
         </QuantityWrapper>
     );

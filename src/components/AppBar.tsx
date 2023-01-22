@@ -13,7 +13,7 @@ const MyAppBar = () => {
     }));
 
     const BasketIconWrapper = styled(Badge)<BadgeProps>(({ theme }) => ({
-        color: "#fff",
+        color: theme.adminIcons.color,
         "& .MuiBadge-badge": {
             right: -3,
             top: 13,
@@ -29,20 +29,20 @@ const MyAppBar = () => {
                     Sklep
                 </Typography>
                 <SearchBar />
-                <IconButton sx={{ marginLeft: 1 }} onClick={switchAdmin}>
-                    <Tooltip title="Konto">
+                <Tooltip title="Konto">
+                    <IconButton sx={{ marginLeft: 1 }} onClick={switchAdmin}>
                         <AccountIconWrapper>
                             <AccountCircleIcon />
                         </AccountIconWrapper>
-                    </Tooltip>
-                </IconButton>
-                <IconButton sx={{ marginLeft: 1 }} onClick={() => setStatus("basket")}>
-                    <BasketIconWrapper badgeContent={itemsInBasket} color="primary">
-                        <Tooltip title="Koszyk">
+                    </IconButton>
+                </Tooltip>
+                <Tooltip title="Koszyk">
+                    <IconButton sx={{ marginLeft: 1 }} onClick={() => setStatus("basket")}>
+                        <BasketIconWrapper badgeContent={itemsInBasket} color="primary">
                             <ShoppingCartOutlinedIcon />
-                        </Tooltip>
-                    </BasketIconWrapper>
-                </IconButton>
+                        </BasketIconWrapper>
+                    </IconButton>
+                </Tooltip>
             </Toolbar>
         </AppBar>
     );

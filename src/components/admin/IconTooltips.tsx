@@ -9,30 +9,44 @@ interface click {
     onClick: (e: React.MouseEvent) => void;
 }
 
-const CustomIconButton = ({ onClick, jsx }: { onClick: (e: React.MouseEvent) => void; jsx: JSX.Element }) => {
-    return <IconButton onClick={onClick}>{jsx}</IconButton>;
+const CustomIconButton = ({ onClick, children, title }: { onClick: (e: React.MouseEvent) => void; children: React.ReactNode; title: string }) => {
+    return (
+        <Tooltip title={title}>
+            <IconButton onClick={onClick} color="inherit">
+                {children}
+            </IconButton>
+        </Tooltip>
+    );
 };
 
+const EditIconWrapper = styled("div")(({ theme }) => ({
+    display: "flex",
+    ":hover": {
+        color: theme.palette.info.main,
+    },
+}));
+
 export const EditIconTooltip = ({ onClick }: click) => (
-    <CustomIconButton
-        onClick={onClick}
-        jsx={
-            <Tooltip title="Edytuj">
-                <EditIcon />
-            </Tooltip>
-        }
-    />
+    <EditIconWrapper>
+        <CustomIconButton onClick={onClick} title="Edytuj">
+            <EditIcon />
+        </CustomIconButton>
+    </EditIconWrapper>
 );
 
+const DeleteIconWrapper = styled("div")(({ theme }) => ({
+    display: "flex",
+    ":hover": {
+        color: theme.palette.error.main,
+    },
+}));
+
 export const DeleteIconTooltip = ({ onClick }: click) => (
-    <CustomIconButton
-        onClick={onClick}
-        jsx={
-            <Tooltip title="Usuń">
-                <DeleteIcon />
-            </Tooltip>
-        }
-    />
+    <DeleteIconWrapper>
+        <CustomIconButton onClick={onClick} title="Usuń">
+            <DeleteIcon />
+        </CustomIconButton>
+    </DeleteIconWrapper>
 );
 
 const AddToCartIconWrapper = styled("div")(({ theme }) => ({
@@ -50,11 +64,11 @@ export const AddToCartIconTooltip = ({
     onClick: (e: React.MouseEvent) => void;
     fontSize?: "small" | "large" | "medium" | undefined;
 }) => (
-    <Tooltip title="Dodaj do koszyka">
-        <AddToCartIconWrapper>
+    <AddToCartIconWrapper>
+        <Tooltip title="Dodaj do koszyka">
             <IconButton onClick={onClick} color="inherit">
                 <AddShoppingCartIcon color="inherit" fontSize={fontSize} />
             </IconButton>
-        </AddToCartIconWrapper>
-    </Tooltip>
+        </Tooltip>
+    </AddToCartIconWrapper>
 );
