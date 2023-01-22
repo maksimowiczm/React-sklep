@@ -24,7 +24,7 @@ export const ProductsList = () => {
 
     if (products.length === 0)
         return (
-            <Typography variant="h4" align="center" className="empty" marginTop={10}>
+            <Typography variant="h4" align="center" color="info" marginTop={10}>
                 Brak wyników
             </Typography>
         );

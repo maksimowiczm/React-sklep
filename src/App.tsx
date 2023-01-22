@@ -6,25 +6,32 @@ import { Status, SortType, ProductData, BasketItem } from "./Types";
 
 import MyAppBar from "./components/AppBar";
 
-import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import FloatingButton from "./components/FloatingButton";
 import Content from "./components/Content";
+
+import { Button } from "@mui/material";
+import { darkTheme, lightTheme } from "./styles/theme";
 
 export const DB = process.env.REACT_APP_DB_SERVER;
 
 export const useAppContext = () => useContext(MyAppContext);
 
 const UseDarkTheme = ({ children }: { children: React.ReactNode }) => {
-    const darkTheme = createTheme({
-        palette: {
-            mode: "dark",
-        },
-    });
+    const [theme, setTheme] = useState<"light" | "dark">("dark");
 
     return (
-        <ThemeProvider theme={darkTheme}>
+        <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
             <CssBaseline />
+            <Button
+                onClick={() => {
+                    if (theme === "dark") setTheme("light");
+                    else setTheme("dark");
+                }}
+            >
+                theme
+            </Button>
             {children}
         </ThemeProvider>
     );
