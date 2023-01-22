@@ -70,7 +70,7 @@ const App = () => {
     }, [itemsInBasket, basket, basketLoaded]);
 
     // Inicjalizacja kontekstu aplikacji
-    const UseProviders = ({ children }: { children: React.ReactNode }) => (
+    const useProviders = (children: React.ReactNode) => (
         <MyAppContext.Provider
             value={{
                 subCategoryId,
@@ -156,14 +156,12 @@ const App = () => {
     const setProduct = (id: number | undefined) => setStates(undefined, undefined, id);
     const setEmpty = () => setStates(undefined, undefined, undefined);
 
-    return (
-        <UseProviders>
-            <UseDarkTheme>
-                <MyAppBar />
-                <Content />
-                {productId === undefined && status === "none" && <FloatingButton />}
-            </UseDarkTheme>
-        </UseProviders>
+    return useProviders(
+        <UseDarkTheme>
+            <MyAppBar />
+            <Content />
+            {productId === undefined && status === "none" && <FloatingButton />}
+        </UseDarkTheme>
     );
 };
 
