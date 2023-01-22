@@ -38,8 +38,8 @@ const MyAppBar = () => {
                 </Tooltip>
                 <Tooltip title="Koszyk">
                     <IconButton sx={{ marginLeft: 1 }} onClick={() => setStatus("basket")}>
-                        <BasketIconWrapper badgeContent={itemsInBasket} color="primary">
-                            <ShoppingCartOutlinedIcon />
+                        <BasketIconWrapper badgeContent={itemsInBasket} color="secondary">
+                            <ShoppingCartOutlinedIcon sx={{ color: "white" }} />
                         </BasketIconWrapper>
                     </IconButton>
                 </Tooltip>
