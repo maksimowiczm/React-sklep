@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box, Button, Divider, ListItemButton } from "@mui/material";
+import { Box, Button, Divider, ListItemButton, Typography } from "@mui/material";
 import axios from "axios";
 import { DB, useAppContext } from "../App";
 import { SubCategoryData, CategoryData } from "../Types";
@@ -49,8 +49,9 @@ const CategoriesList = () => {
             <Divider />
             {categories.map(({ id, name, subCategories }: CategoryData, i: number) => (
                 <React.Fragment key={i}>
-                    <ListItemButton className={`name${categoryId === id ? " active" : ""}`} onClick={() => setCategory(id)}>
-                        {name}
+                    <ListItemButton onClick={() => setCategory(id)}>
+                        <Typography color={`${categoryId === id ? "primary" : undefined}`}>{name}</Typography>
+
                         {admin && <AdminControlsCategory categoryId={id} />}
                     </ListItemButton>
 
@@ -74,10 +75,9 @@ const SubCategoriesList = ({ subCategories }: { subCategories: Array<SubCategory
                         setSubCategory(id);
                         e.stopPropagation();
                     }}
-                    className={`subCategory name ${subCategoryId === id ? "active" : ""}`}
                     sx={{ marginLeft: 1 }}
                 >
-                    - {name}
+                    <Typography color={`${subCategoryId === id ? "primary" : undefined}`}> - {name}</Typography>
                     {admin && <AdminControlsSubcategory subcategoryId={id} />}
                 </ListItemButton>
             ))}

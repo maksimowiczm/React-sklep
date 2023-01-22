@@ -3,8 +3,8 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { AdminControlsProduct } from "./admin/AdminControls";
 import { ProductData } from "../Types";
-import { Box, IconButton, Rating, Tooltip, Typography } from "@mui/material";
-import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import { Box, Rating, Typography } from "@mui/material";
+import { AddToCartIconTooltip } from "./admin/IconTooltips";
 
 export const ProductView = () => {
     const { productId, admin, addOneToBasket } = useAppContext();
@@ -37,11 +37,8 @@ export const ProductView = () => {
                         <Rating name="read-only" value={rating} readOnly />
                         <Typography variant="h6">Cena {product?.price.toFixed(2)} zł</Typography>
                     </Box>
-                    <Tooltip title="Dodaj do koszyka">
-                        <IconButton onClick={addToCart}>
-                            <AddShoppingCartIcon className="addToCart" fontSize="large" />
-                        </IconButton>
-                    </Tooltip>
+
+                    <AddToCartIconTooltip onClick={addToCart} fontSize="large" />
                 </Box>
 
                 <Typography marginTop={2} align="justify">

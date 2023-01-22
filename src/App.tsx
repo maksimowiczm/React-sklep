@@ -11,20 +11,32 @@ import CssBaseline from "@mui/material/CssBaseline";
 import FloatingButton from "./components/FloatingButton";
 import Content from "./components/Content";
 
+import { Button } from "@mui/material";
+
 export const DB = process.env.REACT_APP_DB_SERVER;
 
 export const useAppContext = () => useContext(MyAppContext);
 
 const UseDarkTheme = ({ children }: { children: React.ReactNode }) => {
+    const [theme, setTheme] = useState<"light" | "dark">("dark");
+
     const darkTheme = createTheme({
         palette: {
-            mode: "dark",
+            mode: theme,
         },
     });
 
     return (
         <ThemeProvider theme={darkTheme}>
             <CssBaseline />
+            <Button
+                onClick={() => {
+                    if (theme === "dark") setTheme("light");
+                    else setTheme("dark");
+                }}
+            >
+                theme
+            </Button>
             {children}
         </ThemeProvider>
     );
