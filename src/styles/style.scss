@@ -6,11 +6,7 @@ $product-color-hover: #222;
 $text-color-hover: #ddd;
 $shop-icon-color: rgb(0, 200, 0);
 $shop-icon-color-hover: green;
-
-body {
-    background-color: $base-color;
-    color: $base-font-color;
-}
+$basket-border-color: #666;
 
 .subCategory {
     font-size: 0.8em;
@@ -18,12 +14,6 @@ body {
 
 .active {
     color: $active-font-color !important;
-}
-
-.admin {
-    &.active {
-        color: pink !important;
-    }
 }
 
 .add,
@@ -58,11 +48,11 @@ body {
 }
 
 .cartQuantity {
-    border: 1px solid white;
+    border: 1px solid $base-font-color;
     border-radius: 10px;
 }
 
 .cartItems {
     width: 50vw;
-    border: 1px solid #666;
+    border: 1px solid $basket-border-color;
 }

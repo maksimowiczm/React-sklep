@@ -4,6 +4,7 @@ import { DB, useAppContext } from "../App";
 import { BasketItem } from "../Types";
 
 import { ListItem, IconButton, ListItemText, Box, Collapse, List, Typography, Button, Alert, Tooltip } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
 import { TransitionGroup } from "react-transition-group";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
@@ -51,9 +52,15 @@ const Basket = () => {
             <Collapse in={!ordered}>
                 {basketVisible ? (
                     <Box className="cart" display="flex" flexDirection="column" alignItems="center">
-                        <Typography variant="h4" marginBottom={2}>
-                            Koszyk
-                        </Typography>
+                        <Box marginBottom={2} display="flex" justifyContent="space-between" width="100%">
+                            <Typography variant="h4">Koszyk</Typography>
+                            <IconButton sx={{ borderRadius: "10px" }} onClick={clearBasket}>
+                                <Tooltip title="Usuń">
+                                    <DeleteIcon />
+                                </Tooltip>
+                                Wyczyść koszyk
+                            </IconButton>
+                        </Box>
 
                         <List className="cartItems" disablePadding>
                             <TransitionGroup>
@@ -64,6 +71,7 @@ const Basket = () => {
                                 ))}
                             </TransitionGroup>
                         </List>
+
                         <Button variant="contained" sx={{ margin: 2 }} color="success" onClick={handleOrder}>
                             <Typography color="#000" variant="h6">
                                 Zamów
