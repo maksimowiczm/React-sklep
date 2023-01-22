@@ -5,59 +5,10 @@ import { BasketItem } from "../Types";
 
 import { ListItem, IconButton, ListItemText, Box, Collapse, List, Typography, Button, Alert, Tooltip } from "@mui/material";
 import { TransitionGroup } from "react-transition-group";
-import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import axios from "axios";
 import { DeleteIconTooltip } from "./admin/IconTooltips";
-
-interface RenderItemOptions {
-    item: BasketItem;
-    handleRemoveItem: (item: BasketItem) => void;
-}
-
-const RenderItem = ({ item, handleRemoveItem }: RenderItemOptions) => {
-    const { product, quantity } = item;
-    const { addOneToBasket, removeOneFromBasket } = useAppContext();
-
-    const [count, setCount] = useState(quantity);
-
-    return (
-        <ListItem>
-            <ListItemText primary={product.name} secondary={product.price} sx={{ flexGrow: 1 }} />
-
-            <Box display="flex" justifyContent="center" alignItems="center" className="cartQuantity">
-                <IconButton
-                    onClick={() => {
-                        setCount((prev) => prev + 1);
-                        addOneToBasket(product);
-                    }}
-                >
-                    <Tooltip title="Zwiększ ilość">
-                        <AddIcon />
-                    </Tooltip>
-                </IconButton>
-
-                <Typography align="center" width={30} textAlign="center" sx={{ cursor: "default" }}>
-                    {count}
-                </Typography>
-
-                <IconButton
-                    onClick={() => {
-                        setCount((prev) => (prev - 2 > 0 ? prev - 1 : 1));
-                        removeOneFromBasket(item);
-                    }}
-                >
-                    <Tooltip title="Zmniejsz ilość">
-                        <RemoveIcon />
-                    </Tooltip>
-                </IconButton>
-            </Box>
-
-            <DeleteIconTooltip onClick={() => handleRemoveItem(item)} />
-        </ListItem>
-    );
-};
 
 const Basket = () => {
     const { basket, removeFromBasket, clearBasket, user, itemsInBasket } = useAppContext();
@@ -100,17 +51,23 @@ const Basket = () => {
             <Collapse in={!ordered}>
                 {basketVisible ? (
                     <Box className="cart" display="flex" flexDirection="column" alignItems="center">
+                        <Typography variant="h4" marginBottom={2}>
+                            Koszyk
+                        </Typography>
+
                         <List className="cartItems" disablePadding>
                             <TransitionGroup>
                                 {basket.map((item, i) => (
-                                    <Collapse key={i} sx={{ backgroundColor: i % 2 !== 0 ? "#333" : "" }}>
+                                    <Collapse key={i} sx={{ backgroundColor: i % 2 !== 0 ? "#222" : "" }}>
                                         {<RenderItem item={item} handleRemoveItem={handleRemoveItem} />}
                                     </Collapse>
                                 ))}
                             </TransitionGroup>
                         </List>
-                        <Button variant="contained" sx={{ margin: 2, color: "#333", fontWeight: 500 }} color="success" onClick={handleOrder}>
-                            Zamów
+                        <Button variant="contained" sx={{ margin: 2 }} color="success" onClick={handleOrder}>
+                            <Typography color="#000" variant="h6">
+                                Zamów
+                            </Typography>
                         </Button>
                     </Box>
                 ) : (
@@ -120,6 +77,67 @@ const Basket = () => {
                 )}
             </Collapse>
         </>
+    );
+};
+
+interface RenderItemOptions {
+    item: BasketItem;
+    handleRemoveItem: (item: BasketItem) => void;
+}
+
+const RenderItem = ({ item, handleRemoveItem }: RenderItemOptions) => {
+    const { product } = item;
+    const { setProduct } = useAppContext();
+
+    return (
+        <ListItem>
+            <ListItemText
+                primary={product.name}
+                secondary={`${product.price.toFixed(2)} zł`}
+                secondaryTypographyProps={{ color: "#ddd" }}
+                sx={{ flexGrow: 1, cursor: "pointer" }}
+                onClick={() => setProduct(product.id)}
+            />
+            <ItemCounter item={item} />
+            <DeleteIconTooltip onClick={() => handleRemoveItem(item)} />
+        </ListItem>
+    );
+};
+
+const ItemCounter = ({ item }: { item: BasketItem }) => {
+    const { product, quantity } = item;
+
+    const { addOneToBasket, removeOneFromBasket } = useAppContext();
+    const [count, setCount] = useState(quantity);
+
+    return (
+        <Box display="flex" justifyContent="center" alignItems="center" className="cartQuantity">
+            <IconButton
+                onClick={() => {
+                    setCount((prev) => prev + 1);
+                    addOneToBasket(product);
+                }}
+            >
+                <Tooltip title="Zwiększ ilość">
+                    <AddIcon />
+                </Tooltip>
+            </IconButton>
+
+            <Typography align="center" width={30} textAlign="center" sx={{ cursor: "default" }}>
+                {count}
+            </Typography>
+
+            <IconButton
+                onClick={() => {
+                    setCount((prev) => (prev - 2 > 0 ? prev - 1 : 1));
+                    removeOneFromBasket(item);
+                }}
+            >
+                <Tooltip title="Zmniejsz ilość">
+                    <RemoveIcon />
+                </Tooltip>
+            </IconButton>
+        </Box>
     );
 };
 
