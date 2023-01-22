@@ -62,7 +62,7 @@ const Basket = () => {
                     <Box className="cart" display="flex" flexDirection="column" alignItems="center">
                         <Box marginBottom={2} display="flex" justifyContent="space-between" width="100%">
                             <Typography variant="h4">Koszyk</Typography>
-                            <IconButton sx={{ borderRadius: "10px" }} onClick={clearBasket}>
+                            <IconButton sx={{ borderRadius: "10px" }} onClick={clearBasket} color="primary">
                                 <Tooltip title="Usuń">
                                     <DeleteIcon />
                                 </Tooltip>
@@ -73,19 +73,23 @@ const Basket = () => {
                         <BasketWrapper>
                             <List className="cartItems" disablePadding>
                                 <TransitionGroup>
-                                    {basket.map((item, i) => (
-                                        <Collapse key={i} sx={{ backgroundColor: i % 2 !== 0 ? "#222" : "" }}>
-                                            {<RenderItem item={item} handleRemoveItem={handleRemoveItem} />}
-                                        </Collapse>
-                                    ))}
+                                    {basket.map((item, i) => {
+                                        const BasketItemWrapper = styled("div")(({ theme }) => ({
+                                            backgroundColor: i % 2 !== 0 ? theme.basket.odd : theme.basket.even,
+                                        }));
+
+                                        return (
+                                            <Collapse key={i}>
+                                                <BasketItemWrapper>{<RenderItem item={item} handleRemoveItem={handleRemoveItem} />}</BasketItemWrapper>
+                                            </Collapse>
+                                        );
+                                    })}
                                 </TransitionGroup>
                             </List>
                         </BasketWrapper>
 
-                        <Button variant="contained" sx={{ margin: 2 }} color="success" onClick={handleOrder}>
-                            <Typography color="#000" variant="h6">
-                                Zamów
-                            </Typography>
+                        <Button variant="contained" sx={{ margin: 2 }} onClick={handleOrder}>
+                            <Typography variant="h6">Zamów</Typography>
                         </Button>
                     </Box>
                 ) : (
@@ -112,7 +116,6 @@ const RenderItem = ({ item, handleRemoveItem }: RenderItemOptions) => {
             <ListItemText
                 primary={product.name}
                 secondary={`${product.price.toFixed(2)} zł`}
-                secondaryTypographyProps={{ color: "#ddd" }}
                 sx={{ flexGrow: 1, cursor: "pointer" }}
                 onClick={() => setProduct(product.id)}
             />
