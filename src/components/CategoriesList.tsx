@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box, Button, Divider, ListItemButton, Typography, styled } from "@mui/material";
+import { Stack, Button, Divider, ListItemButton, Typography, styled, Box } from "@mui/material";
 import axios from "axios";
 import { DB, useAppContext } from "../App";
 import { SubCategoryData, CategoryData } from "../Types";
@@ -11,9 +11,15 @@ const CategoryListWrapper = styled("div")(({ theme }) => ({
     borderColor: theme.palette.primary.main,
 }));
 
+const CategoryLabelWrapper = styled("div")(({ theme }) => ({
+    ":hover": {
+        color: theme.palette.success.light,
+    },
+}));
+
 const CategoriesList = () => {
     const [categories, setCategories] = useState<Array<CategoryData>>([]);
-    const { categoryId, setCategory, update, setStatus, admin } = useAppContext();
+    const { categoryId, setCategory, update, setStatus, admin, reset } = useAppContext();
 
     useEffect(() => {
         axios.get(`http://${DB}/categories?_embed=subCategories`).then((res) => setCategories(res.data));
@@ -33,40 +39,53 @@ const CategoriesList = () => {
     };
 
     return (
-        <CategoryListWrapper>
-            <Typography variant="h5" align="center" padding={1}>
-                Kategorie
-            </Typography>
+        <>
             {admin && (
-                <Box display="flex" flexDirection="column" alignItems="flex-start">
-                    <Button onClick={addCategoryAction}>
+                <Stack spacing={1} margin={1}>
+                    <Button onClick={addCategoryAction} variant="contained" size="small" fullWidth>
                         <AddIcon />
-                        Dodaj Kategorię
+                        <Box flexGrow={1}>
+                            <Typography justifyContent="center">Dodaj Kategorię</Typography>
+                        </Box>
                     </Button>
-                    <Button onClick={addSubCategoryAction}>
+                    <Button onClick={addSubCategoryAction} variant="contained" size="small" fullWidth>
                         <AddIcon />
-                        Dodaj podkategorie
+                        <Box flexGrow={1}>
+                            <Typography justifyContent="center">Dodaj podkategorie</Typography>
+                        </Box>
                     </Button>
-                    <Button onClick={addProductAction}>
+                    <Button onClick={addProductAction} variant="contained" size="small" fullWidth>
                         <AddIcon />
-                        Dodaj Produkt
+                        <Box flexGrow={1}>
+                            <Typography justifyContent="center">Dodaj Produkt</Typography>
+                        </Box>
                     </Button>
-                </Box>
+                </Stack>
             )}
 
-            {categories.map(({ id, name, subCategories }: CategoryData, i: number) => (
-                <React.Fragment key={i}>
-                    <ListItemButton onClick={() => setCategory(id)}>
-                        <Typography color={`${categoryId === id ? "primary" : undefined}`}>{name}</Typography>
+            <CategoryListWrapper>
+                <CategoryLabelWrapper>
+                    <Typography variant="h4" align="center" padding={1} fontWeight={600} onClick={reset} sx={{ cursor: "pointer" }}>
+                        Kategorie
+                    </Typography>
+                </CategoryLabelWrapper>
+                {categories.map(({ id, name, subCategories }: CategoryData, i: number) => (
+                    <React.Fragment key={i}>
+                        <CategoryLabelWrapper>
+                            <ListItemButton onClick={() => setCategory(id)}>
+                                <Typography color={`${categoryId === id ? "primary" : undefined}`} fontWeight={600}>
+                                    {name}
+                                </Typography>
+                                {admin && <AdminControlsCategory categoryId={id} />}
+                            </ListItemButton>
+                        </CategoryLabelWrapper>
 
-                        {admin && <AdminControlsCategory categoryId={id} />}
-                    </ListItemButton>
-
-                    <SubCategoriesList subCategories={subCategories} />
-                    <Divider />
-                </React.Fragment>
-            ))}
-        </CategoryListWrapper>
+                        <SubCategoriesList subCategories={subCategories} />
+                        <Divider />
+                    </React.Fragment>
+                ))}
+            </CategoryListWrapper>
+        </>
     );
 };
 
@@ -80,18 +99,20 @@ const SubCategoriesList = ({ subCategories }: { subCategories: Array<SubCategory
     return (
         <>
             {subCategories.map(({ id, name }: SubCategoryData, i: number) => (
-                <ListItemButton
-                    key={i}
-                    onClick={(e) => {
-                        setSubCategory(id);
-                        e.stopPropagation();
-                    }}
-                >
-                    <SubCategoryWrapper>
-                        <Typography color={`${subCategoryId === id ? "primary" : undefined}`}> • {name}</Typography>
-                    </SubCategoryWrapper>
-                    {admin && <AdminControlsSubcategory subcategoryId={id} />}
-                </ListItemButton>
+                <CategoryLabelWrapper>
+                    <ListItemButton
+                        key={i}
+                        onClick={(e) => {
+                            setSubCategory(id);
+                            e.stopPropagation();
+                        }}
+                    >
+                        <SubCategoryWrapper>
+                            <Typography color={`${subCategoryId === id ? "primary" : undefined}`}>• {name}</Typography>
+                        </SubCategoryWrapper>
+                        {admin && <AdminControlsSubcategory subcategoryId={id} />}
+                    </ListItemButton>
+                </CategoryLabelWrapper>
             ))}
         </>
     );
