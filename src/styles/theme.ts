@@ -34,7 +34,7 @@ export const darkTheme = createTheme({
         even: "#111",
     },
     adminIcons: {
-        edit: "#456990",
+        edit: "#6D36CD",
         delete: "#F45B69",
     },
 });
@@ -49,7 +49,7 @@ export const lightTheme = createTheme({
         even: "#fff",
     },
     adminIcons: {
-        edit: "#456990",
+        edit: "#6D36CD",
         delete: "#F45B69",
     },
 });
