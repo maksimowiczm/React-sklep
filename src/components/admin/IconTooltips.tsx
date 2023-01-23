@@ -7,6 +7,7 @@ import { styled } from "@mui/material/styles";
 
 interface click {
     onClick: (e: React.MouseEvent) => void;
+    hover?: boolean;
 }
 
 const CustomIconButton = ({ onClick, children, title }: { onClick: (e: React.MouseEvent) => void; children: React.ReactNode; title: string }) => {
@@ -19,35 +20,36 @@ const CustomIconButton = ({ onClick, children, title }: { onClick: (e: React.Mou
     );
 };
 
-const EditIconWrapper = styled("div")(({ theme }) => ({
-    display: "flex",
-    ":hover": {
-        color: theme.palette.info.main,
-    },
-}));
+export const EditIconTooltip = ({ onClick, hover }: click) => {
+    const EditIconWrapper = styled("div")(({ theme }) => ({
+        display: "flex",
+        color: hover ? theme.adminIcons.edit : undefined,
+        // color: hover ? theme.palette.info.main : undefined,
+    }));
 
-export const EditIconTooltip = ({ onClick }: click) => (
-    <EditIconWrapper>
-        <CustomIconButton onClick={onClick} title="Edytuj">
-            <EditIcon />
-        </CustomIconButton>
-    </EditIconWrapper>
-);
+    return (
+        <EditIconWrapper>
+            <CustomIconButton onClick={onClick} title="Edytuj">
+                <EditIcon />
+            </CustomIconButton>
+        </EditIconWrapper>
+    );
+};
 
-const DeleteIconWrapper = styled("div")(({ theme }) => ({
-    display: "flex",
-    ":hover": {
-        color: theme.palette.error.main,
-    },
-}));
+export const DeleteIconTooltip = ({ onClick, hover }: click) => {
+    const DeleteIconWrapper = styled("div")(({ theme }) => ({
+        display: "flex",
+        color: hover ? theme.adminIcons.delete : undefined,
+    }));
 
-export const DeleteIconTooltip = ({ onClick }: click) => (
-    <DeleteIconWrapper>
-        <CustomIconButton onClick={onClick} title="Usuń">
-            <DeleteIcon />
-        </CustomIconButton>
-    </DeleteIconWrapper>
-);
+    return (
+        <DeleteIconWrapper>
+            <CustomIconButton onClick={onClick} title="Usuń">
+                <DeleteIcon />
+            </CustomIconButton>
+        </DeleteIconWrapper>
+    );
+};
 
 const AddToCartIconWrapper = styled("div")(({ theme }) => ({
     color: theme.palette.success.main,

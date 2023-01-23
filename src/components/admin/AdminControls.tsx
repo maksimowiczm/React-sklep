@@ -13,10 +13,11 @@ interface AdminControlsProps {
     id: number;
     item: string;
     status: Status;
+    hover?: boolean;
     setItem: (id: number | undefined) => void;
 }
 
-const AdminControls = ({ id, item, status, setItem }: AdminControlsProps) => {
+const AdminControls = ({ id, item, status, setItem, hover }: AdminControlsProps) => {
     const { setStatus, setUpdate, update } = useAppContext();
     const [open, setOpen] = useState(false);
     const close = (e: React.MouseEvent) => {
@@ -39,8 +40,9 @@ const AdminControls = ({ id, item, status, setItem }: AdminControlsProps) => {
     return (
         <>
             <Box flexGrow={1} />
-            <EditIconTooltip onClick={edit} />
+            <EditIconTooltip onClick={edit} hover={hover} />
             <DeleteIconTooltip
+                hover={hover}
                 onClick={(e) => {
                     setOpen(true);
                     e.stopPropagation();
@@ -60,17 +62,17 @@ const AdminControls = ({ id, item, status, setItem }: AdminControlsProps) => {
     );
 };
 
-export const AdminControlsCategory = ({ categoryId }: { categoryId: number }) => {
+export const AdminControlsCategory = ({ categoryId, hover }: { categoryId: number; hover?: boolean }) => {
     const { setCategory } = useAppContext();
-    return <AdminControls id={categoryId} item={"categories"} setItem={setCategory} status="editCategory" />;
+    return <AdminControls id={categoryId} item={"categories"} setItem={setCategory} status="editCategory" hover={hover} />;
 };
 
-export const AdminControlsSubcategory = ({ subcategoryId }: { subcategoryId: number }) => {
+export const AdminControlsSubcategory = ({ subcategoryId, hover }: { subcategoryId: number; hover?: boolean }) => {
     const { setSubCategory } = useAppContext();
-    return <AdminControls id={subcategoryId} item={"subcategories"} setItem={setSubCategory} status="editSubCategory" />;
+    return <AdminControls id={subcategoryId} item={"subcategories"} setItem={setSubCategory} status="editSubCategory" hover={hover} />;
 };
 
-export const AdminControlsProduct = ({ productId }: { productId: number }) => {
+export const AdminControlsProduct = ({ productId, hover }: { productId: number; hover?: boolean }) => {
     const { setProduct } = useAppContext();
-    return <AdminControls id={productId} item={"products"} setItem={setProduct} status="editProduct" />;
+    return <AdminControls id={productId} item={"products"} setItem={setProduct} status="editProduct" hover={hover} />;
 };

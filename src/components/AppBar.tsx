@@ -13,7 +13,7 @@ const MyAppBar = () => {
     }));
 
     const BasketIconWrapper = styled(Badge)<BadgeProps>(({ theme }) => ({
-        color: theme.adminIcons.color,
+        color: "#fff",
         "& .MuiBadge-badge": {
             right: -3,
             top: 13,
@@ -39,7 +39,7 @@ const MyAppBar = () => {
                 <Tooltip title="Koszyk">
                     <IconButton sx={{ marginLeft: 1 }} onClick={() => setStatus("basket")}>
                         <BasketIconWrapper badgeContent={itemsInBasket} color="secondary">
-                            <ShoppingCartOutlinedIcon sx={{ color: "white" }} />
+                            <ShoppingCartOutlinedIcon />
                         </BasketIconWrapper>
                     </IconButton>
                 </Tooltip>

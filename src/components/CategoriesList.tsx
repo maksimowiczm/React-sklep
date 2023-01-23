@@ -13,13 +13,13 @@ const CategoryListWrapper = styled("div")(({ theme }) => ({
 
 const CategoryLabelWrapper = styled("div")(({ theme }) => ({
     ":hover": {
-        color: theme.palette.success.light,
+        // color: theme.palette.success.light,
     },
 }));
 
 const CategoriesList = () => {
     const [categories, setCategories] = useState<Array<CategoryData>>([]);
-    const { categoryId, setCategory, update, setStatus, admin, reset } = useAppContext();
+    const { update, setStatus, admin, reset } = useAppContext();
 
     useEffect(() => {
         axios.get(`http://${DB}/categories?_embed=subCategories`).then((res) => setCategories(res.data));
@@ -69,22 +69,34 @@ const CategoriesList = () => {
                         Kategorie
                     </Typography>
                 </CategoryLabelWrapper>
-                {categories.map(({ id, name, subCategories }: CategoryData, i: number) => (
-                    <React.Fragment key={i}>
-                        <CategoryLabelWrapper>
-                            <ListItemButton onClick={() => setCategory(id)}>
-                                <Typography color={`${categoryId === id ? "primary" : undefined}`} fontWeight={600}>
-                                    {name}
-                                </Typography>
-                                {admin && <AdminControlsCategory categoryId={id} />}
-                            </ListItemButton>
-                        </CategoryLabelWrapper>
 
-                        <SubCategoriesList subCategories={subCategories} />
-                        <Divider />
-                    </React.Fragment>
+                {categories.map((props: CategoryData, i: number) => (
+                    <Category {...props} />
                 ))}
             </CategoryListWrapper>
+        </>
+    );
+};
+
+const Category = ({ id, name, subCategories }: { id: number; name: string; subCategories: SubCategoryData[] }) => {
+    const { setCategory, categoryId, admin } = useAppContext();
+    const [hover, setHover] = useState<boolean>(false);
+
+    return (
+        <>
+            <CategoryLabelWrapper onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
+                <ListItemButton onClick={() => setCategory(id)}>
+                    <Typography color={`${categoryId === id ? "primary" : undefined}`} fontWeight={600}>
+                        {name}
+                    </Typography>
+                    {admin && <AdminControlsCategory categoryId={id} hover={hover} />}
+                </ListItemButton>
+            </CategoryLabelWrapper>
+
+            {subCategories.map((props: SubCategoryData, i: number) => (
+                <SubCategory {...props} />
+            ))}
+            <Divider />
         </>
     );
 };
@@ -93,27 +105,25 @@ const SubCategoryWrapper = styled("div")(({ theme }) => ({
     paddingLeft: 10,
 }));
 
-const SubCategoriesList = ({ subCategories }: { subCategories: Array<SubCategoryData> }) => {
-    const { subCategoryId, admin, setSubCategory } = useAppContext();
+const SubCategory = ({ id, name }: { id: number; name: string }) => {
+    const { setSubCategory, subCategoryId, admin } = useAppContext();
+    const [hover, setHover] = useState<boolean>(false);
 
     return (
         <>
-            {subCategories.map(({ id, name }: SubCategoryData, i: number) => (
-                <CategoryLabelWrapper>
-                    <ListItemButton
-                        key={i}
-                        onClick={(e) => {
-                            setSubCategory(id);
-                            e.stopPropagation();
-                        }}
-                    >
-                        <SubCategoryWrapper>
-                            <Typography color={`${subCategoryId === id ? "primary" : undefined}`}>• {name}</Typography>
-                        </SubCategoryWrapper>
-                        {admin && <AdminControlsSubcategory subcategoryId={id} />}
-                    </ListItemButton>
-                </CategoryLabelWrapper>
-            ))}
+            <CategoryLabelWrapper onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
+                <ListItemButton
+                    onClick={(e) => {
+                        setSubCategory(id);
+                        e.stopPropagation();
+                    }}
+                >
+                    <SubCategoryWrapper>
+                        <Typography color={`${subCategoryId === id ? "primary" : undefined}`}>• {name}</Typography>
+                    </SubCategoryWrapper>
+                    {admin && <AdminControlsSubcategory subcategoryId={id} hover={hover} />}
+                </ListItemButton>
+            </CategoryLabelWrapper>
         </>
     );
 };

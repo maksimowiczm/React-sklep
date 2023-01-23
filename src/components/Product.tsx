@@ -3,9 +3,11 @@ import { AdminControlsProduct } from "./admin/AdminControls";
 import { Box, Card, CardActions, CardContent, Typography, CardActionArea } from "@mui/material";
 import { ProductData } from "../Types";
 import { AddToCartIconTooltip } from "./admin/IconTooltips";
+import { useState } from "react";
 
 export const Product = ({ id, name, price }: ProductData) => {
     const { setProduct, admin, addOneToBasket } = useAppContext();
+    const [hover, setHover] = useState<boolean>(false);
 
     const addToCart = (e: React.MouseEvent) => {
         addOneToBasket({ id, name, price });
@@ -13,7 +15,7 @@ export const Product = ({ id, name, price }: ProductData) => {
     };
 
     return (
-        <Card onClick={() => setProduct(id)} variant="outlined">
+        <Card onClick={() => setProduct(id)} variant="outlined" onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
             <CardActionArea>
                 <CardContent sx={{ minHeight: 200 }}>
                     <Typography sx={{ fontSize: 14 }} align="justify" color="text.secondary">
@@ -31,7 +33,7 @@ export const Product = ({ id, name, price }: ProductData) => {
                 </CardContent>
                 <CardActions>
                     <Box flexGrow={1} />
-                    {admin && <AdminControlsProduct productId={id} />}
+                    {admin && <AdminControlsProduct productId={id} hover={hover} />}
                     <AddToCartIconTooltip onClick={addToCart} />
                 </CardActions>
             </CardActionArea>

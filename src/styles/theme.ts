@@ -7,7 +7,8 @@ declare module "@mui/material/styles" {
             even: string;
         };
         adminIcons: {
-            color: string;
+            edit: string;
+            delete: string;
         };
     }
 
@@ -18,8 +19,8 @@ declare module "@mui/material/styles" {
             even: string;
         };
         adminIcons: {
-            lightColor: string;
-            darkColor: string;
+            edit: string;
+            delete: string;
         };
     }
 }
@@ -33,8 +34,8 @@ export const darkTheme = createTheme({
         even: "#111",
     },
     adminIcons: {
-        lightColor: "#fff",
-        darkColor: "#fff",
+        edit: "#456990",
+        delete: "#F45B69",
     },
 });
 
@@ -48,7 +49,7 @@ export const lightTheme = createTheme({
         even: "#fff",
     },
     adminIcons: {
-        lightColor: "#fff",
-        darkColor: "#fff",
+        edit: "#456990",
+        delete: "#F45B69",
     },
 });
