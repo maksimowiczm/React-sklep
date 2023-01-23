@@ -9,7 +9,7 @@ const MyAppBar = () => {
 
     const AccountIconWrapper = styled("div")(({ theme }) => ({
         display: "flex",
-        color: admin ? theme.palette.success.light : undefined,
+        color: admin ? theme.palette.success.light : "#fff",
     }));
 
     const BasketIconWrapper = styled(Badge)<BadgeProps>(({ theme }) => ({

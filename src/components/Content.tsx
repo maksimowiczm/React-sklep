@@ -46,10 +46,10 @@ const Content = () => {
         if (status === "none")
             return (
                 <>
-                    <Grid item xs={3}>
+                    <Grid item xs={12} md={5} xl={3}>
                         <CategoriesList />
                     </Grid>
-                    <Grid item xs={9}>
+                    <Grid item xs={12} md={7} xl={9}>
                         {productId === undefined ? <ProductsList /> : <ProductView />}
                     </Grid>
                 </>

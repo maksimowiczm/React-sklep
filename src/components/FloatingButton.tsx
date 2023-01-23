@@ -4,7 +4,7 @@ import SortByAlphaIcon from "@mui/icons-material/SortByAlpha";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import SortIcon from "@mui/icons-material/Sort";
 import { useAppContext } from "../App";
-import { Box, Tooltip } from "@mui/material";
+import { Tooltip } from "@mui/material";
 
 const FloatingButton = () => {
     const { sortType, setSortType } = useAppContext();
@@ -30,33 +30,31 @@ const FloatingButton = () => {
     ];
 
     return (
-        <Box position="absolute" top="0" padding={2} height="100vh" width="100vw" display="flex" flexDirection="column" alignItems="center" zIndex={-1}>
-            <Box flexGrow={1} />
-            <Tooltip title="Sortowanie">
-                <SpeedDial
-                    ariaLabel=""
-                    icon={<SortIcon />}
-                    sx={{
-                        position: "sticky",
-                        bottom: 50,
-                        width: 0,
-                        left: "95vw",
-                    }}
-                >
-                    {actions.map((action) => (
-                        <SpeedDialAction
-                            key={action.name}
-                            icon={action.icon}
-                            tooltipTitle={action.name}
-                            onClick={(e) => {
-                                action.click();
-                                e.stopPropagation();
-                            }}
-                        />
-                    ))}
-                </SpeedDial>
-            </Tooltip>
-        </Box>
+        <Tooltip title="Sortowanie">
+            <SpeedDial
+                ariaLabel=""
+                icon={<SortIcon />}
+                sx={{
+                    position: "sticky",
+                    bottom: 50,
+                    width: 0,
+                    left: "95%",
+                }}
+            >
+                {actions.map((action) => (
+                    <SpeedDialAction
+                        key={action.name}
+                        icon={action.icon}
+                        tooltipTitle={action.name}
+                        onClick={(e) => {
+                            action.click();
+                            e.stopPropagation();
+                        }}
+                    />
+                ))}
+            </SpeedDial>
+        </Tooltip>
     );
 };
+
 export default FloatingButton;

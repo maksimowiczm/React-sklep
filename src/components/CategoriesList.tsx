@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { Box, Button, Divider, ListItemButton, Typography } from "@mui/material";
+import { Box, Button, Divider, ListItemButton, Typography, styled } from "@mui/material";
 import axios from "axios";
 import { DB, useAppContext } from "../App";
 import { SubCategoryData, CategoryData } from "../Types";
 import { AdminControlsCategory, AdminControlsSubcategory } from "./admin/AdminControls";
 import AddIcon from "@mui/icons-material/Add";
+
+const CategoryListWrapper = styled("div")(({ theme }) => ({
+    border: "solid 1px",
+    borderColor: theme.palette.primary.main,
+}));
 
 const CategoriesList = () => {
     const [categories, setCategories] = useState<Array<CategoryData>>([]);
@@ -28,7 +33,10 @@ const CategoriesList = () => {
     };
 
     return (
-        <>
+        <CategoryListWrapper>
+            <Typography variant="h5" align="center" padding={1}>
+                Kategorie
+            </Typography>
             {admin && (
                 <Box display="flex" flexDirection="column" alignItems="flex-start">
                     <Button onClick={addCategoryAction}>
@@ -46,7 +54,6 @@ const CategoriesList = () => {
                 </Box>
             )}
 
-            <Divider />
             {categories.map(({ id, name, subCategories }: CategoryData, i: number) => (
                 <React.Fragment key={i}>
                     <ListItemButton onClick={() => setCategory(id)}>
@@ -59,9 +66,13 @@ const CategoriesList = () => {
                     <Divider />
                 </React.Fragment>
             ))}
-        </>
+        </CategoryListWrapper>
     );
 };
+
+const SubCategoryWrapper = styled("div")(({ theme }) => ({
+    paddingLeft: 10,
+}));
 
 const SubCategoriesList = ({ subCategories }: { subCategories: Array<SubCategoryData> }) => {
     const { subCategoryId, admin, setSubCategory } = useAppContext();
@@ -75,9 +86,10 @@ const SubCategoriesList = ({ subCategories }: { subCategories: Array<SubCategory
                         setSubCategory(id);
                         e.stopPropagation();
                     }}
-                    sx={{ marginLeft: 1 }}
                 >
-                    <Typography color={`${subCategoryId === id ? "primary" : undefined}`}> - {name}</Typography>
+                    <SubCategoryWrapper>
+                        <Typography color={`${subCategoryId === id ? "primary" : undefined}`}> • {name}</Typography>
+                    </SubCategoryWrapper>
                     {admin && <AdminControlsSubcategory subcategoryId={id} />}
                 </ListItemButton>
             ))}

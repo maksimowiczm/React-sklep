@@ -32,7 +32,7 @@ export const ProductsList = () => {
     return (
         <Grid container spacing={2}>
             {products.map(({ id, name, price }: ProductData, i) => (
-                <Grid key={i} item xs={4}>
+                <Grid key={i} item xs={12} md={6} xl={4}>
                     <Product id={id} name={name} price={price} />
                 </Grid>
             ))}
