@@ -41,6 +41,9 @@ const Content = () => {
             case "login":
                 return <LoginForm />;
 
+            case "register":
+                return <LoginForm />;
+
             default:
                 throw new Error(`Nie istnieje widok dla statusu ${status}`);
         }

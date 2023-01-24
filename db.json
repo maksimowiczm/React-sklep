@@ -1,5 +1,15 @@
 {
   "orders": [],
+  "accounts": [
+    {
+      "id": "admin",
+      "password": "$2a$10$OhnG2cn0mZSuN1WWlkfJveDBXqlop2JlVRwAeNZEehtpBBLJxvWBm"
+    },
+    {
+      "id": "user",
+      "password": "$2a$10$9je3o0FdiyG4rj3JdnWhIO0dtYFy63cZk0wLY2tiOJcR7WuMI9BHK"
+    }
+  ],
   "categories": [
     {
       "id": 1,

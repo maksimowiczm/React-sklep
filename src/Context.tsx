@@ -12,7 +12,7 @@ type AppContext = {
     setProduct: (id: number | undefined) => void;
 
     admin: boolean;
-    switchAdmin: () => void;
+    setAdmin: (admin: boolean) => void;
 
     user: string | undefined;
     setUser: (user: string | undefined) => void;
@@ -41,38 +41,38 @@ type AppContext = {
 
 export const MyAppContext = createContext<AppContext>({
     categoryId: undefined,
-    setCategory: () => {},
+    setCategory: () => { },
 
     subCategoryId: undefined,
-    setSubCategory: () => {},
+    setSubCategory: () => { },
 
     productId: undefined,
-    setProduct: () => {},
+    setProduct: () => { },
 
     admin: false,
-    switchAdmin: () => {},
+    setAdmin: () => { },
 
     user: undefined,
-    setUser: () => {},
+    setUser: () => { },
 
     status: "none",
-    setStatus: () => {},
+    setStatus: () => { },
 
     update: 0,
-    setUpdate: () => {},
+    setUpdate: () => { },
 
-    reset: () => {},
+    reset: () => { },
 
     searchPhrase: undefined,
-    setSearchPhrase: () => {},
+    setSearchPhrase: () => { },
 
     sortType: { prop: "name", direction: "asc" },
-    setSortType: () => {},
+    setSortType: () => { },
 
     basket: [],
     itemsInBasket: 0,
-    addOneToBasket: () => {},
-    removeOneFromBasket: () => {},
-    removeFromBasket: () => {},
-    clearBasket: () => {},
+    addOneToBasket: () => { },
+    removeOneFromBasket: () => { },
+    removeFromBasket: () => { },
+    clearBasket: () => { },
 });
