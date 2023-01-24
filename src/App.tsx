@@ -8,7 +8,7 @@ import MyAppBar from "./components/AppBar";
 
 import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
-import FloatingButton from "./components/FloatingButton";
+import { Box } from "@mui/material";
 import Content from "./components/Content";
 
 import { Button } from "@mui/material";
@@ -22,18 +22,22 @@ const UseDarkTheme = ({ children }: { children: React.ReactNode }) => {
     const [theme, setTheme] = useState<"light" | "dark">("dark");
 
     return (
-        <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
-            <CssBaseline />
-            <Button
-                onClick={() => {
-                    if (theme === "dark") setTheme("light");
-                    else setTheme("dark");
-                }}
-            >
-                theme
-            </Button>
-            {children}
-        </ThemeProvider>
+        <>
+            <Box position="sticky" top="96vh">
+                <Button
+                    onClick={() => {
+                        if (theme === "dark") setTheme("light");
+                        else setTheme("dark");
+                    }}
+                >
+                    theme
+                </Button>
+            </Box>
+            <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
+                <CssBaseline />
+                {children}
+            </ThemeProvider>
+        </>
     );
 };
 
