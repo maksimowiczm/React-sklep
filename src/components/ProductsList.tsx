@@ -4,11 +4,12 @@ import { DB, useAppContext } from "../App";
 import { ProductData } from "../Types";
 import Product from "./Product";
 import { Grid, Typography } from "@mui/material";
+import FloatingButton from "./FloatingButton";
 
 export const ProductsList = () => {
     const [products, setProducts] = useState<Array<ProductData>>([]);
 
-    const { categoryId, subCategoryId, update, sortType, searchPhrase } = useAppContext();
+    const { categoryId, subCategoryId, update, sortType, searchPhrase, productId } = useAppContext();
 
     useEffect(() => {
         const { prop, direction } = sortType;
@@ -30,13 +31,16 @@ export const ProductsList = () => {
         );
 
     return (
-        <Grid container spacing={2}>
-            {products.map(({ id, name, price }: ProductData, i) => (
-                <Grid key={i} item xs={12} md={6} xl={4}>
-                    <Product id={id} name={name} price={price} />
-                </Grid>
-            ))}
-        </Grid>
+        <>
+            <Grid container spacing={2}>
+                {products.map(({ id, name, price }: ProductData, i) => (
+                    <Grid key={i} item xs={12} md={6} xl={4}>
+                        <Product id={id} name={name} price={price} />
+                    </Grid>
+                ))}
+            </Grid>
+            {productId === undefined && <FloatingButton />}
+        </>
     );
 };
 

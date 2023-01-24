@@ -164,13 +164,10 @@ const App = () => {
     const setEmpty = () => setStates(undefined, undefined, undefined);
 
     return useProviders(
-        <>
-            <UseDarkTheme>
-                <MyAppBar />
-                <Content />
-                {productId === undefined && status === "none" && <FloatingButton />}
-            </UseDarkTheme>
-        </>
+        <UseDarkTheme>
+            <MyAppBar />
+            <Content />
+        </UseDarkTheme>
     );
 };
 
