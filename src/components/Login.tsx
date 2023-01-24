@@ -56,7 +56,6 @@ const LoginForm = () => {
     };
 
     const validate = () => {
-        console.log(password, login);
         if (login === "" || login.length < 3) return false;
         if (password === "") return false;
         if (status === "register" && password !== repetedPassword) return false;
