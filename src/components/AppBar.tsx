@@ -3,7 +3,14 @@ import { useAppContext } from "../App";
 import SearchBar from "./SearchBar";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-import { useTheme } from "@mui/material/styles";
+
+let IconWrapper = styled("div")(({ theme }) => ({
+    display: "flex",
+    color: "#fff",
+    ":hover": {
+        color: "#ddd",
+    },
+}));
 
 const MyAppBar = () => {
     const { reset } = useAppContext();
@@ -26,18 +33,6 @@ const MyAppBar = () => {
 const AccountIcon = () => {
     const { setStatus, user } = useAppContext();
 
-    const theme = useTheme();
-    let color = user ? theme.palette.secondary.main : "#fff";
-    let hoverColor = user ? theme.palette.secondary.dark : "#ddd";
-
-    let AccountWrapper = styled("div")(({ theme }) => ({
-        display: "flex",
-        color,
-        ":hover": {
-            color: hoverColor,
-        },
-    }));
-
     const AccountIconWrapper = styled("div")(({ theme }) => ({
         color: "inherit",
         display: "flex",
@@ -47,27 +42,19 @@ const AccountIcon = () => {
     }));
 
     return (
-        <AccountWrapper>
+        <IconWrapper>
             <IconButton sx={{ marginLeft: 1, borderRadius: 10, color: "inherit" }} onClick={() => setStatus("login")}>
                 <AccountIconWrapper>
                     <AccountCircleIcon />
                 </AccountIconWrapper>
                 <Typography marginLeft={1}>{user ? "Wyloguj" : "Zaloguj"}</Typography>
             </IconButton>
-        </AccountWrapper>
+        </IconWrapper>
     );
 };
 
 const BasketIcon = () => {
-    const { setStatus, itemsInBasket, user } = useAppContext();
-
-    let BasketWrapper = styled("div")(({ theme }) => ({
-        display: "flex",
-        color: user ? theme.palette.secondary.main : "#fff",
-        ":hover": {
-            color: user ? theme.palette.secondary.dark : "#ddd",
-        },
-    }));
+    const { setStatus, itemsInBasket } = useAppContext();
 
     const BasketIconWrapper = styled(Badge)<BadgeProps>(({ theme }) => ({
         "& .MuiBadge-badge": {
@@ -79,14 +66,14 @@ const BasketIcon = () => {
     }));
 
     return (
-        <BasketWrapper>
+        <IconWrapper>
             <IconButton sx={{ marginLeft: 1, borderRadius: 10, color: "inherit" }} onClick={() => setStatus("basket")}>
                 <BasketIconWrapper badgeContent={itemsInBasket} sx={{ color: "inherit" }} color="secondary">
                     <ShoppingCartOutlinedIcon />
                 </BasketIconWrapper>
                 <Typography marginLeft={2}>Koszyk</Typography>
             </IconButton>
-        </BasketWrapper>
+        </IconWrapper>
     );
 };
 
