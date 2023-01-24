@@ -1,5 +1,46 @@
 {
-  "orders": [],
+  "orders": [
+    {
+      "order": [
+        {
+          "product": {
+            "id": 1,
+            "name": "ASUS ZenBook 14 UM425QAA",
+            "price": 3499
+          },
+          "quantity": 1
+        }
+      ],
+      "user": "bartek",
+      "id": 1
+    },
+    {
+      "order": [
+        {
+          "product": {
+            "id": 4,
+            "name": "Palit GeForce RTX 4090 GameRock 24GB GDDR6X",
+            "price": 9999
+          },
+          "quantity": 1
+        }
+      ],
+      "id": 2
+    },
+    {
+      "order": [
+        {
+          "product": {
+            "id": 3,
+            "name": "WD 1TB M.2 PCIe Gen4 NVMe Black SN770",
+            "price": 436
+          },
+          "quantity": 1
+        }
+      ],
+      "id": 3
+    }
+  ],
   "accounts": [
     {
       "id": "admin",
@@ -8,12 +49,20 @@
     {
       "id": "user",
       "password": "$2a$10$9je3o0FdiyG4rj3JdnWhIO0dtYFy63cZk0wLY2tiOJcR7WuMI9BHK"
+    },
+    {
+      "id": "ala",
+      "password": "$2a$10$SThM2a2DA0p0LQdtJTXX3ODU8oP28NrtAOplhgN0xcgZaQVBvftKC"
+    },
+    {
+      "id": "bartek",
+      "password": "$2a$10$U9l2uIBWIZmfAePoMnA42efbYluFMDXJQN5XvvBlbat9E/KmyUwau"
     }
   ],
   "categories": [
     {
       "id": 1,
-      "name": "Smartfony i smartwatchee"
+      "name": "Smartfony i smartwatche"
     },
     {
       "id": 2,
@@ -73,15 +122,6 @@
       "rating": 5,
       "categoryId": 2,
       "subCategoryId": 2
-    },
-    {
-      "name": "Epic Product",
-      "description": "Fabulous description",
-      "price": 69.69,
-      "rating": 5,
-      "categoryId": 1,
-      "subCategoryId": 4,
-      "id": 5
     }
   ]
 }

@@ -25,6 +25,8 @@ const LoginForm = () => {
     }, []);
 
     const logIn = () => {
+        validate();
+        if (error) return;
         axios
             .get(`http://${DB}/accounts/${login}`)
             .then((response) => {
@@ -42,13 +44,34 @@ const LoginForm = () => {
     };
 
     const registerNew = () => {
+        validate();
+        if (error) return;
         var hash = bcrypt.hashSync(password, 10);
-        axios.post(`http://${DB}/accounts/`, { id: login, password: hash });
+        axios.post(`http://${DB}/accounts/`, { id: login, password: hash }).catch((err) => setError(true));
+        if (!error) logIn();
+    };
+
+    const validate = () => {
+        if (login === "" || login.length < 3) {
+            setError(true);
+            return;
+        }
+        if (password === "") {
+            setError(true);
+            return;
+        }
+        if (status === "register" && password !== repetedPassword) {
+            setError(true);
+            return;
+        }
+        setError(false);
     };
 
     const errorHandle = () => {
-        if (error) return <Typography>Nieprawidłowe dane logowania!</Typography>;
-        else return <></>;
+        if (error) {
+            if (status == "login") return <Typography>Nieprawidłowe dane logowania!</Typography>;
+            else return <Typography>Hasła się nie zgadzają lub konto już istnieje!</Typography>;
+        } else return <></>;
     };
     const switchStatus = () => {
         if (status === "login") setStatus("register");
@@ -81,7 +104,7 @@ const LoginForm = () => {
             <Button variant="contained" onClick={status === "login" ? logIn : registerNew}>
                 {status === "login" ? "Zaloguj" : "Zarejestruj"}
             </Button>
-            <Typography onClick={switchStatus}> {status === "login" ? "Zarejestruj" : "Zaloguj"}</Typography>
+            <Typography onClick={switchStatus}> {status === "login" ? "Nie masz konta?" : "Masz już konto?"}</Typography>
         </Stack>
     );
 };
