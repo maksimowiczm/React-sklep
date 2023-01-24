@@ -90,7 +90,7 @@ const App = () => {
                 setProduct,
 
                 admin,
-                switchAdmin: () => setAdmin(!admin),
+                setAdmin,
 
                 user,
                 setUser,

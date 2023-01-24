@@ -4,6 +4,7 @@ import CategoriesList from "./CategoriesList";
 import ProductEditView from "./admin/crud/ProductEditView";
 import ProductsList from "./ProductsList";
 import ProductView from "./ProductView";
+import LoginForm from "./Login";
 
 import { Grid } from "@mui/material";
 import CategoryEditView from "./admin/crud/CategoryEditView";
@@ -36,6 +37,12 @@ const Content = () => {
 
             case "basket":
                 return <Basket />;
+
+            case "login":
+                return <LoginForm />;
+
+            case "register":
+                return <LoginForm />;
 
             default:
                 throw new Error(`Nie istnieje widok dla statusu ${status}`);
