@@ -9,7 +9,7 @@ import axios from "axios";
 import TextField from "@mui/material/TextField";
 
 const LoginForm = () => {
-    const { setAdmin, setUser, setStatus, status, user, admin } = useAppContext();
+    const { setAdmin, setUser, setStatus, status, user } = useAppContext();
 
     const [login, setLogin] = useState<string>("");
     const [password, setPassword] = useState<string>("");
@@ -22,7 +22,7 @@ const LoginForm = () => {
             setAdmin(false);
             setStatus("none");
         }
-    }, []);
+    }, [setUser, setAdmin, setStatus, user]);
 
     const logIn = () => {
         validate();
@@ -32,7 +32,7 @@ const LoginForm = () => {
             .then((response) => {
                 if (bcrypt.compareSync(password, response.data?.password)) {
                     setUser(response.data?.id);
-                    if (response.data?.id == "admin") {
+                    if (response.data?.id === "admin") {
                         setAdmin(true);
                     }
                     setStatus("none");
@@ -69,7 +69,7 @@ const LoginForm = () => {
 
     const errorHandle = () => {
         if (error) {
-            if (status == "login") return <Typography>Nieprawidłowe dane logowania!</Typography>;
+            if (status === "login") return <Typography>Nieprawidłowe dane logowania!</Typography>;
             else return <Typography>Hasła się nie zgadzają lub konto już istnieje!</Typography>;
         } else return <></>;
     };
@@ -79,7 +79,7 @@ const LoginForm = () => {
     };
 
     const repeatPasswordField = () => {
-        if (status == "register")
+        if (status === "register")
             return (
                 <FormControl fullWidth>
                     <TextField type="password" label="Powtórz Hasło" onInput={(e: React.ChangeEvent<HTMLInputElement>) => setRepetedPassword(e.target.value)} />

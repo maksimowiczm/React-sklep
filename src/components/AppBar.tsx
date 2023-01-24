@@ -5,7 +5,7 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 
 const MyAppBar = () => {
-    const { reset, admin, setStatus, itemsInBasket, user } = useAppContext();
+    const { reset, setStatus, itemsInBasket, user } = useAppContext();
 
     const AccountIconWrapper = styled("div")(({ theme }) => ({
         display: "flex",
