@@ -71,7 +71,7 @@ const CategoriesList = () => {
                 </CategoryLabelWrapper>
 
                 {categories.map((props: CategoryData, i: number) => (
-                    <Category {...props} />
+                    <Category key={i} {...props} />
                 ))}
             </CategoryListWrapper>
         </>
@@ -94,7 +94,7 @@ const Category = ({ id, name, subCategories }: { id: number; name: string; subCa
             </CategoryLabelWrapper>
 
             {subCategories.map((props: SubCategoryData, i: number) => (
-                <SubCategory {...props} />
+                <SubCategory key={i} {...props} />
             ))}
             <Divider />
         </>
