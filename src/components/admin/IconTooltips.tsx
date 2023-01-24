@@ -24,7 +24,6 @@ export const EditIconTooltip = ({ onClick, hover }: click) => {
     const EditIconWrapper = styled("div")(({ theme }) => ({
         display: "flex",
         color: hover ? theme.adminIcons.edit : undefined,
-        // color: hover ? theme.palette.info.main : undefined,
     }));
 
     return (
@@ -68,7 +67,7 @@ export const AddToCartIconTooltip = ({
 }) => (
     <AddToCartIconWrapper>
         <Tooltip title="Dodaj do koszyka">
-            <IconButton onClick={onClick} color="inherit">
+            <IconButton onClick={onClick} color="inherit" sx={{ display: "flex" }}>
                 <AddShoppingCartIcon color="inherit" fontSize={fontSize} />
             </IconButton>
         </Tooltip>

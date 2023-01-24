@@ -1,6 +1,6 @@
 import { useAppContext } from "../App";
 import { AdminControlsProduct } from "./admin/AdminControls";
-import { Box, Card, CardActions, CardContent, Typography, CardActionArea } from "@mui/material";
+import { Box, Card, CardActions, CardContent, Typography, CardActionArea, styled } from "@mui/material";
 import { ProductData } from "../Types";
 import { AddToCartIconTooltip } from "./admin/IconTooltips";
 import { useState } from "react";
@@ -15,8 +15,8 @@ export const Product = ({ id, name, price }: ProductData) => {
     };
 
     return (
-        <Card onClick={() => setProduct(id)} variant="outlined" onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
-            <CardActionArea>
+        <Card variant="outlined" onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
+            <CardActionArea onClick={() => setProduct(id)}>
                 <CardContent sx={{ minHeight: 200 }}>
                     <Typography sx={{ fontSize: 14 }} align="justify" color="text.secondary">
                         Nazwa Produktu
@@ -31,12 +31,15 @@ export const Product = ({ id, name, price }: ProductData) => {
                         {price.toFixed(2)} zł
                     </Typography>
                 </CardContent>
-                <CardActions>
-                    <Box flexGrow={1} />
+                <CardActions></CardActions>
+            </CardActionArea>
+            <Box position="relative" top={-45} height={0}>
+                <Box flexGrow={1} />
+                <Box display="flex" width="99%">
                     {admin && <AdminControlsProduct productId={id} hover={hover} />}
                     <AddToCartIconTooltip onClick={addToCart} />
-                </CardActions>
-            </CardActionArea>
+                </Box>
+            </Box>
         </Card>
     );
 };
