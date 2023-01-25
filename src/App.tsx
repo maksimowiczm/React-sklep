@@ -23,7 +23,7 @@ const UseDarkTheme = ({ children }: { children: React.ReactNode }) => {
 
     return (
         <>
-            <Box position="sticky" top="96vh">
+            <Box position="sticky" top="96vh" height={0}>
                 <Button
                     onClick={() => {
                         if (theme === "dark") setTheme("light");
