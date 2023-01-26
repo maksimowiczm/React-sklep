@@ -26,8 +26,11 @@ const LoginForm = () => {
     }, [status]);
 
     const logIn = () => {
-        validate();
-        if (error) return;
+        setError(false);
+        if (!validate()) {
+            setError(true);
+            return;
+        }
         axios
             .get(`http://${DB}/accounts/${login}`)
             .then((response) => {
@@ -45,6 +48,7 @@ const LoginForm = () => {
     };
 
     const registerNew = () => {
+        setError(false);
         if (!validate()) {
             setError(true);
             return;
@@ -52,13 +56,16 @@ const LoginForm = () => {
 
         var hash = bcrypt.hashSync(password, 10);
         axios.post(`http://${DB}/accounts/`, { id: login, password: hash }).catch((err) => setError(true));
-        if (!error) logIn();
+        if (!error) {
+            logIn();
+        }
     };
 
     const validate = () => {
         if (login === "" || login.length < 3) return false;
         if (password === "") return false;
         if (status === "register" && password !== repetedPassword) return false;
+        return true;
     };
 
     const switchStatus = () => {

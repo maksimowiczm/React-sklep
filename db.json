@@ -39,6 +39,42 @@
         }
       ],
       "id": 3
+    },
+    {
+      "order": [
+        {
+          "product": {
+            "id": 10,
+            "name": "Dell Inspiron G15 Ryzen 5 5600H/16GB/512/Win11 RTX3050",
+            "price": 4299
+          },
+          "quantity": 1
+        },
+        {
+          "product": {
+            "id": 12,
+            "name": "Dell Vostro 3710 SFF i5-12400/16GB/512/Win11P",
+            "price": 3499
+          },
+          "quantity": 1
+        }
+      ],
+      "user": "bartek",
+      "id": 4
+    },
+    {
+      "order": [
+        {
+          "product": {
+            "id": 7,
+            "name": "Samsung Galaxy Watch 4 Aluminium 40mm Pink Gold LTE",
+            "price": 949
+          },
+          "quantity": 2
+        }
+      ],
+      "user": "bartek",
+      "id": 5
     }
   ],
   "accounts": [
@@ -57,6 +93,10 @@
     {
       "id": "bartek",
       "password": "$2a$10$U9l2uIBWIZmfAePoMnA42efbYluFMDXJQN5XvvBlbat9E/KmyUwau"
+    },
+    {
+      "id": "michal143",
+      "password": "$2a$10$gIE2aABeuQDNiBzjYnb58OXf6IlxkOWcmgKHArtUtm9u2/T9PQ4Ra"
     }
   ],
   "categories": [
@@ -93,6 +133,16 @@
       "id": 4,
       "name": "Apple",
       "categoryId": 1
+    },
+    {
+      "name": "Samsung",
+      "categoryId": 1,
+      "id": 5
+    },
+    {
+      "name": "Komputery stacjonarne",
+      "categoryId": 3,
+      "id": 6
     }
   ],
   "products": [
@@ -122,6 +172,78 @@
       "rating": 5,
       "categoryId": 2,
       "subCategoryId": 2
+    },
+    {
+      "name": "Apple Watch 8 45/Silver Aluminum/White Sport LTE",
+      "description": "Twój nieodłączny kompan ma jeszcze więcej nowych, potężnych funkcji. Monitorowanie temperatury◊Zastrzeżenia prawne pod kątem analizy zdrowia kobiet◊Zastrzeżenia prawne. Funkcję Wykrywanie wypadków, która wzywa pomoc◊Zastrzeżenia prawne. Śledzenie faz snu dla lepszego rozumienia odpoczynku◊Zastrzeżenia prawne. Zdrowie ma przyszłość. W jasnych barwach.",
+      "price": 2999,
+      "rating": 4,
+      "categoryId": 1,
+      "subCategoryId": 4,
+      "id": 5
+    },
+    {
+      "name": "Samsung Galaxy Watch 5 44mm Blue",
+      "description": "Postaw na zdrowy styl życia i miej swój organizm stale pod kontrolą. Analizuj pomiary w aplikacji, aby wychwycić jakiekolwiek nieprawidłowości. Sensory są teraz jeszcze dokładniejsze i dają Ci szczegółową wiedzę na temat Twojego zdrowia. Od teraz możesz sprawdzać skład swojego ciała dzięki technologii impedancji bioelektrycznej. Na bieżąco śledź przyrost masy mięśniowej i zmniejszającą się tkankę tłuszczową\n\nMożesz sprawdzać stan swojego serca z czujnikiem EKG albo kontrolować ciśnienie i saturację, aby jeszcze lepiej dostosować swoje możliwości do wykonywanych treningów.",
+      "price": 1399,
+      "rating": 3,
+      "categoryId": 1,
+      "subCategoryId": 5,
+      "id": 6
+    },
+    {
+      "name": "Samsung Galaxy Watch 4 Aluminium 40mm Pink Gold LTE",
+      "description": "Niezwykle elegancki i szykowny Samsung Galaxy Watch 4 40mm Pink Gold LTE z pewnością przykuje uwagę każdego, kto na niego spojrzy. Wyróżnij się z tłumu z pięknym, a zarazem minimalistycznym zegarkiem. Jego koperta wykonana jest w całości z aluminium i doskonale zgrywa się z profilowanym, polimerowym paskiem. Waga, która wynosi zaledwie 25,9 gramów, zapewnia lekkość urządzenia, przez co nie poczujesz jego obecności na nadgarstku.\n\nWyświetlacz wykonany w technologii Super AMOLED z funkcją Always-On-Display cały czas będzie wyświetlał godzinę, bez konieczności wybudzania. Na czytelnym wyświetlaczu o rozdzielczości 1,2” zobaczysz wszystkie informacje i powiadomienia nawet przy mocnym słońcu. Nie jesteś zwolennikiem noszenia w kieszeni portfela? To świetnie się składa, ponieważ smartwatch posiada Google Pay, dzięki któremu zrobisz zakupy jeszcze szybciej przy pomocy płatności zbliżeniowej.",
+      "price": 949,
+      "rating": 4,
+      "categoryId": 1,
+      "subCategoryId": 5,
+      "id": 7
+    },
+    {
+      "name": "HP Victus 15 i5-12450H/16GB/512 RTX3050 144Hz",
+      "description": "Procesor:Intel Core i5-12450H\nPamięć:16 GB\nGrafika:NVIDIA GeForce RTX 3050 + Intel UHD Graphics\nTyp ekranu:Matowy, LED, IPS",
+      "price": 3699,
+      "rating": 4,
+      "categoryId": 3,
+      "subCategoryId": 3,
+      "id": 8
+    },
+    {
+      "name": "Apple MacBook Air M1/8GB/256/Mac OS Space Gray US",
+      "description": "Procesor:Apple M1\nPamięć:8 GB\nGrafika:Apple M1 [7 rdzeni]\nTyp ekranu:Błyszczący, LED, IPS, Retina",
+      "price": 4799,
+      "rating": 1,
+      "categoryId": 3,
+      "subCategoryId": 3,
+      "id": 9
+    },
+    {
+      "name": "Dell Inspiron G15 Ryzen 5 5600H/16GB/512/Win11 RTX3050",
+      "description": "Dell G15 5515 – optymalne połączenie pracy i rozrywki\nPoznaj laptopa Dell G15, następcę kultowych modeli G3 i G5, o 15,6-calowym ekranie i odświeżaniu do 120 Hz. Model ten precyzyjnie łączy przeznaczenie do pracy czy nauki z pasjami oraz czasem wolnym. W szczególności odpowiada na wymagające potrzeby fanów gamingu. \n\n-Chłodzenie na poziomie najlepszych laptopów w swojej klasie \n-Oryginalny design i wytrzymała konstrukcja \n-Obsługa serwisowa klasy biznes",
+      "price": 4299,
+      "rating": 5,
+      "categoryId": 3,
+      "subCategoryId": 3,
+      "id": 10
+    },
+    {
+      "name": "Lenovo IdeaPad 3-15 i5-1135G7/8GB/512/Win11",
+      "description": "Uniwersalny laptop Lenovo IdeaPad 3-15\nPoznaj Lenovo IdeaPad 3-15. Wyjątkową serię laptopów, która sprosta Twoim oczekiwaniom. Nowoczesny procesor oraz zintegrowana karta graficzna zagwarantują Ci optymalną wydajność. Lenovo IdeaPad 3-15 sprawdzi się zarówno jako narzędzie do pracy biurowej, jak i centrum filmowo-gamingowej rozrywki. Podziwiaj naturalne kolory wyświetlane na ekranie w rozdzielczości Full HD.",
+      "price": 2499,
+      "rating": 2,
+      "categoryId": 3,
+      "subCategoryId": 3,
+      "id": 11
+    },
+    {
+      "name": "Dell Vostro 3710 SFF i5-12400/16GB/512/Win11P",
+      "description": "System:Microsoft Windows 11 Pro\nProcesor:Intel Core i5-12400\nGrafika:Intel UHD Graphics 730\nPamięć RAM:16 GB",
+      "price": 3499,
+      "rating": 3,
+      "categoryId": 3,
+      "subCategoryId": 6,
+      "id": 12
     }
   ]
 }

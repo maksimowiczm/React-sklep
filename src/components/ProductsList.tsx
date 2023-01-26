@@ -15,10 +15,10 @@ export const ProductsList = () => {
         const { prop, direction } = sortType;
         let serarchPartial = searchPhrase ? "name_like=" + searchPhrase + "&" : "";
         if (categoryId !== undefined)
-            axios.get(`http://${DB}/products?categoryId=${categoryId}&${serarchPartial}_sort=name&_order=${sortType}`).then((res) => setProducts(res.data));
+            axios.get(`http://${DB}/products?categoryId=${categoryId}&${serarchPartial}_sort=${prop}&_order=${direction}`).then((res) => setProducts(res.data));
         else if (subCategoryId !== undefined)
             axios
-                .get(`http://${DB}/products?subCategoryId=${subCategoryId}&${serarchPartial}_sort=name&_order=${sortType}`)
+                .get(`http://${DB}/products?subCategoryId=${subCategoryId}&${serarchPartial}_sort=${prop}&_order=${direction}`)
                 .then((res) => setProducts(res.data));
         else axios.get(`http://${DB}/products?${serarchPartial}_sort=${prop}&_order=${direction}`).then((res) => setProducts(res.data));
     }, [categoryId, subCategoryId, sortType, searchPhrase, update]);

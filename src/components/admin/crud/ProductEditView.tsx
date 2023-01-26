@@ -59,6 +59,9 @@ export const ProductEditView = () => {
         if (productId !== undefined) {
             axios.get(`http://${DB}/products/${productId}?_expand=category&_expand=subCategory`).then((res) => {
                 setName(res.data?.name);
+                setDesc(res.data?.desc);
+                setPrice(res.data?.price);
+                setRating(res.data?.rating);
                 setChosenCategory(res.data?.category?.id!!);
                 setChosenSub(res.data?.subCategory?.id!!);
 
@@ -89,7 +92,14 @@ export const ProductEditView = () => {
     const patch = () => {
         if (!validateForm()) return;
 
-        axios.patch(`http://${DB}/products/${productId}`, { name: name, categoryId: chosenCategory, subCategoryId: chosenSub });
+        axios.patch(`http://${DB}/products/${productId}`, {
+            name: name,
+            description: desc,
+            price: price,
+            rating: rating,
+            categoryId: chosenCategory,
+            subCategoryId: chosenSub,
+        });
         setStatus("none");
     };
     const add = () => {
